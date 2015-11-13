@@ -1,0 +1,70 @@
+***** PAGINATION *****
+<ul class="pagination" role="menubar" aria-label="Pagination">
+  <li class="arrow unavailable" aria-disabled="true"><a href="">&laquo; Previous</a></li>
+  <li class="current"><a href="">1</a></li>
+  <li><a href="">2</a></li>
+  <li><a href="">3</a></li>
+  <li><a href="">4</a></li>
+  <li class="unavailable" aria-disabled="true"><a href="">&hellip;</a></li>
+  <li><a href="">12</a></li>
+  <li><a href="">13</a></li>
+  <li class="arrow"><a href="">Next &raquo;</a></li>
+</ul>
+
+
+
+
+<li class="has-dropdown not-click">
+                  <a href="http://localhost/basc_test/galas.php" role="link">Galas</a> 
+                  <ul class="dropdown">
+                     <li><a href="http://localhost/basc_test/galas.php" role="link">View All</a></li>
+                     <li><a href="http://localhost/basc_test/galas/create.php" role="link">Create</a></li>
+                     <li><a href="http://localhost/basc_test/galas/edit.php" role="link">Edit</a></li>
+                  </ul>
+               </li>
+               <li class="divider"></li>
+               <li class="has-dropdown not-click">
+                  <a href="http://localhost/basc_test/members.php" role="link">Members</a> 
+                  <ul class="dropdown">
+                     <li><a href="http://localhost/basc_test/members.php" role="link">View All</a></li>
+                     <li><a href="http://localhost/basc_test/members/create.php" role="link">Create</a></li>
+                     <li><a href="http://localhost/basc_test/members/edit.php" role="link">Edit</a></li>
+                  </ul>
+               </li>
+               <li class="divider"></li>
+               <li class="has-dropdown not-click">
+                  <a href="http://localhost/basc_test/squads.php" role="link">Squads</a> 
+                  <ul class="dropdown">
+                     <li><a href="http://localhost/basc_test/squads.php" role="link">View All</a></li>
+                     <li><a href="http://localhost/basc_test/squads/create.php" role="link">Create</a></li>
+                     <li><a href="http://localhost/basc_test/squads/edit.php" role="link">Edit</a></li>
+                  </ul>
+               </li>
+               <li class="divider"></li>
+               <li class="has-dropdown not-click">
+                  <a href="http://localhost/basc_test/news.php" role="link">News</a> 
+                  <ul class="dropdown">
+                     <li><a href="http://localhost/basc_test/news.php" role="link">View All</a></li>
+                     <li><a href="http://localhost/basc_test/news/create.php" role="link">Create</a></li>
+                     <li><a href="http://localhost/basc_test/news/edit.php" role="link">Edit</a></li>
+                  </ul>
+               </li>
+               <li class="divider"></li>
+               <li class="has-dropdown not-click">
+                  <a href="http://localhost/basc_test/shop.php" role="link">Shop</a> 
+                  <ul class="dropdown">
+                     <li><a href="http://localhost/basc_test/shop.php" role="link">View All</a></li>
+                     <li><a href="http://localhost/basc_test/shop/create.php" role="link">Create</a></li>
+                     <li><a href="http://localhost/basc_test/shop/edit.php" role="link">Edit</a></li>
+                  </ul>
+               </li>
+               
+               
+               
+               
+               
+               
+               
+date("d/m/Y", strtotime($gala->getConfirmationDate()))
+
+131625432@N06
