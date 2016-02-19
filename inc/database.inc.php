@@ -10,4 +10,5 @@
   //$domain='http://www.bucksburnasc.org.uk/2015/'; // please finish with a '/' to ensure relative URLs work. Ta.
   $domain='http://bucktest-rgu.azurewebsites.net/';
   $admin='1206499@rgu.ac.uk';
+
   ?>
