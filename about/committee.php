@@ -31,7 +31,7 @@
         <p>Some descriptive text about the committee.</p>
             
         <?php
-            require '../inc/connection.inc.php';
+            include '../inc/connection.inc.php';
             require '../obj/members_roles.obj.php';
             require '../obj/roles.obj.php';
             require '../obj/members.obj.php';
