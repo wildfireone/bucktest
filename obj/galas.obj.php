@@ -101,6 +101,7 @@ class Galas {
     public function getAllDetails($conn) {
         echo "Start Method";
         $sql = "SELECT * FROM galas WHERE id = " . $this->getID();
+        echo "SQL".$sql;
         $stmt = $conn->prepare($sql);
         //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
         try {
@@ -108,7 +109,8 @@ class Galas {
             $results = $stmt->fetchAll();
 
             foreach ($results as $row) {
-                echo $row["title"];
+                echo "THIS".$row["id"];
+                echo "This".$row["title"];
                 $this->setID($row["id"]);
                 $this->setTitle($row["title"]);
                 echo $this->getTitle();
