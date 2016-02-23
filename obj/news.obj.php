@@ -65,7 +65,6 @@ class News {
         $sql = "SELECT * FROM news WHERE ID = ':id'";
         $stmt = $conn->prepare($sql);
         $currentid = $this->getID();
-        echo $currentid;
         $stmt->bindParam(':id', $currentid, PDO::PARAM_INT);
 
         try {
@@ -81,6 +80,8 @@ class News {
                 $this->setDate($row["Date"]);
                 $this->setMainBody($row["MainBody"]);
             }
+            echo $this->id . ", " . $this->title . ", " . $this->subTitle . ", " . $this->author . ", " .
+                $this->date . ", " . $this->mainBody;
             return true;
         } catch (PDOException $e) {
             echo "Query failed: " . $e->getMessage();
