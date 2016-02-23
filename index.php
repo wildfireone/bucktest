@@ -56,10 +56,10 @@ error_reporting(E_ALL);
                     $venue->setID($galaItem["venueID"]);
                     $venue->getAllDetails($conn);
                     echo "<p>Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID()."</p>";
-                    $link = "gala-results/view.php?id=" . $gala->getID();
+                    $link = "gala-results/view.php?id=" . $galaItem["id"];
 
                     echo '<div class="large-12 medium-12 small-12 columns centre">
-                            <h3 class="h4 capitalise"><a href="' . $link . '">' . $gala->getTitle() . '</a></h3>
+                            <h3 class="h4 capitalise"><a href="' . $link . '">' . $galaItem["title"] . '</a></h3>
                             <h4 class="h6"><i>' . $venue->getVenue() . ' - ' . date("d/m/Y", strtotime($gala->getDate())) . '</i></h4>
                     </div>';
                 }
