@@ -161,7 +161,7 @@ class News {
 
     public function getMostRecent($conn,$limit) {
         $sql = "SELECT id FROM news ORDER BY Date DESC LIMIT :limit";
-
+//comment
         $stmt = $conn->prepare($sql);        
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         
