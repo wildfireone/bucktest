@@ -70,7 +70,7 @@ class News {
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
-            
+            dump_var($results);
             // Iterate through the results and set the details
             foreach ($results as $row) {
                 $this->setID($row["ID"]);
@@ -80,8 +80,8 @@ class News {
                 $this->setDate($row["Date"]);
                 $this->setMainBody($row["MainBody"]);
             }
-            echo $this->id . ", " . $this->title . ", " . $this->subTitle . ", " . $this->author . ", " .
-                $this->date . ", " . $this->mainBody;
+            //echo $this->id . ", " . $this->title . ", " . $this->subTitle . ", " . $this->author . ", " .
+            //$this->date . ", " . $this->mainBody;
             return true;
         } catch (PDOException $e) {
             echo "Query failed: " . $e->getMessage();
