@@ -55,6 +55,8 @@ error_reporting(E_ALL);
                     $gala->getAllDetails($conn);
                     $venue->setID($galaItem["venueID"]);
                     $venue->getAllDetails($conn);
+
+                    echo "<p> Hellosdkjfb".$gala->getTitle()."</p>";
                     //echo "<p>Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID()."</p>";
                     $link = "gala-results/view.php?id=" . $gala->getID();
 
