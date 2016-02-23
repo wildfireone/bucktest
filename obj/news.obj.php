@@ -41,22 +41,22 @@ class News {
         
     // ***** SETTERS *****    
     public function setID($id) {
-        $this->id = $id;
+        $this->ID = $id;
     }    
     public function setTitle($title) {
-        $this->title = $title;
+        $this->Title = $title;
     }    
     public function setSubTitle($subTitle) {
-        $this->subTitle = $subTitle;
+        $this->Subtitle = $subTitle;
     }    
     public function setAuthor($author) {
-        $this->author = $author;
+        $this->Author = $author;
     }    
     public function setDate($date) {
-        $this->date = $date;
+        $this->Date = $date;
     }    
     public function setMainBody($mainBody) {
-        $this->mainBody = $mainBody;
+        $this->MainBody = $mainBody;
     }
     
     // ***** OTHER METHODS *****    
