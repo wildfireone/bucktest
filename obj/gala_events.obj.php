@@ -70,18 +70,18 @@ class GalaEvents {
     
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn, $galaID) {
-        $sql = "SELECT * FROM gala_events WHERE id = :id AND galaID = :galaID";
+        $sql = "SELECT * FROM gala_events WHERE id = '". $this->getID() ."' AND galaID = '". $this->getGalaID() ."'";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
         
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
             
             foreach ($results as $row) {
-                $this->setID($row["id"]);
-                $this->setGalaID($row["galaID"]);
+                //$this->setID($row["id"]);
+                //$this->setGalaID($row["galaID"]);
                 $this->setStrokeID($row["strokeID"]);
                 $this->setLengthID($row["lengthID"]);
                 $this->setGender($row["gender"]);
