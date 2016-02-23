@@ -284,6 +284,7 @@ class Galas {
          try {
             $stmt->execute();
             $results = $stmt->fetchAll();
+             var_dump($results);
             return $results;
         } catch (PDOException $e) {
             return "Database query failed: " . $e->getMessage();
