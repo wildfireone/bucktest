@@ -71,7 +71,7 @@ error_reporting(E_ALL);
                     <div class="row">';
 
                 foreach ($newsList as $news) {
-                    $newsItem->setID($news["ID"]);
+                    $newsItem->setID($news["id"]);
                     $newsItem->getAllDetails($conn);
                     $link = "news/view.php?id=" . $newsItem->getID();
 
