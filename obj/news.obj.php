@@ -62,9 +62,8 @@ class News {
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn) {
         
-        $sql = "SELECT * FROM news WHERE ID = ".$this->getID();
+        $sql = "SELECT * FROM news WHERE id = ".$this->getID();
         $stmt = $conn->prepare($sql);
-        //$currentid = $this->getID();
         //$stmt->bindParam(':id', $currentid, PDO::PARAM_INT);
 
         try {
@@ -73,15 +72,13 @@ class News {
 
             // Iterate through the results and set the details
             foreach ($results as $row) {
-                $this->setID($row["ID"]);
-                $this->setTitle($row["Title"]);
-                $this->setSubTitle($row["Subtitle"]);
-                $this->setAuthor($row["Author"]);
-                $this->setDate($row["Date"]);
-                $this->setMainBody($row["MainBody"]);
+                $this->setID($row["id"]);
+                $this->setTitle($row["title"]);
+                $this->setSubTitle($row["subTitle"]);
+                $this->setAuthor($row["author"]);
+                $this->setDate($row["date"]);
+                $this->setMainBody($row["mainBody"]);
             }
-            //echo $this->id . ", " . $this->title . ", " . $this->subTitle . ", " . $this->author . ", " .
-            //$this->date . ", " . $this->mainBody;
             return true;
         } catch (PDOException $e) {
             echo "Query failed: " . $e->getMessage();
@@ -163,7 +160,7 @@ class News {
     }
 
     public function getMostRecent($conn,$limit) {
-        $sql = "SELECT ID FROM news ORDER BY Date DESC LIMIT :limit";
+        $sql = "SELECT id FROM news ORDER BY Date DESC LIMIT :limit";
 
         $stmt = $conn->prepare($sql);        
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
