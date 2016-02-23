@@ -49,13 +49,13 @@ error_reporting(E_ALL);
                 echo '<div class="large-6 medium-6 small-12 columns index">
                     <h2 class="h3 capitalise">Recent Gala Results</h2>
                     <div class="row">';
-                    echo "Hello";
+
                 foreach ($galaList as $galaItem) {
                     $gala->setID($galaItem["id"]);
                     $gala->getAllDetails($conn);
                     $venue->setID($gala->getVenueID());
                     $venue->getAllDetails($conn);
-                    echo "Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID();
+                    echo "<p>Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID()."</p>";
                     $link = "gala-results/view.php?id=" . $gala->getID();
 
                     echo '<div class="large-12 medium-12 small-12 columns centre">
