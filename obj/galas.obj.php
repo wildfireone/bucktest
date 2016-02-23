@@ -107,11 +107,8 @@ class Galas {
             $results = $stmt->fetchAll();
 
             foreach ($results as $row) {
-                echo "THIS".$row["id"];
-                echo "This".$row["title"];
                 $this->setID($row["id"]);
                 $this->setTitle($row["title"]);
-                echo $this->getTitle();
                 $this->setDescription($row["description"]);
                 $this->setDate($row["date"]);
                 $this->setIsAccredited($row["isAccredited"]);
