@@ -53,7 +53,7 @@ error_reporting(E_ALL);
                 foreach ($galaList as $galaItem) {
                     $gala->setID($galaItem["id"]);
                     $gala->getAllDetails($conn);
-                    $venue->setID($gala->getVenueID());
+                    $venue->setID($galaItem["venueID"]);
                     $venue->getAllDetails($conn);
                     echo "<p>Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID()."</p>";
                     $link = "gala-results/view.php?id=" . $gala->getID();
