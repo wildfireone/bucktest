@@ -72,12 +72,12 @@ class News {
             
             // Iterate through the results and set the details
             foreach ($results as $row) {
-                $this->setID($row["id"]);
-                $this->setTitle($row["title"]);
-                $this->setSubTitle($row["subTitle"]);
-                $this->setAuthor($row["author"]);
-                $this->setDate($row["date"]);
-                $this->setMainBody($row["mainBody"]);                
+                $this->setID($row["ID"]);
+                $this->setTitle($row["Title"]);
+                $this->setSubTitle($row["Subtitle"]);
+                $this->setAuthor($row["Author"]);
+                $this->setDate($row["Date"]);
+                $this->setMainBody($row["MainBody"]);
             }
             return true;
         } catch (PDOException $e) {
@@ -159,7 +159,7 @@ class News {
     }
 
     public function getMostRecent($conn,$limit) {
-        $sql = "SELECT id FROM news ORDER BY date DESC LIMIT :limit";
+        $sql = "SELECT ID FROM news ORDER BY Date DESC LIMIT :limit";
 
         $stmt = $conn->prepare($sql);        
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);

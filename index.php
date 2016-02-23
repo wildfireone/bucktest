@@ -68,7 +68,7 @@
                     <div class="row">';
 
                 foreach ($newsList as $news) {
-                    $newsItem->setID($news["id"]);
+                    $newsItem->setID($news["ID"]);
                     $newsItem->getAllDetails($conn);
                     $link = "news/view.php?id=" . $newsItem->getID();
 
