@@ -83,6 +83,7 @@ class News {
             }
             return true;
         } catch (PDOException $e) {
+            echo "Query failed: " . $e->getMessage();
             return "Query failed: " . $e->getMessage();
         }    
     }
