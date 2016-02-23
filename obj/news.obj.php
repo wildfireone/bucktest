@@ -70,7 +70,7 @@ class News {
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
-            dump_var($results);
+            var_dump($results);
             // Iterate through the results and set the details
             foreach ($results as $row) {
                 $this->setID($row["ID"]);
