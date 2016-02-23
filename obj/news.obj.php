@@ -64,7 +64,8 @@ class News {
         
         $sql = "SELECT * FROM news WHERE ID = ':id'";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $this->getID(), PDO::PARAM_INT);
+        $currentid = $this->getID();
+        $stmt->bindParam(':id', $currentid, PDO::PARAM_INT);
 
         try {
             $stmt->execute();
