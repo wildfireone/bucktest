@@ -62,10 +62,10 @@ class News {
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn) {
         
-        $sql = "SELECT * FROM news WHERE ID = ':id'";
+        $sql = "SELECT * FROM news WHERE ID = ".$this->getID();
         $stmt = $conn->prepare($sql);
-        $currentid = $this->getID();
-        $stmt->bindParam(':id', $currentid, PDO::PARAM_INT);
+        //$currentid = $this->getID();
+        //$stmt->bindParam(':id', $currentid, PDO::PARAM_INT);
 
         try {
             $stmt->execute();
