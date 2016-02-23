@@ -99,9 +99,9 @@ class Galas {
     
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn) {
-        $sql = "SELECT * FROM galas WHERE id = :id";
+        $sql = "SELECT * FROM galas WHERE id = " . $this->getID();
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
+        //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
 
         try {
             $stmt->execute();
@@ -120,7 +120,7 @@ class Galas {
                 $this->setFees($row["fees"]);
                 $this->setConfirmationDate($row["confirmationDate"]);
                 $this->setCutOffDate($row["cutOffDate"]);
-                $this->setNotes($row["notes"]);
+                //$this->setNotes($row["notes"]);
             }
             return true;
         } catch (PDOException $e) {
