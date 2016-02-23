@@ -49,6 +49,7 @@ error_reporting(E_ALL);
                 echo '<div class="large-6 medium-6 small-12 columns index">
                     <h2 class="h3 capitalise">Recent Gala Results</h2>
                     <div class="row">';
+                    echo "Hello";
                 foreach ($galaList as $galaItem) {
                     $gala->setID($galaItem["id"]);
                     $gala->getAllDetails($conn);
