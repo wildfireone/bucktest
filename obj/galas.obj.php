@@ -105,7 +105,7 @@ class Galas {
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
-
+            echo var_dump($results);
             foreach ($results as $row) {
                 $this->setID($row["id"]);
                 $this->setTitle($row["title"]);
@@ -284,7 +284,6 @@ class Galas {
          try {
             $stmt->execute();
             $results = $stmt->fetchAll();
-             var_dump($results);
             return $results;
         } catch (PDOException $e) {
             return "Database query failed: " . $e->getMessage();
@@ -363,10 +362,10 @@ class Galas {
     }
                 
     public function numberOfResults($conn) {
-        $sql = "SELECT member FROM swim_times WHERE galaID = :galaID";
+        $sql = "SELECT member FROM swim_times WHERE galaID = ";
         
         $stmt = $conn->prepare($sql); 
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
         
          try {
             $stmt->execute();

@@ -51,13 +51,10 @@ error_reporting(E_ALL);
                     <div class="row">';
 
                 foreach ($galaList as $galaItem) {
-                    echo "<p> Hellosdkjfb".$gala->getTitle()."</p>";
                     $gala->setID($galaItem["id"]);
                     $gala->getAllDetails($conn);
                     $venue->setID($galaItem["venueID"]);
                     $venue->getAllDetails($conn);
-
-
                     //echo "<p>Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID()."</p>";
                     $link = "gala-results/view.php?id=" . $gala->getID();
 
