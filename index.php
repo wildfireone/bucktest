@@ -54,7 +54,7 @@ error_reporting(E_ALL);
                     $gala->getAllDetails($conn);
                     $venue->setID($gala->getVenueID());
                     $venue->getAllDetails($conn);
-
+                    echo "Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID();
                     $link = "gala-results/view.php?id=" . $gala->getID();
 
                     echo '<div class="large-12 medium-12 small-12 columns centre">
