@@ -102,7 +102,6 @@ class Galas {
         $sql = "SELECT * FROM galas WHERE id = " . $this->id;
         $stmt = $conn->prepare($sql);
         //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
-        echo "Hello";
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
