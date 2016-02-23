@@ -268,7 +268,9 @@ class Galas {
     }
     
     public function listAllCompletedGalas($conn, $limit=null) {       
-        $sql = "SELECT g.id, v.id AS venueID FROM galas g, venues v WHERE g.venueID = v.id AND g.date < current_date ORDER BY g.date DESC";
+        $sql = "SELECT g.id, v.id AS venueID
+                FROM galas g, venues v
+                WHERE g.venueID = v.id AND g.date < current_date ORDER BY g.date DESC";
         
         if (!is_null($limit)) {
             $sql .= ' LIMIT :limit';

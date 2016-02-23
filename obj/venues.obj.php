@@ -80,9 +80,9 @@ class Venues {
     
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn) {        
-        $sql = "SELECT * FROM venues WHERE id = :id";
+        $sql = "SELECT * FROM venues WHERE id = " . $this->getID();
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $this->getID(), PDO::PARAM_INT);
+        //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_INT);
 
         try {
             $stmt->execute();
