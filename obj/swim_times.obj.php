@@ -121,11 +121,11 @@ class Swim_Times {
     }
 
     public function listAllSwimTimesForGalaByEvent($conn, $galaID, $eventID) {       
-        $sql = "SELECT member, galaID, eventID FROM swim_times WHERE galaID = :galaID AND eventID = :eventID ORDER BY time ASC";
+        $sql = "SELECT member, galaID, eventID FROM swim_times WHERE galaID = '".$galaID."' AND eventID = '".$eventID."' ORDER BY time ASC";
         
         $stmt = $conn->prepare($sql); 
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
-        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':eventID', $eventID, PDO::PARAM_STR);
         
          try {
             $stmt->execute();
