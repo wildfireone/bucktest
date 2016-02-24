@@ -55,7 +55,7 @@
                     foreach ($galasList as $gala) {
                         $galaItem->setID($gala["id"]);
                         $galaItem->getAllDetails($conn);            
-                        $venue->setID($galaItem->getVenueID());
+                        $venue->setID($gala["venueID"]);
                         $venue->getAllDetails($conn);
 
                         $link = "gala-results/view.php?id=" . $galaItem->getID();
