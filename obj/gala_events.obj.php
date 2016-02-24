@@ -245,10 +245,10 @@ class GalaEvents {
 
 
     public function listStrokesForGala($conn, $galaID) {       
-        $sql = "SELECT DISTINCT strokeID FROM gala_events WHERE galaID = :galaID ORDER BY strokeID ASC";
+        $sql = "SELECT DISTINCT strokeID FROM gala_events WHERE galaID = '". $galaID ."' ORDER BY strokeID ASC";
         
         $stmt = $conn->prepare($sql); 
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
         
          try {
             $stmt->execute();
