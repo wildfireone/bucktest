@@ -57,7 +57,8 @@
                 $length = new Lengths();
                 $swim_time = new Swim_Times();
                 
-                $gala = new Galas($_GET["id"]);
+                $gala = new Galas();
+                $gala->setID($_GET["id"]);
                 $gala->getAllDetails($conn); 
                 $venue->setID($gala->getVenueID());
                 $venue->getAllDetails($conn);
