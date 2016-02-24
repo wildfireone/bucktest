@@ -211,7 +211,7 @@ class GalaEvents {
     }
 
     public function listAllGalaEventsByStroke($conn, $galaID, $stroke) {       
-        $sql = "SELECT id FROM gala_events WHERE galaID = :galaID AND strokeID = :stroke ORDER BY strokeID ASC, lengthID ASC, ageLower ASC, gender ASC";
+        $sql = "SELECT id FROM gala_events WHERE galaID = '".$galaID."' AND strokeID = '".$stroke."' ORDER BY strokeID ASC, lengthID ASC, ageLower ASC, gender ASC";
         
         $stmt = $conn->prepare($sql); 
         $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
