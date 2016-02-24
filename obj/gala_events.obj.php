@@ -70,7 +70,7 @@ class GalaEvents {
     
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn, $galaID) {
-        $sql = "SELECT * FROM gala_events WHERE id = '". $this->getID() ."' AND galaID = '". $this->getGalaID() ."'";
+        $sql = "SELECT * FROM gala_events WHERE id = '". $this->getID() ."' AND galaID = '". $galaID ."'";
         $stmt = $conn->prepare($sql);
         //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
         //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
