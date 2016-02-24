@@ -135,7 +135,7 @@
                         <tr>';
 
                     $events = $event->listAllGalaEventsByStroke($conn,$gala->getID(),$stroke->getID());
-                    var_dump($events);
+
                     foreach ($events as $eventItem) {
                         $event->setID($eventItem["id"]);
                         $event->getAllDetails($conn,$gala->getID());
