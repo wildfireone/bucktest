@@ -61,7 +61,7 @@ class Timetable {
     }
     
     public function getTimeSlots($conn) {
-        $sql = "SELECT DISTINCT dayID, venueID, time FROM timetable ORDER BY dayID, time";
+        $sql = "SELECT DISTINCT dayID, venueID, time FROM timetable ORDER BY dayid, time";
         
         $stmt = $conn->prepare($sql);
         
