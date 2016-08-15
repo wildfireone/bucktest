@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
     session_start();
 ?>
 
@@ -46,12 +49,13 @@
                 echo '<div class="large-6 medium-6 small-12 columns index">
                     <h2 class="h3 capitalise">Recent Gala Results</h2>
                     <div class="row">';
+
                 foreach ($galaList as $galaItem) {
                     $gala->setID($galaItem["id"]);
                     $gala->getAllDetails($conn);
-                    $venue->setID($gala->getVenueID());
+                    $venue->setID($galaItem["venueID"]);
                     $venue->getAllDetails($conn);
-
+                    //echo "<p>Gala ID: ".$gala->getID()." Venue ID: ".$gala->getVenueID()."</p>";
                     $link = "gala-results/view.php?id=" . $gala->getID();
 
                     echo '<div class="large-12 medium-12 small-12 columns centre">

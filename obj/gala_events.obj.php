@@ -70,18 +70,18 @@ class GalaEvents {
     
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn, $galaID) {
-        $sql = "SELECT * FROM gala_events WHERE id = :id AND galaID = :galaID";
+        $sql = "SELECT * FROM gala_events WHERE id = '". $this->getID() ."' AND galaID = '". $galaID ."'";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
         
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
             
             foreach ($results as $row) {
-                $this->setID($row["id"]);
-                $this->setGalaID($row["galaID"]);
+                //$this->setID($row["id"]);
+                //$this->setGalaID($row["galaID"]);
                 $this->setStrokeID($row["strokeID"]);
                 $this->setLengthID($row["lengthID"]);
                 $this->setGender($row["gender"]);
@@ -211,11 +211,11 @@ class GalaEvents {
     }
 
     public function listAllGalaEventsByStroke($conn, $galaID, $stroke) {       
-        $sql = "SELECT id FROM gala_events WHERE galaID = :galaID AND strokeID = :stroke ORDER BY strokeID ASC, lengthID ASC, ageLower ASC, gender ASC";
+        $sql = "SELECT id FROM gala_events WHERE galaID = '".$galaID."' AND strokeID = '".$stroke."' ORDER BY strokeID ASC, lengthID ASC, ageLower ASC, gender ASC";
         
         $stmt = $conn->prepare($sql); 
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
-        $stmt->bindParam(':stroke', $stroke, PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':stroke', $stroke, PDO::PARAM_STR);
         
          try {
             $stmt->execute();
@@ -245,10 +245,10 @@ class GalaEvents {
 
 
     public function listStrokesForGala($conn, $galaID) {       
-        $sql = "SELECT DISTINCT strokeID FROM gala_events WHERE galaID = :galaID ORDER BY strokeID ASC";
+        $sql = "SELECT DISTINCT strokeID FROM gala_events WHERE galaID = '". $galaID ."' ORDER BY strokeID ASC";
         
         $stmt = $conn->prepare($sql); 
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
         
          try {
             $stmt->execute();

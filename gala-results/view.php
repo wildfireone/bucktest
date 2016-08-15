@@ -57,7 +57,8 @@
                 $length = new Lengths();
                 $swim_time = new Swim_Times();
                 
-                $gala = new Galas($_GET["id"]);
+                $gala = new Galas();
+                $gala->setID($_GET["id"]);
                 $gala->getAllDetails($conn); 
                 $venue->setID($gala->getVenueID());
                 $venue->getAllDetails($conn);
@@ -134,7 +135,7 @@
                         <tr>';
 
                     $events = $event->listAllGalaEventsByStroke($conn,$gala->getID(),$stroke->getID());
-                
+
                     foreach ($events as $eventItem) {
                         $event->setID($eventItem["id"]);
                         $event->getAllDetails($conn,$gala->getID());

@@ -99,14 +99,13 @@ class Galas {
     
     // ***** OTHER METHODS *****    
     public function getAllDetails($conn) {
-        $sql = "SELECT * FROM galas WHERE id = :id";
+        $sql = "SELECT * FROM galas WHERE id = '" . $this->getID() . "'";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
-
+        //$stmt->bindParam(':id', $this->getID(), PDO::PARAM_STR);
         try {
             $stmt->execute();
             $results = $stmt->fetchAll();
-            
+
             foreach ($results as $row) {
                 $this->setID($row["id"]);
                 $this->setTitle($row["title"]);
@@ -120,7 +119,7 @@ class Galas {
                 $this->setFees($row["fees"]);
                 $this->setConfirmationDate($row["confirmationDate"]);
                 $this->setCutOffDate($row["cutOffDate"]);
-                $this->setNotes($row["notes"]);
+                //$this->setNotes($row["notes"]);
             }
             return true;
         } catch (PDOException $e) {
@@ -268,7 +267,9 @@ class Galas {
     }
     
     public function listAllCompletedGalas($conn, $limit=null) {       
-        $sql = "SELECT g.id, v.id AS venueID FROM galas g, venues v WHERE g.venueID = v.id AND g.date < current_date ORDER BY g.date DESC";
+        $sql = "SELECT g.id, v.id AS venueID
+                FROM galas g, venues v
+                WHERE g.venueID = v.id AND g.date < current_date ORDER BY g.date DESC";
         
         if (!is_null($limit)) {
             $sql .= ' LIMIT :limit';
@@ -361,10 +362,10 @@ class Galas {
     }
                 
     public function numberOfResults($conn) {
-        $sql = "SELECT member FROM swim_times WHERE galaID = :galaID";
+        $sql = "SELECT member FROM swim_times WHERE galaID = ";
         
         $stmt = $conn->prepare($sql); 
-        $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
+        //$stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);
         
          try {
             $stmt->execute();
