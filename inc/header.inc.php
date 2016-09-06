@@ -17,7 +17,7 @@ $domain='http://bucktest.dev/';
             <ul>
                <li class="divider"></li>
                <li class="has-dropdown not-click">
-                  <a href=". $domain . galas.php" role="link">Galas</a> 
+                  <a href="'. $domain . 'galas.php" role="link">Galas</a> 
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'upcoming-galas.php" role="link">Upcoming Galas</a></li>
                      <li><a href="'. $domain . 'gala-results.php" role="link">Gala Results</a></li>                
