@@ -57,7 +57,7 @@ class Roles {
                 $this->setID($row["id"]);
                 $this->setRole($row["role"]); 
                 $this->setDescription($row["description"]); 
-                $this->setEmail($row["email"]);  
+                //$this->setEmail($row["email"]);
             }
             return true;
         } catch (PDOException $e) {
