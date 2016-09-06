@@ -143,13 +143,12 @@
                     echo '</table>';
                     echo '<a href="#results" class="right">Back to top</a>';
 
-            }
+            }}
                 dbClose($conn);
             ?>
               
         </div> 
     </div>
-    <?php include 'inc/footer.inc.php';?>
+    <?php  include 'inc/footer.inc.php';?>
 </body>
-
 </html>
