@@ -21,7 +21,7 @@
         
             <ul class="breadcrumbs">
                 <li><a href="index.php" role="link">Home</a></li>
-                <?php if(isset($_SESSION["username"])) { echo 'li><a href="galas.php" role="link">Galas</li>'; } ?>
+                <?php if(isset($_SESSION["username"])) { echo'<li><a href="galas.php" role="link">Galas'; } ?>
                 <li class="current">Upcoming Galas</li>
             </ul>
 
