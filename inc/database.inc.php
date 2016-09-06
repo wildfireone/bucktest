@@ -8,6 +8,6 @@
   $host='localhost'; // use 'localhost' if web server and mysql server are co-located (XAMMP)
                      // use 'csdm-mysql' to access CSDM mysql database server
   //$domain='http://www.bucksburnasc.org.uk/2015/'; // please finish with a '/' to ensure relative URLs work. Ta.
-  $domain='http://localhost/bucktest';
+  $domain='http://bucktest.dev/';
   $admin='1504693@rgu.ac.uk';
   ?>
