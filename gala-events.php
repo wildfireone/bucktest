@@ -151,7 +151,7 @@
                             echo '<td data-th="Gender" class="centre">Mixed</td>';
                         }
 
-                        echo '<td class="none centre"><a href="gala-events/edit.php?id=' . $event->getID() . '&galaID=' . $event->getGalaID() . '">Edit this Event</a></td>';
+                        echo '<td class="none centre"><a href="gala-events/edit.php?id=' . $event->getID() . '&galaID=' . $gala->getID() . '">Edit this Event</a></td>';
                         echo '</tr>';
                     }
                     echo '</table>';
