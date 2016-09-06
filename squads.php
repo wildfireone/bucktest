@@ -88,8 +88,8 @@
                     echo "<tr>";
                     echo '<td data-th="Squad">' . $squadItem->getSquad() . '</td>';
                     echo '<td data-th="Description">' . $squadItem->getDescription() . '</td>';
-                    echo '<td data-th="Coach"><a href=\"" . $squadCoachLink . "\">' . $member->getFullNameByUsername($conn) . '</a></td>';
-                    echo '<td data-th="No. of Members"><a href=\"" . $squadCountLink . "\">' . $squad["COUNT(*)"] . '</a></td>';
+                    echo '<td data-th="Coach"><a href="'.$squadCoachLink.'">' . $member->getFullNameByUsername($conn) . '</a></td>';
+                    echo '<td data-th="No. of Members"><a href="'.$squadCountLink.'">' . $squad["COUNT(*)"] . '</a></td>';
                     echo '<td class="none"><a href="' . $squadViewLink . '">View Details</a></td>';
                     echo "</tr>";
                 }
