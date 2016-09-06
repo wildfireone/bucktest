@@ -10,7 +10,7 @@
     }
 
     // Check for a parameter before we send the header
-    if (is_null($_GET["u"])) {        
+    if (is_null($_GET["u"])) {
         header( 'Location:' . $domain . '404.php' );
         exit;
     } else {
@@ -50,12 +50,12 @@
             <h2>View a Member</h2>        
           
                 <?php
-                require '../inc/connection.inc.php';
+
                 require '../inc/forms.inc.php';
-                require '../obj/members.obj.php';
+
                 require '../obj/status.obj.php';
                 require '../obj/roles.obj.php';
-                require '../obj/members_roles.obj.php';
+
 
                 $conn = dbConnect();
 
@@ -107,7 +107,12 @@
                 echo emailInputSetup(false,"Email","txtEmail",$member->getEmail(),250,true);
                 
                 echo '</fieldset></div>';
-                echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRoles($conn), $roles->listAllRoles($conn), true);
+                //old broken
+                //echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRoles($conn), $roles->listAllRoles($conn), true);
+
+                //new working!
+                echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRolesForMember($conn,$member->getUsername()), $roles->listAllRoles($conn), true);
+
                 echo textareaInputSetup(false, "Notes", "txtNotes", $member->getNotes(), 100, 8, true);
                 echo linkButton("Edit this Member", "edit.php?u=".$member->getUsername());
                 echo formEnd();                
