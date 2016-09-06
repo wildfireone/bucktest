@@ -53,7 +53,7 @@ class Members_Roles {
     }
     
     public function create($conn) {
-        $sql = "INSERT INTO Members_Roles VALUES (:member, :role)";
+        $sql = "INSERT INTO members_roles VALUES (:member, :role)";
             $stmt = $conn->prepare($sql);
         
             $stmt->bindParam(':member', $this->getMember(), PDO::PARAM_STR);
@@ -106,7 +106,7 @@ class Members_Roles {
     }
     
     public function listAllSwimmers($conn) {
-        $sql = "SELECT m.username, CONCAT(m.firstName, ' ', m.lastName) AS name, s.squad FROM members m, members_roles r, squads s WHERE r.roleID = 18 AND r.member = m.username AND m.squadID = s.id";
+        $sql = "SELECT m.username, CONCAT(m.firstName, ' ', m.lastName) AS name, s.squad FROM members m, members_roles r, squads s WHERE r.roleID = 1 AND r.member = m.username AND m.squadID = s.id";
         $stmt = $conn->prepare($sql);
 
         try {
@@ -117,7 +117,7 @@ class Members_Roles {
             foreach ($results as $result) {
                 $array[$result["username"]] = $result["name"] . " (" . $result["squad"] . ")";
             }
-            
+
             return $array;
         } catch (PDOException $e) {
             return "Query failed: " . $e->getMessage();
@@ -485,7 +485,7 @@ class Members_Roles {
     }
     
     public function listAllCoaches($conn) {
-        $sql = "SELECT m.username, CONCAT(m.firstName, ' ', m.lastName) AS name FROM members m, members_roles r WHERE r.roleID = 16 AND r.member = m.username";
+        $sql = "SELECT m.username, CONCAT(m.firstName, ' ', m.lastName) AS name FROM members m, members_roles r WHERE r.roleID = 3 AND r.member = m.username";
         $stmt = $conn->prepare($sql);
 
         try {
