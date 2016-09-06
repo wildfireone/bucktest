@@ -433,7 +433,7 @@ class Members {
             $this->isEmailValid($email) && 
             $this->isParentTitleValid($parentTitle) && 
             $this->isParentNameValid($parentName) && 
-            $this->isSquadValid($squad) && 
+            $this->isSquadValid($squadID) &&
             $this->isRegisterDateValid($registerDate) && 
             $this->isLastLoginDateValid($lastLoginDate) && 
             $this->isMonthlyFeeValid($monthlyFee) && 
