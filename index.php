@@ -42,7 +42,7 @@ error_reporting(E_ALL);
                     <h2 class="h3 capitalise">About Us</h2>
                     <p>Bucksburn Amateur Swimming Club (BASC) is a fairly young club with over 100 swimmers, which hosts a wide range of age groups and abilities. BASC was formed in 1990, and at that time had only 1 core aim - to encourage local participation in the sport of swimming.</p>
                     <div class="large-6 large-centered middle-12 small-12 columns">
-                    <a href="about-us.php" class="button small radius h6 capitalise margin">Read more About Us</a>
+                    <a href="about.php" class="button small radius h6 capitalise margin">Read more About Us</a>
                     </div>
                     </div>';
 
