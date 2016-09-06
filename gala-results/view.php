@@ -1,4 +1,10 @@
-<?php 
+<?php
+
+//Debugging enable
+ini_set('display_errors',1);
+ini_set('display_startup_errors' ,1);
+//error_reporting(E_ALL);
+
     session_start();
 
     require '../inc/connection.inc.php';
@@ -143,6 +149,7 @@
                         $length->getAllDetails($conn);
 
                         $swim_times = $swim_time->listAllSwimTimesForGalaByEvent($conn,$gala->getID(),$event->getID());
+
                         $iCount = 0;
 
                         foreach ($swim_times as $swim_timeItem) {
