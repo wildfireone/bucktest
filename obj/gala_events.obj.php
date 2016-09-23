@@ -258,6 +258,16 @@ class GalaEvents {
             return "Database query failed: " . $e->getMessage();
         }
     }
+
+    //List all ranks for swim times in array
+    public function listRanks()
+    {
+        $ranks = array(-1,1,2,3,4,5,6,7,8,98,99);
+       return $ranks;
+    }
+
+
+
                 
     public function doResultsExist($conn, $galaID) {
         $sql = "SELECT member FROM swim_times WHERE galaID = :galaID AND eventID = :eventID LIMIT 1";
