@@ -439,11 +439,10 @@ class Members {
             else
             {
                 $sql .= " AND m.firstName = :name OR m.lastName = :name";
-                echo "Name where";
+
             }
             $count++;
         }
-        var_dump($count);
 
         $stmt = $conn->prepare($sql);
 
