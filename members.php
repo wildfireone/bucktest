@@ -17,6 +17,7 @@
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
         <link href="css/site.css" rel="stylesheet"/>
         <script src="js/foundation.min.js"></script>
+        <script src="js/functions.js"></script>
     </head>
 
     <body>   
@@ -51,11 +52,11 @@
 
                 echo '<ul class="accordion" data-accordion>
                   <li class="accordion-navigation">
-                    <a href="#search">Search Members</a>
-                    <div id="search" class="content">';
+                   <input type="button" name="answer" value="Search Members" onclick="toggle_visibility(\'search\')" />
+                      <div id="search" class="content">';
+
 
                 echo formStart();
-
                 if (isset($_POST["btnSubmit"])) {
                     if (!empty($_POST["sltStatus"])) {
                         echo comboInputPostback(false, "Search by Member Status", "sltStatus", $_POST["sltStatus"], $status->listAllStatus($conn));
@@ -101,7 +102,6 @@
                         $membersList = $memberItem->listAllMembers($conn);
                     }
                 } else {
-
                     if(isset($_GET['squadID']))
                     {
                         $squadID = $_GET['squadID'];
