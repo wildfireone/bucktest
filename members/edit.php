@@ -27,13 +27,30 @@
         
         $connection = dbConnect();
         $memberValidation = new Members($_GET["u"]);
-        
-        if ($memberValidation->isInputValid($connection, $_POST['txtFirstName'], $_POST['txtMiddleName'], $_POST['txtLastName'], $_POST['txtUsername'], $_POST['txtDOB'],$_POST['sltGender'],$_POST['sltStatus'],$_POST['txtSASANumber'],$_POST['txtRegisterDate'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'], $_POST['txtHours'], $_POST['txtFees']) && count($_POST['chkRoles']) > 0) {
+        $members_rolesValidation = new Members_Roles();
+//25 parameter function - really?...
+        //($conn,$_POST['txtUsername'],$_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$member->getLastLoginDate(),$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes'])
+     //
+//if ($memberValidation->isInputValidEdit($_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
+
+
+    if(count($_POST['chkRoles']) > 0)
+        {
             $memberValidation->setFirstName($_POST['txtFirstName']);
-            
+
             $memberValidation->update($connection);
             $_SESSION['update'] = true;
-            
+            $members_rolesValidation->setMember($memberValidation->getUsername());
+
+            $roles = array();
+            foreach ($_POST['chkRoles'] as $key => $value) {
+                array_push($array, $value);
+            }
+            foreach ($roles as $role) {
+                $members_rolesValidation->setRoleID($role);
+                $members_rolesValidation->setMember($_GET["u"]);
+                $members_rolesValidation->create($connection);
+            }
             header('Location:' .$domain . '/members/view.php?u=' . $memberValidation->getUsername());
             die();
         } else {
@@ -124,25 +141,14 @@
                     echo textInputSetup(true,"Last Name","txtLastName",$member->getLastName(),50);
                 }
                 
-                if (isset($_POST["btnSubmit"])) {
-                    if (empty($_POST["txtUsername"])) {
-                        echo textInputEmptyError(true, "Username", "txtUsername", "errEmptyUsername", "Please enter a Username", 8);
-                    } else {
-                        if ($member->isUsernameValid($conn, $_POST['txtUsername'])) {
-                            echo textInputPostback(true,"Username","txtUsername", $_POST["txtUsername"], 8);
-                        } else {
-                            echo textInputPostbackError(true, "Username", "txtUsername", $_POST['txtUsername'], "errErrUsername", "This username is already taken. Please enter a unique username", 8);
-                        }                        
-                    }
-                } else {
-                    echo textInputSetup(true,"Username","txtUsername",$member->getUsername(),8);
-                }
 
-                if (isset($_POST["btnSubmit"])) {
-                    echo passwordInputEmptyError(true, "Password", "txtPassword", "errEmptyPassword", "Please enter a Password", 16);         
+                    echo textInputSetup(false,"Username","txtUsername",$member->getUsername(),8,true);
+
+              /*  if (isset($_POST["btnSubmit"])) {
+                    echo passwordInputEmptyError(false, "Password", "txtPassword", "errEmptyPassword", "Please enter a Password", 16);
                 } else {
-                    echo passwordInputBlank(true,"Password","txtPassword",16);
-                }
+                    echo passwordInputBlank(false,"Password","txtPassword",16);
+                }*/
                 
                 if (isset($_POST["btnSubmit"])) {
                     if (empty($_POST["txtDOB"])) {
