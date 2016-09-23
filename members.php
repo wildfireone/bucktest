@@ -40,12 +40,14 @@
                 require 'obj/squads.obj.php';
                 require 'obj/roles.obj.php';
                 require 'inc/forms.inc.php';
+                require 'obj/members_roles.obj.php';
 
                 $conn = dbConnect();
 
                 $status = new Status();
                 $squads = new Squads();
                 $roles = new Roles();
+                $members_roles = New Members_Roles();
 
                 echo '<ul class="accordion" data-accordion>
                   <li class="accordion-navigation">
@@ -99,7 +101,16 @@
                         $membersList = $memberItem->listAllMembers($conn);
                     }
                 } else {
-                    $membersList = $memberItem->listAllMembers($conn);
+
+                    if(isset($_GET['squadID']))
+                    {
+                        $squadID = $_GET['squadID'];
+                        $membersList = $memberItem->listAllSquadMembers($conn,$squadID);
+                        //var_dump($membersList);
+                    }
+                    else{
+                        $membersList = $memberItem->listAllCurrentMembers($conn);
+                    }
                 }
 
                 echo '<p class="right"><b>' . count($membersList) . ' results</b></p>';
@@ -126,7 +137,10 @@
                     } else {
                         echo '<td data-th="Squad"></td>';
                     }
-                    echo '<td data-th="Role"></td>';
+
+                    echo '<td data-th="Role">';
+                    echo listMemberRoles($members_roles->getAllRolesForMember($conn, $memberItem->getUsername()), $roles->listAllRoles($conn));
+                    echo '</td>';
                     echo '<td class="none"><a href="members/view.php?u=' . $memberItem->getUsername() . '">View Details</td>';
                     echo "</tr>";
                 }
