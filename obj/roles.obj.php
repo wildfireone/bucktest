@@ -124,6 +124,9 @@ class Roles {
             return "Query failed: " . $e->getMessage();
         }
     }
+
+
 }
+
 
 ?>

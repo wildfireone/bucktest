@@ -297,7 +297,7 @@ class Members {
         $sql = "UPDATE members SET sasaNumber = :sasaNumber, status = :status, firstName = :firstName, MiddleName = :middleName, lastName = :lastName, gender = :gender, dob = :dob, address1 = :address1, address2 = :address2, city = :city, county = :county, postcode = :postcode, telephone = :telephone, mobile = :mobile, email = :email, parentTitle = :parentTitle, parentName = :parentName, squadID = :squadID, registerDate = :registerDate, lastLoginDate = :lastLoginDate, monthlyFee = :monthlyFee, feeAdjustment = :feeAdjustment, swimmmingHours = :swimmingHours, notes = :notes WHERE username = :username";
         
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
+        //$stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
         $stmt->bindParam(':sasaNumber', $this->getSASANumber(), PDO::PARAM_STR);
         $stmt->bindParam(':status', $this->getStatus(), PDO::PARAM_INT);
         $stmt->bindParam(':firstName', $this->getFirstName(), PDO::PARAM_STR);
@@ -368,6 +368,54 @@ class Members {
             return "Database query failed: " . $e->getMessage();
         }
     }
+
+    //List all current members of the club (status = 1)
+    public function listAllCurrentMembers($conn, $name = null) {
+        $sql = "SELECT m.username, s.squad FROM members m LEFT JOIN squads s ON m.squadid = s.id WHERE m.status = 1";
+
+        if (!is_null($name)) {
+            $sql .= " WHERE m.firstName = :name OR m.lastName = :name";
+        }
+
+        $stmt = $conn->prepare($sql);
+
+        if (!is_null($name)) {
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        }
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            return "Database query failed: " . $e->getMessage();
+        }
+    }
+
+    //List all members which are in a squad (via url parameter)
+    public function listAllSquadMembers($conn, $squadID ,$name = null) {
+    $sql = "SELECT m.username, s.squad FROM members m LEFT JOIN squads s ON m.squadid = s.id WHERE m.squadid = '$squadID'";
+
+    if (!is_null($name)) {
+        $sql .= " WHERE m.firstName = :name OR m.lastName = :name";
+    }
+
+    $stmt = $conn->prepare($sql);
+
+    if (!is_null($name)) {
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    }
+
+    try {
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        return $results;
+    } catch (PDOException $e) {
+        return "Database query failed: " . $e->getMessage();
+    }
+}
+
+
     
     public function listGenders ($mixed=false) {
         if (!$mixed) {
@@ -446,7 +494,38 @@ class Members {
             print_r('false');
         }
     }
-    
+
+    public function isInputValidEdit($sasaNumber,$status,$firstName,$middleName,$lastName,$gender,$dob,$address1,$address2,$city,$county,$postcode,$telephone,$mobile,$email,$parentTitle,$parentName,$squadID,$registerDate,$monthlyFee,$feeAdjustment,$swimmingHours,$notes) {
+        if ($this->isSASANumberValid($sasaNumber) &&
+            $this->isStatusValid($status) &&
+            $this->isFirstNameValid($firstName) &&
+            $this->isMiddleNameValid($middleName) &&
+            $this->isLastNameValid($lastName) &&
+            $this->isGenderValid($gender) &&
+            $this->isDOBValid($dob) &&
+            $this->isAddress1Valid($address1) &&
+            $this->isAddress2Valid($address2) &&
+            $this->isCityValid($city) &&
+            $this->isCountyValid($county) &&
+            $this->isPostcodeValid($postcode) &&
+            $this->isTelephoneValid($telephone) &&
+            $this->isMobileValid($mobile) &&
+            $this->isEmailValid($email) &&
+            $this->isParentTitleValid($parentTitle) &&
+            $this->isParentNameValid($parentName) &&
+            $this->isSquadValid($squadID) &&
+            $this->isRegisterDateValid($registerDate) &&
+            $this->isMonthlyFeeValid($monthlyFee) &&
+            $this->isFeeAdjustmentValid($feeAdjustment) &&
+            $this->isSwimmingHoursValid($swimmingHours) &&
+            $this->isNotesValid($notes)) {
+            return true;
+        } else {
+            return false;
+            print_r('false');
+        }
+    }
+
     public function isFirstNameValid($firstName) {
         if (count($firstName > 0) && count($firstName <= 50)) {
             return true;
