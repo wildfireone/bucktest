@@ -20,8 +20,8 @@
             $swim->setGalaID($_POST["sltGala"]);
             $swim->setEventID($_POST["sltEvent"]);
             $swim->setTime($_POST["txtTime"]);
-            if (!empty($_POST["txtRank"])) {
-                $swim->setRank($_POST["txtRank"]);
+            if (!empty($_POST["sltRank"])) {
+                $swim->setRank($_POST["sltRank"]);
             }
 
             if ($swim->create($connection)) {
@@ -34,7 +34,7 @@
             $_SESSION['invalid'] = true;
         }
         dbClose($connection);
-    } 
+    }
 ?>
 
 <!DOCTYPE html>
@@ -141,11 +141,20 @@
                     echo textInputBlank(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", 8);
                 }
 
+
                 if (isset($_POST["btnSubmit"])) {
+                        echo comboInputPostback(false, "Rank", "sltRank", $_POST["sltRank"], $event->listRanks());
+                } else {
+                    echo comboInputBlank(false,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
+                }
+
+              /*  if (isset($_POST["btnSubmit"])) {
                     echo textInputPostback(false, "Rank", "txtRank", $_POST["txtRank"], 2);
                 } else {
-                    echo textInputBlank(false, "Rank", "txtRank", 2);
-                }
+                    echo comboInputBlank(true,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
+
+                    //echo textInputBlank(false, "Rank", "txtRank", 2);
+                }*/
 
                 echo formEndWithButton("Record Swim Time");
 

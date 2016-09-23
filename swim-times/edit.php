@@ -25,8 +25,8 @@
                 $swim->setGalaID($_POST["sltGala"]);
                 $swim->setEventID($_POST["sltEvent"]);
                 $swim->setTime($_POST["txtTime"]);
-                if (!empty($_POST["txtRank"])) {
-                    $swim->setRank($_POST["txtRank"]);
+                if (!empty($_POST["sltRank"])) {
+                    $swim->setRank($_POST["sltRank"]);
                 }                
 
                 if ($swim->create($connection)) {
@@ -149,11 +149,17 @@
                     echo textInputSetup(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", $swimTime->getTime(), 8);
                 }
 
-                if (isset($_POST["btnSubmit"])) {
-                    echo textInputPostback(false, "Rank", "txtRank", $_POST["txtRank"], 2);
-                } else {
-                    echo textInputSetup(false, "Rank", "txtRank", $swimTime->getRank(), 2);
-                }
+
+            if (isset($_POST["btnSubmit"])) {
+                echo comboInputPostback(false, "Rank", "sltRank", $_POST["sltRank"], $event->listRanks());
+
+             if (is_null($swimTime->getRank())) {
+                echo comboInputBlank(false,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
+             }
+            }
+            else {
+                echo comboInputSetup(false,"Rank","sltRank",$swimTime->getRank(),$event->listRanks());
+            }
 
                 echo formEndWithButton("Save Changes", $domain . "swim-times/delete.php?galaID=" . $gala->getID() . "&eventID=" . $event->getID() . "&member=" . $swimTime->getMember());
 
