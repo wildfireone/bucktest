@@ -392,9 +392,92 @@ class Members {
         }
     }
 
+    //List all members based on search results
+    public function listMemberSearchResults($conn, $status=null , $squadID = null , $role = null, $name = null) {
+       //parameter counter
+        $count= 0;
+
+        if (is_null($role)) {
+            $sql = "SELECT m.username, s.squad  FROM members m LEFT JOIN squads s ON m.squadid = s.id";
+            $count=0;
+        }
+
+        if (!is_null($role)) {
+            $sql = "SELECT m.username, s.squad  FROM members m LEFT JOIN squads s ON m.squadid = s.id LEFT JOIN members_roles r ON r.member = m.username WHERE r.roleID = :role";
+            $sql .= "";
+            $count++;
+        }
+
+
+        //If parameters are not null then add them to the SQL query
+        if (!is_null($status)) {
+            if ($count == 0)
+            {
+                $sql .= " WHERE m.status = :status";
+            }
+            else{
+                $sql .= " AND m.status = :status";
+            }
+           $count++;
+        }
+
+        if (!is_null($squadID)) {
+            if ($count == 0) {
+                $sql .= " WHERE m.squadid = :squadID";
+            }
+            else{
+                $sql .= " AND m.squadid = :squadID";
+            }
+            $count++;
+        }
+
+
+        if (!is_null($name)) {
+            if ($count == 0) {
+                $sql .= " WHERE m.firstName = :name OR m.lastName = :name";
+            }
+            else
+            {
+                $sql .= " AND m.firstName = :name OR m.lastName = :name";
+                echo "Name where";
+            }
+            $count++;
+        }
+        var_dump($count);
+
+        $stmt = $conn->prepare($sql);
+
+        //Also bind them to them a keyword:
+
+        if (!is_null($status)) {
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        }
+
+        if (!is_null($squadID)) {
+            $stmt->bindParam(':squadID', $squadID, PDO::PARAM_STR);
+        }
+
+        if (!is_null($role)) {
+            $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+        }
+
+        if (!is_null($name)) {
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        }
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            return "Database query failed: " . $e->getMessage();
+        }
+    }
+
+
     //List all members which are in a squad (via url parameter)
     public function listAllSquadMembers($conn, $squadID ,$name = null) {
-    $sql = "SELECT m.username, s.squad FROM members m LEFT JOIN squads s ON m.squadid = s.id WHERE m.squadid = '$squadID'";
+    $sql = "SELECT m.username, s.squad FROM members m  LEFT JOIN squads s ON m.squadid = s.id WHERE m.squadid = '$squadID'";
 
     if (!is_null($name)) {
         $sql .= " WHERE m.firstName = :name OR m.lastName = :name";
