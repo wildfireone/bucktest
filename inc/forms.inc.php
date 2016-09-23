@@ -873,7 +873,12 @@ function comboInputBlank($isRequired, $labelDescription, $labelControlName, $tex
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">
                 <option value="" selected="selected">' . $text . '</option>';
         foreach ($options as $key => $value) {
-            $output .= '<option value="' . $key . '">' . $value . '</option>';
+            if($labelDescription === "Rank") {
+                $output .= '<option value="' . $value . '">' . $value . '</option>';
+            }
+            else{
+                $output .= '<option value="' . $key . '">' . $value . '</option>';
+            }
         }
         $output .= '</select>
                 </label>
@@ -885,7 +890,12 @@ function comboInputBlank($isRequired, $labelDescription, $labelControlName, $tex
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">
                 <option value="" selected="selected">' . $text . '</option>';
         foreach ($options as $key => $value) {
-            $output .= '<option value="' . $key . '">' . $value . '</option>';
+            if($labelDescription === "Rank") {
+                $output .= '<option value="' . $value . '">' . $value . '</option>';
+            }
+            else{
+                $output .= '<option value="' . $key . '">' . $value . '</option>';
+            }
         }
         $output .= '</select>
                 </label>
@@ -932,6 +942,13 @@ function comboInputPostback($isRequired, $labelDescription, $labelControlName, $
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
         foreach ($options as $key => $value) {
+            if($labelDescription === "Rank") {
+                if ($value == $selected) {
+                    $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
+                } else {
+                    $output .= '<option value="' . $value . '">' . $value . '</option>';
+                }
+            }
             if ($key == $selected) {
                 $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
             } else {
@@ -947,6 +964,13 @@ function comboInputPostback($isRequired, $labelDescription, $labelControlName, $
                 <label><b>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
         foreach ($options as $key => $value) {
+            if($labelDescription === "Rank") {
+                if ($value == $selected) {
+                    $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
+                } else {
+                    $output .= '<option value="' . $value . '">' . $value . '</option>';
+                }
+            }
             if ($key == $selected) {
                 $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
             } else {
@@ -968,10 +992,19 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '" disabled>';
             foreach ($options as $key => $value) {
-                if ($value == $selected || $key == $selected) {
-                    $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
-                } else {
-                    $output .= '<option value="' . $key . '">' . $value . '</option>';
+                if($labelDescription === "Rank") {
+                    if ($value == $selected) {
+                        $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $value . '">' . $value . '</option>';
+                    }
+                }
+                else {
+                    if ($value == $selected || $key == $selected) {
+                        $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $key . '">' . $value . '</option>';
+                    }
                 }
             }
             $output .= '</select>
@@ -984,10 +1017,19 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
             foreach ($options as $key => $value) {
-                if ($value == $selected || $key == $selected) {
-                    $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
-                } else {
-                    $output .= '<option value="' . $key . '">' . $value . '</option>';
+                if($labelDescription === "Rank") {
+                    if ($value == $selected) {
+                        $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $value . '">' . $value . '</option>';
+                    }
+                }
+                else {
+                    if ($value == $selected || $key == $selected) {
+                        $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $key . '">' . $value . '</option>';
+                    }
                 }
             }
             $output .= '</select>
@@ -1001,10 +1043,18 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                 <label><b>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '" disabled>';
             foreach ($options as $key => $value) {
-                if ($value == $selected || $key == $selected) {
-                    $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
+                if ($labelDescription === "Rank") {
+                    if ($value == $selected) {
+                        $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $value . '">' . $value . '</option>';
+                    }
                 } else {
-                    $output .= '<option value="' . $key . '">' . $value . '</option>';
+                    if ($value == $selected || $key == $selected) {
+                        $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $key . '">' . $value . '</option>';
+                    }
                 }
             }
             $output .= '</select>
@@ -1016,10 +1066,19 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                 <label><b>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
             foreach ($options as $key => $value) {
-                if ($value == $selected || $key == $selected) {
-                    $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
-                } else {
-                    $output .= '<option value="' . $key . '">' . $value . '</option>';
+                if($labelDescription === "Rank") {
+                    if ($value == $selected) {
+                        $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $value . '">' . $value . '</option>';
+                    }
+                }
+                else {
+                    if ($value == $selected || $key == $selected) {
+                        $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
+                    } else {
+                        $output .= '<option value="' . $key . '">' . $value . '</option>';
+                    }
                 }
             }
             $output .= '</select>
@@ -1086,7 +1145,7 @@ function checkboxInputEmptyError($isRequired, $labelDescription, $labelControlNa
 function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false) {
     $array = array();
     foreach ($selected as $key => $value) {
-        array_push($array, $value);        
+        array_push($array, $value);
     }
     if ($isRequired) {
         if ($isReadOnly) {
@@ -1148,6 +1207,22 @@ function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $
         }
         
     }
+}
+
+function listMemberRoles($selected, $options)
+{
+    $array = array();
+    foreach ($selected as $key => $value) {
+        array_push($array, $value);
+    }
+    $output = "";
+
+    foreach ($options as $key => $value) {
+        if (in_array($key, $array)) {
+            $output .= $value . ",";
+        }
+    }
+    return $output;
 }
 
 function checkboxInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options) {
