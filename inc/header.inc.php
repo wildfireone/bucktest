@@ -43,7 +43,7 @@ function showEditLink($domain,$view, $edit, $parm)
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'members.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'members/create.php" role="link">Create</a></li>';
-                     showEditLink($domain, '/members/view.php','members/edit.php', 'id');
+                     showEditLink($domain, '/members/view.php','members/edit.php', 'u');
                 echo '</ul>
                </li>
                <li class="divider"></li>
