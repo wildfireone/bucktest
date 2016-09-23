@@ -96,12 +96,47 @@
                 $memberItem = new Members();
 
                 if (isset($_POST["btnSubmit"])) {
-                    if (!empty($_POST["txtSearch"])) {
-                        $membersList = $memberItem->listAllMembers($conn, $_POST["txtSearch"]);
-                    } else {
-                        $membersList = $memberItem->listAllMembers($conn);
+
+                    //Variables
+                    $status = null;
+                    $squad = null;
+                    $role = null;
+                    $name = null;
+
+                    //Set form data to variables if they are present:
+                    if (!empty($_POST["sltStatus"])) {
+                        $status = $_POST["sltStatus"];
                     }
-                } else {
+
+                    if (!empty($_POST["sltSquad"])) {
+                        $squad = $_POST["sltSquad"];
+                    }
+
+                    if (!empty($_POST["sltRole"])) {
+                        $role = $_POST["sltRole"];
+                    }
+
+                    if (!empty($_POST["txtSearch"])) {
+                        $name = $_POST["txtSearch"];
+                    }
+
+                    $membersList = $memberItem->listMemberSearchResults($conn, $status, $squad, $role, $name);
+                    //var_dump($membersList);
+
+                    /* //Search by members name:
+                     if (!empty($_POST["txtSearch"])) {
+                         $membersList = $memberItem->listAllMembers($conn, $_POST["txtSearch"]);
+                     }
+
+
+                     if (!empty($_POST["sltSquad"])) {
+                         $squadID = $_POST['sltSquad'];
+                         $membersList = $memberItem->listAllSquadMembers($conn,$squadID);
+                     }*/
+
+                }
+
+                else {
                     if(isset($_GET['squadID']))
                     {
                         $squadID = $_GET['squadID'];
