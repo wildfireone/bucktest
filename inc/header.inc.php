@@ -2,15 +2,18 @@
 //Set domain here as not all pages include the database file (for some reason...)
 $domain='http://bucktest.dev/';
 
+
 //Show edit link for each section if the url is on the correct viewing page
-function showEditLink($domain,$view, $edit, $parm)
+/*function showEditLink($domain,$view, $edit, $parm)
 {
     if($_SERVER['PHP_SELF'] === $view) {
         $id = $_GET[$parm];
         $link = $domain . $edit. '?' . $parm . '=' . $id;
+
         echo '<li><a href="'.$link.'" role="link">Edit</a></li>';
     }
-}
+}*/
+
 ?>
 <header>
    <a href="<?php echo $domain ?>index.php" class="nohover">
@@ -33,7 +36,7 @@ function showEditLink($domain,$view, $edit, $parm)
                      <li><a href="'. $domain . 'galas.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'galas/create.php" role="link">Create</a></li>
                      ';
-                    showEditLink($domain, '/galas/view.php','galas/edit.php', 'id');
+                    showEditLink($domain, '/galas/view.php','galas/edit.php', 'id',$_SESSION["username"],$connection,$memberValidation);
                     echo'
                   </ul>
                </li>
@@ -43,7 +46,7 @@ function showEditLink($domain,$view, $edit, $parm)
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'members.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'members/create.php" role="link">Create</a></li>';
-                     showEditLink($domain, '/members/view.php','members/edit.php', 'u');
+                     showEditLink($domain, '/members/view.php','members/edit.php', 'u',$_SESSION["username"],$connection,$memberValidation);
                 echo '</ul>
                </li>
                <li class="divider"></li>
@@ -52,7 +55,7 @@ function showEditLink($domain,$view, $edit, $parm)
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'squads.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'squads/create.php" role="link">Create</a></li>';
-                      showEditLink($domain, '/squads/view.php','squads/edit.php', 'id');
+                      showEditLink($domain, '/squads/view.php','squads/edit.php', 'id',$_SESSION["username"],$connection,$memberValidation);
                   echo'</ul>
                </li>
                <li class="divider"></li>
@@ -61,7 +64,7 @@ function showEditLink($domain,$view, $edit, $parm)
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'venues.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'venues/create.php" role="link">Create</a></li>';
-                     showEditLink($domain, '/venues/view.php','venues/edit.php', 'id');
+                     showEditLink($domain, '/venues/view.php','venues/edit.php', 'id',$_SESSION["username"],$connection,$memberValidation);
                   echo'</ul>
                </li>
                <li class="divider"></li>
@@ -70,7 +73,7 @@ function showEditLink($domain,$view, $edit, $parm)
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'news.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'news/create.php" role="link">Create</a></li>';
-                     showEditLink($domain, '/news/view.php','news/edit.php', 'id');
+                     showEditLink($domain, '/news/view.php','news/edit.php', 'id',$_SESSION["username"],$connection, $memberValidation);
                   echo'</ul>
                </li>
                <li class="divider"></li>
@@ -81,7 +84,7 @@ function showEditLink($domain,$view, $edit, $parm)
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'shop.php" role="link">View All</a></li>
                      <li><a href="'. $domain . 'shop/create.php" role="link">Create</a></li>';
-                     showEditLink($domain, '/shop/view.php','shop/edit.php', 'id');
+                     showEditLink($domain, '/shop/view.php','shop/edit.php', 'id', $_SESSION["username"],$connection, $memberValidation);
                   echo '</ul>
                </li>
                <li class="divider"></li>
