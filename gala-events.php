@@ -34,7 +34,7 @@
             <?php
                 require 'inc/forms.inc.php';
                 require 'obj/venues.obj.php';
-                require 'obj/members.obj.php';
+                require_once 'obj/members.obj.php';
                 require 'obj/galas.obj.php';
                 require 'obj/gala_events.obj.php';
                 require 'obj/strokes.obj.php';

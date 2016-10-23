@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +30,6 @@
             <h2>Upcoming Galas</h2>
         
             <?php
-                require 'inc/connection.inc.php';
                 require 'obj/galas.obj.php';
                 require 'obj/venues.obj.php';
 

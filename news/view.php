@@ -2,6 +2,7 @@
     session_start(); 
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/news.obj.php';
 
     // Check for a parameter before we send the header
@@ -42,7 +43,7 @@
                 <li class="current">
                     
                     <?php  
-                        require '../obj/members.obj.php';
+                        require_once '../obj/members.obj.php';
                         require '../inc/forms.inc.php';
 
                         $conn = dbConnect();

@@ -2,6 +2,7 @@
     session_start();
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/gala_events.obj.php';
     
     if (!isset($_SESSION['username'])) {
@@ -75,7 +76,7 @@
                 require '../obj/venues.obj.php';
                 require '../obj/strokes.obj.php';
                 require '../obj/lengths.obj.php';
-                require '../obj/members.obj.php';
+                require_once '../obj/members.obj.php';
 
                 $conn = dbConnect();
 

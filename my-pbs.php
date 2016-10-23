@@ -1,6 +1,7 @@
 <?php session_start();
 
     require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 
     if (!isset($_SESSION['username'])) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
@@ -37,7 +38,7 @@
           
                 <?php
                 require 'inc/forms.inc.php';
-                require 'obj/members.obj.php';
+                require_once 'obj/members.obj.php';
                 require 'obj/galas.obj.php';
                 require 'obj/gala_events.obj.php';
                 require 'obj/strokes.obj.php';

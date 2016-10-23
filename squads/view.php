@@ -6,6 +6,8 @@
             header( 'Location:' . $domain . '404.php' );
             die();
     }
+    require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -47,9 +49,8 @@
             ?>
                             
             <?php
-                    require '../inc/connection.inc.php';
                     require '../obj/squads.obj.php';
-                    require '../obj/members_roles.obj.php';
+                    require_once '../obj/members_roles.obj.php';
                     require '../inc/forms.inc.php';
 
                     $conn = dbConnect();

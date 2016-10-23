@@ -2,6 +2,7 @@
     session_start();
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/shop.obj.php';
 
     if (!isset($_SESSION['username'])) {

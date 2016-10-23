@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +33,9 @@
         <p>Some descriptive text about the committee.</p>
             
         <?php
-            include '../inc/connection.inc.php';
-            require '../obj/members_roles.obj.php';
+            require_once '../obj/members_roles.obj.php';
             require '../obj/roles.obj.php';
-            require '../obj/members.obj.php';
+            require_once '../obj/members.obj.php';
 
             $conn = dbConnect();
             

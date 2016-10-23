@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +32,9 @@
             <h2>News</h2>
 
             <?php
-                require 'inc/connection.inc.php';
+
                 require 'obj/news.obj.php';
-                require 'obj/members.obj.php';
+                require_once 'obj/members.obj.php';
 
                 if (isset($_SESSION['delete'])) {
                     echo '<p class="alert-box success radius centre">News Item deleted successfully!</p>';

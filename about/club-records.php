@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -43,11 +45,11 @@
                         <th>Time</th>
                     </tr>';
 
-                require '../inc/connection.inc.php';
+
                 require '../obj/club_records.obj.php';
                 require '../obj/strokes.obj.php';
                 require '../obj/lengths.obj.php';
-                require '../obj/members.obj.php';
+                require_once '../obj/members.obj.php';
 
                 $conn = dbConnect();
 

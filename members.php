@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+    require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
     if (!isset($_SESSION['username'])) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
@@ -35,13 +36,13 @@
                 <h2>Members</h2>   
 
                 <?php
-                require 'inc/connection.inc.php';
-                require 'obj/members.obj.php';
+
+                require_once 'obj/members.obj.php';
                 require 'obj/status.obj.php';
                 require 'obj/squads.obj.php';
                 require 'obj/roles.obj.php';
                 require 'inc/forms.inc.php';
-                require 'obj/members_roles.obj.php';
+                require_once 'obj/members_roles.obj.php';
 
                 $conn = dbConnect();
 

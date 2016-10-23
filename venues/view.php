@@ -6,6 +6,8 @@
             header( 'Location:' . $domain . '404.php' );
             die();
     }
+    require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +49,6 @@
             ?>
                             
             <?php
-                    require '../inc/connection.inc.php';
                     require '../inc/forms.inc.php';
                     require '../obj/venues.obj.php';
 

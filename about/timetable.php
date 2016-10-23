@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,6 @@
         <p>Below is our club's timetable which shows when and where each of our squads train.</p>
                         
             <?php
-                require '../inc/connection.inc.php';
                 require '../inc/forms.inc.php';
                 require '../obj/timetable.obj.php';
                 require '../obj/days.obj.php';

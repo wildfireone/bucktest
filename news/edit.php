@@ -2,6 +2,7 @@
     session_start();
         // Check for a parameter before we send the header
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/news.obj.php';
 
     if (!isset($_SESSION['username'])) {

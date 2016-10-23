@@ -8,6 +8,7 @@ ini_set('display_startup_errors' ,1);
     session_start();
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/galas.obj.php';
 
     if (is_null($_GET["id"])) {        
@@ -48,7 +49,7 @@ ini_set('display_startup_errors' ,1);
             <?php
                 require '../inc/forms.inc.php';
                 require '../obj/venues.obj.php';
-                require '../obj/members.obj.php';
+                require_once '../obj/members.obj.php';
                 require '../obj/gala_events.obj.php';
                 require '../obj/strokes.obj.php';
                 require '../obj/lengths.obj.php';

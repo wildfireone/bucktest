@@ -2,6 +2,7 @@
     session_start();
 
     require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 
     if (!isset($_SESSION['username'])) {
         header('location: ' . $domain . '/message.php?id=badaccess');
@@ -50,7 +51,7 @@
                 </tr>
             <?php
                 require 'obj/squads.obj.php';
-                require 'obj/members.obj.php';
+                require_once 'obj/members.obj.php';
 
                 $conn = dbConnect();
                 

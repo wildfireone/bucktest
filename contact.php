@@ -2,6 +2,7 @@
     session_start();
 
     require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
     require 'inc/functions.inc.php';
     
     if (isset($_POST["btnSubmit"])) {

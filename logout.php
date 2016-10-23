@@ -1,6 +1,8 @@
 <?php session_start();
     unset($_SESSION);
     session_destroy();
+    require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>

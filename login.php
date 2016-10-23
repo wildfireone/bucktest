@@ -1,8 +1,9 @@
 <?php 
     session_start(); 
     require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
     require 'inc/functions.inc.php';
-    require 'obj/members.obj.php';
+    require_once 'obj/members.obj.php';
 
     if(isset($_SESSION['username'])){        
         header('location: ' . $domain . 'member-area.php');

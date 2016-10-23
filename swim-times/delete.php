@@ -7,6 +7,7 @@
     }
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/swim_times.obj.php';
     
     if (isset($_POST['btnSubmit'])) {
@@ -56,8 +57,8 @@
                 require '../inc/forms.inc.php';
                 require '../obj/galas.obj.php';
                 require '../obj/gala_events.obj.php';
-                require '../obj/members_roles.obj.php';
-                require '../obj/members.obj.php';
+                require_once '../obj/members_roles.obj.php';
+                require_once '../obj/members.obj.php';
                 require '../obj/lengths.obj.php';
                 require '../obj/strokes.obj.php';
 

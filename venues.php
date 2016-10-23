@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +37,6 @@
                     <th>View Details</th>
                 </tr>
             <?php
-                require 'inc/connection.inc.php';
                 require 'obj/venues.obj.php';
 
                 if (isset($_SESSION['delete'])) {

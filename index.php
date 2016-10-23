@@ -3,6 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
     session_start();
+require 'inc/connection.inc.php';
+require 'inc/security.inc.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +27,11 @@ error_reporting(E_ALL);
             <img src="img/banner.jpg" alt=""/>
 
             <?php
-                require 'inc/connection.inc.php';
+
                 require 'obj/news.obj.php';
                 require 'obj/galas.obj.php';
                 require 'obj/venues.obj.php';
-                require 'obj/members.obj.php';
+
 
                 $conn = dbConnect();
                 $newsItem = new News();

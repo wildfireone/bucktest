@@ -1,7 +1,7 @@
 <?php
     session_start();
     require 'inc/connection.inc.php';
-
+    require 'inc/security.inc.php';
     if (!isset($_SESSION['username'])) {
         header('location: ' . $domain . '/message.php?id=badaccess');
         die();
@@ -37,7 +37,7 @@
             <div class="large-4 medium-6 small-12 columns centre">
                 <?php echo '<a href="my-details.php" class="small radius button capitalise h6">My Details</a>'; ?>
                 <?php 
-                    require 'obj/members_roles.obj.php';
+                    require_once 'obj/members_roles.obj.php';
                     $members_roles = new Members_Roles();
                     $conn = dbConnect();
                     if ($members_roles->isMemberSwimmer($conn, $_SESSION['username'])) {
@@ -57,8 +57,8 @@
             
             <p>Below is a list of all the areas of the website you can access.</p>
                 
-                <?php 
-                    include 'obj/members.obj.php';
+                <?php
+                   //include 'obj/members.obj.php';
                     include 'obj/roles.obj.php';
 
                     $member = new Members();

@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+
+    require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
+
     if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {        
             header( 'Location:' . $domain . '404.php' );
             die();
@@ -34,7 +38,6 @@
             <h2>View a Shop Item</h2>
             
             <?php
-                require '../inc/connection.inc.php';
                 require '../obj/shop.obj.php';
                 require '../inc/forms.inc.php';
 

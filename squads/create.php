@@ -2,6 +2,7 @@
 session_start();
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/squads.obj.php';
 
     if (!isset($_SESSION['username'])) {
@@ -62,7 +63,7 @@ session_start();
     
             <?php                            
                 require '../inc/forms.inc.php';
-                require '../obj/members_roles.obj.php';
+                require_once '../obj/members_roles.obj.php';
 
                 if (isset($_SESSION['invalid'])) {
                     echo '<p class="alert-box error radius centre">Some of the input you provided was invalid. Please correct the highlighted errors and try again.</p>';

@@ -1,8 +1,8 @@
 <?php session_start();
 
     require '../inc/connection.inc.php';
-    require '../obj/members.obj.php';
-    require '../obj/members_roles.obj.php';
+    require '../inc/security.inc.php';
+
 
     if (!isset($_SESSION['username'])) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );

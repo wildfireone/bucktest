@@ -12,6 +12,7 @@
     }
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/squads.obj.php';
     
     if (isset($_POST['btnSubmit'])) {

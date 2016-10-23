@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">

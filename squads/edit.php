@@ -12,6 +12,7 @@
     }
 
     require '../inc/connection.inc.php';
+    require '../inc/security.inc.php';
     require '../obj/squads.obj.php';
     
     if (isset($_POST['btnSubmit'])) {
@@ -67,7 +68,7 @@
                       
             <?php
                 require '../inc/forms.inc.php';
-                require '../obj/members_roles.obj.php';
+                require_once '../obj/members_roles.obj.php';
             
                 $conn = dbConnect();
 
