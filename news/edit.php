@@ -10,6 +10,12 @@
         exit;
     }
 
+    if(!newsFullAccess($connection, $currentUser, $memberValidation)) {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
+
     // Check for a parameter before we send the header
     if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {        
             header( 'Location:' . $domain . '404.php' );
@@ -18,6 +24,14 @@
         $connection = dbConnect();
         $news = new News($_GET["id"]);
         if (!$news->doesExist($connection)) {
+            header( 'Location:' . $domain . '404.php' );
+            exit;
+        }
+
+        //Does the user have the correct permissions?
+
+        if (!$memberValidation->isMemberCommittee($connection,$currentUser->getUsername()) || !$memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) )
+        {
             header( 'Location:' . $domain . '404.php' );
             exit;
         }

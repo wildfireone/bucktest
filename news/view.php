@@ -76,11 +76,10 @@
 
                 </article>
                 </div>';
-                if (isset($_SESSION["username"])) {
-                    echo linkButton("Edit this News Article", 'edit.php?id=' . $newsItem->getID(),true);
+                if (isset($_SESSION["username"]) && (newsFullAccess($connection, $currentUser, $memberValidation))) {
+                        echo linkButton("Edit this News Article", 'edit.php?id=' . $newsItem->getID(), true);
                 }
-
-                    ?>
+                ?>
             </div>
         </div>
         <?php include '../inc/footer.inc.php';?>

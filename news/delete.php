@@ -10,6 +10,11 @@
         exit;
     }
 
+    if(!newsFullAccess($connection, $currentUser, $memberValidation)) {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
     // Check for a parameter before we send the header
     if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {        
             header( 'Location:' . $domain . '404.php' );
