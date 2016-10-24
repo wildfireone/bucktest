@@ -98,14 +98,14 @@
                     echo '<td  data-th="Squads">';
                     echo substr($squadList, 0, (strlen($squadList)-2));
                     echo '</td>';
-                    if (isset($_SESSION['username'])) {
+                    if (isset($_SESSION['username']) && (timetableFullAccess($connection, $currentUser, $memberValidation))) {
                         echo '<td><a href="' . $domain . 'about/timetable/edit.php?dayID=' . $day->getID() . '&venueID=' . $venue->getID() . '&time=' . htmlspecialchars($timetable["time"]) . '">Edit</a></td>';
                     }
                     echo '</tr>';   
                 }
                 echo '</table>';
 
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['username']) && (timetableFullAccess($connection, $currentUser, $memberValidation))) {
                     echo '<div class="row">';
                     echo linkButton("Add New Timetable Item", $domain . "about/timetable/create.php");
                     echo '</div>';

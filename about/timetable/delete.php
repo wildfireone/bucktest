@@ -10,6 +10,11 @@
         exit;
     }
 
+    if(!timetableFullAccess($connection, $currentUser, $memberValidation)) {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
     $connection = dbConnect();
     $timetable = new Timetable();
 
