@@ -9,6 +9,12 @@
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
     }
+
+    if(!galaFullAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
     
     if (isset($_POST['btnSubmit'])) {
         
@@ -223,8 +229,12 @@
                 if (isset($_POST["sltVenue"])) {
                     $venues->setID($_POST['sltVenue']);
                     $venues->getAllDetails($conn);
-                        
-                    echo linkButton("Add a new Venue", '../venues/create.php',true);
+
+                    if(venueFullAccess($connection, $currentUser, $memberValidation))
+                    {
+                        echo linkButton("Add a new Venue", '../venues/create.php',true);
+                    }
+
                     
                     echo comboInputPostback(true,"Venue","sltVenue",$_POST["sltVenue"],$venues->listAllVenues($conn));
                     echo textInputSetup(true,"Address Line 1","txtAddress1",$venues->getAddress1(),50,true);
@@ -255,7 +265,9 @@
                 }
 
                 echo '<div class="large-12 medium-12 small-12 columns">';
+            if(venueFullAccess($connection, $currentUser, $memberValidation)) {
                 echo linkButton("Edit this Venue", '../venues/edit.php?id='.$venues->getID(),true);
+            }
                 echo '</div>';
 
                 echo '</fieldset></div>';

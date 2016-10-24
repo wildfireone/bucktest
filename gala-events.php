@@ -1,10 +1,17 @@
 <?php
     session_start();
     require 'inc/connection.inc.php';
+    require 'inc/security.inc.php';
 
     if (!isset($_SESSION['username'])) {
         header('location: ' . $domain . '/message.php?id=badaccess');
         die();
+    }
+
+    if(!galaFullAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
     }
 ?>
 

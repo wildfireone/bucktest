@@ -10,7 +10,14 @@
         exit;
     }
 
-    $connection = dbConnect();
+    if(!galaFullAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
+
+$connection = dbConnect();
 
     if (is_null($_GET["id"])) {        
         header( 'Location:' . $domain . '404.php' );

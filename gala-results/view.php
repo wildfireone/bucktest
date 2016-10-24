@@ -121,7 +121,7 @@ ini_set('display_startup_errors' ,1);
                 }
                 echo '</ol>';
 
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['username']) && (galaFullAccess($connection,$currentUser,$memberValidation)))  {
                     echo linkButton("Edit Gala Events", "../gala-events.php?id=".$gala->getID(), true) . '<br>';
                 }
 
@@ -212,7 +212,7 @@ ini_set('display_startup_errors' ,1);
                                 echo '<td></td>';
                             }
 
-                            if (isset($_SESSION["username"])) {
+                            if (isset($_SESSION["username"]) && (galaFullAccess($connection,$currentUser,$memberValidation))) {
                                 echo '<td class="none class="centre"><a href="' . $domain . 'swim-times/edit.php?galaID=' . $gala->getID() . '&eventID=' . $event->getID() . '&member=' . $member->getUsername() . '">Edit</a></td>';
                             }  
 
@@ -229,7 +229,7 @@ ini_set('display_startup_errors' ,1);
 
             echo '<div class="row"></div>';
 
-            if (isset($_SESSION['username'])) {
+            if (isset($_SESSION['username']) && (galaFullAccess($connection,$currentUser,$memberValidation))) {
                 echo linkButton("Add Swim Times", $domain . "swim-times/create.php?galaID=".$gala->getID(), true) . '<br>';
             }
 

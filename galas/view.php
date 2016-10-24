@@ -183,15 +183,15 @@
 
                 echo '<div class="row">';
                 echo '<div class="large-4 medium-4 small-12 columns left">';
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['username']) && (galaFullAccess($connection,$currentUser,$memberValidation))) {
                     echo linkButton("Edit Gala", $domain . "galas/edit.php?id=".$gala->getID(), true) . '<br>';
                 }
                 echo '</div><div class="large-4 medium-4 small-12 columns left">';
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['username']) && (galaFullAccess($connection,$currentUser,$memberValidation))) {
                     echo linkButton("Add or Edit Gala Events", $domain . "gala-events.php?id=".$gala->getID(), true) . '<br>';
                 }
                 echo '</div><div class="large-4 medium-4 small-12 columns left">';
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['username']) && (galaFullAccess($connection,$currentUser,$memberValidation))) {
                     echo linkButton("Add Swim Times", $domain . "swim-times/create.php?galaID=".$gala->getID(), true) . '<br>';
                 }
                 echo '</div></div>';

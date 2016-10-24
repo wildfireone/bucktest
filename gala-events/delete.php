@@ -21,6 +21,12 @@
             header( 'Location:' . $domain . '404.php' );
             exit;
         }
+
+        if(!galaFullAccess($connection,$currentUser,$memberValidation))
+        {
+            header( 'Location:' . $domain . 'message.php?id=badaccess' );
+            exit;
+        }
     }
 
     if (isset($_POST['btnSubmit'])) {
