@@ -6,10 +6,17 @@
         exit;
     }
 
+
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
     require '../obj/swim_times.obj.php';
-    
+
+    if(!galaFullAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
     if (isset($_POST['btnSubmit'])) {
         
         $connection = dbConnect();
