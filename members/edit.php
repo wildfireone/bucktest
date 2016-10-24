@@ -34,32 +34,34 @@
     if (isset($_POST['btnSubmit'])) {
         
         $connection = dbConnect();
-        $memberValidation = new Members($_GET["u"]);
+        $member_Validation = new Members($_GET["u"]);
         $members_rolesValidation = new Members_Roles();
 //25 parameter function - really?...
         //($conn,$_POST['txtUsername'],$_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$member->getLastLoginDate(),$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes'])
      //
-//if ($memberValidation->isInputValidEdit($_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
+//if ($member_Validation->isInputValidEdit($_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
 
 
     if(count($_POST['chkRoles']) > 0)
         {
-            $memberValidation->setFirstName($_POST['txtFirstName']);
+            $member_Validation->setFirstName($_POST['txtFirstName']);
 
-            $memberValidation->update($connection);
+            $member_Validation->update($connection);
             $_SESSION['update'] = true;
-            $members_rolesValidation->setMember($memberValidation->getUsername());
+            $members_rolesValidation->setMember($member_Validation->getUsername());
 
             $roles = array();
+            var_dump($_POST['chkRoles']);
             foreach ($_POST['chkRoles'] as $key => $value) {
-                array_push($array, $value);
+                array_push($roles, $value);
             }
+
             foreach ($roles as $role) {
                 $members_rolesValidation->setRoleID($role);
                 $members_rolesValidation->setMember($_GET["u"]);
                 $members_rolesValidation->create($connection);
             }
-            header('Location:' .$domain . '/members/view.php?u=' . $memberValidation->getUsername());
+            header('Location:' .$domain . '/members/view.php?u=' . $member_Validation->getUsername());
             die();
         } else {
             $_SESSION['invalid'] = true;
