@@ -70,7 +70,7 @@
                         echo '<td data-th="Description">' . $shopItem->getDescription() . "</td>";
                         echo '<td data-th="Price">£' . $shopItem->getPrice() . '</td>';
                         echo '<td data-th="Quantity">' . $shopItem->getQuantity() . '</td>';
-                        if (isset($_SESSION["username"])) {
+                        if (isset($_SESSION["username"]) && (shopFullAccess($connection, $currentUser, $memberValidation)))  {
                             echo '<td class="none"><a href="' . $shopViewLink . '">View Details</a></td>';
                         }
                         echo '</tr>';

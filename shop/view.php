@@ -9,6 +9,16 @@
             header( 'Location:' . $domain . '404.php' );
             die();
     }
+
+    if (!isset($_SESSION['username'])) {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
+    if(!shopFullAccess($connection, $currentUser, $memberValidation)) {
+            header( 'Location:' . $domain . 'message.php?id=badaccess' );
+            exit;
+    }
 ?>
 
 <!DOCTYPE html>
