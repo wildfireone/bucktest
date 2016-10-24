@@ -3,17 +3,6 @@
 $domain='http://bucktest.dev/';
 
 
-//Show edit link for each section if the url is on the correct viewing page
-/*function showEditLink($domain,$view, $edit, $parm)
-{
-    if($_SERVER['PHP_SELF'] === $view) {
-        $id = $_GET[$parm];
-        $link = $domain . $edit. '?' . $parm . '=' . $id;
-
-        echo '<li><a href="'.$link.'" role="link">Edit</a></li>';
-    }
-}*/
-
 ?>
 <header>
    <a href="<?php echo $domain ?>index.php" class="nohover">
@@ -32,15 +21,23 @@ $domain='http://bucktest.dev/';
                   <a href="'. $domain . 'galas.php" role="link">Galas</a> 
                   <ul class="dropdown">
                      <li><a href="'. $domain . 'upcoming-galas.php" role="link">Upcoming Galas</a></li>
-                     <li><a href="'. $domain . 'gala-results.php" role="link">Gala Results</a></li>                
-                     <li><a href="'. $domain . 'galas.php" role="link">View All</a></li>
-                     <li><a href="'. $domain . 'galas/create.php" role="link">Create</a></li>
+                     <li><a href="'. $domain . 'gala-results.php" role="link">Gala Results</a></li> 
                      ';
-                    showEditLink($domain, '/galas/view.php','galas/edit.php', 'id',$_SESSION["username"],$connection,$memberValidation);
-                    echo'
+                      if(galaFullAccess($connection,$currentUser,$memberValidation))
+                      {
+                          echo '
+                           <li><a href="'. $domain . 'galas.php" role="link">View All</a></li>
+                           <li><a href="'. $domain . 'galas/create.php" role="link">Create</a></li>
+                          ';
+                          showEditLink($domain, '/galas/view.php','galas/edit.php', 'id',$_SESSION["username"],$connection,$memberValidation);
+                      }
+                echo'
                   </ul>
                </li>
-               <li class="divider"></li>
+               ';
+       if(memberFullAccess($connection,$currentUser,$memberValidation)) {
+        echo '
+           <li class="divider"></li>
                <li class="has-dropdown not-click">
                   <a href="'. $domain . 'members.php" role="link">Members</a> 
                   <ul class="dropdown">
@@ -49,6 +46,9 @@ $domain='http://bucktest.dev/';
                      showEditLink($domain, '/members/view.php','members/edit.php', 'u',$_SESSION["username"],$connection,$memberValidation);
                 echo '</ul>
                </li>
+               ';
+       }
+       echo '  
                <li class="divider"></li>
                <li class="has-dropdown not-click">
                   <a href="'. $domain . 'squads.php" role="link">Squads</a>
