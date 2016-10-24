@@ -8,6 +8,18 @@
     }
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
+
+    if (!isset($_SESSION['username'])) {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
+    if(!venueFullAccess($connection, $currentUser, $memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
 ?>
 
 <!DOCTYPE html>

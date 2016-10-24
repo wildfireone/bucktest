@@ -14,7 +14,13 @@
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
     require '../obj/venues.obj.php';
-    
+
+    if(!venueFullAccess($connection, $currentUser, $memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
     if (isset($_POST['btnSubmit'])) {
         
         $connection = dbConnect();

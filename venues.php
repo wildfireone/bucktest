@@ -2,6 +2,19 @@
     session_start();
     require 'inc/connection.inc.php';
     require 'inc/security.inc.php';
+
+    if (!isset($_SESSION['username'])) {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
+    if(!venueViewAccess($connection, $currentUser, $memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +47,11 @@
                     <th>Address Line 1</th>
                     <th>City</th>
                     <th>Telephone</th>
-                    <th>View Details</th>
+                    <?php
+                    if(venueFullAccess($connection, $currentUser, $memberValidation)) {
+                    echo '<th>View Details</th>';
+                    }
+                    ?>
                 </tr>
             <?php
                 require 'obj/venues.obj.php';
@@ -63,7 +80,9 @@
                         echo '<td>' . $venueItem->getAddress1() . '</td>';
                         echo '<td>' . $venueItem->getCity() . '</td>';
                         echo '<td>' . $venueItem->getTelephone() . '</td>';
-                        echo '<td><a href="' . $link . '">View Details</a></td>';
+                        if(venueFullAccess($connection, $currentUser, $memberValidation)) {
+                            echo '<td><a href="' . $link . '">View Details</a></td>';
+                        }
                         echo '</tr>';
                     }
                 }
