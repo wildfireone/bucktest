@@ -22,6 +22,13 @@
             header( 'Location:' . $domain . '404.php' );
             exit;
         }
+
+        //No Full access? Show 403 error message
+        if(!memberFullAccess($connection,$currentUser,$memberValidation))
+        {
+            header( 'Location:' . $domain . 'message.php?id=badaccess' );
+            exit;
+        }
     }
     
     if (isset($_POST['btnSubmit'])) {

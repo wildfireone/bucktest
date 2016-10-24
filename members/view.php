@@ -20,6 +20,13 @@
             header( 'Location:' . $domain . '404.php' );
             exit;
         }
+
+        //No view access? Show 403 error message
+        if(!memberViewAccess($connection,$currentUser,$memberValidation))
+        {
+            header( 'Location:' . $domain . 'message.php?id=badaccess' );
+            exit;
+        }
     }
 ?>
 
@@ -114,7 +121,13 @@
                 echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRolesForMember($conn,$member->getUsername()), $roles->listAllRoles($conn), true);
 
                 echo textareaInputSetup(false, "Notes", "txtNotes", $member->getNotes(), 100, 8, true);
-                echo linkButton("Edit this Member", "edit.php?u=".$member->getUsername());
+
+                //Only members with full access can edit members
+                if(memberFullAccess($connection,$currentUser,$memberValidation))
+                {
+                    echo linkButton("Edit this Member", "edit.php?u=".$member->getUsername());
+                }
+
                 echo formEnd();                
 
                 dbClose($conn);

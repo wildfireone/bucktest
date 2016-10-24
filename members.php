@@ -6,6 +6,13 @@
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
     }
+
+    if(!memberViewAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
 ?>
 
 <!DOCTYPE html>
