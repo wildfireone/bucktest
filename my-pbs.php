@@ -48,7 +48,7 @@
                 $conn = dbConnect();
 
                 //$member = new Members($_SESSION["username"]);
-                $member = new Members("alibai16");
+                $member = new Members("matbro17");
                 $member->getAllDetails($conn);
                 
                 $gala = new Galas();
@@ -90,7 +90,7 @@
                             <th class="centre">Rank</th>
                         <tr>';
 
-                    $swim_times = $swim_time->listAllPBsForSwimmerByStrokeAndEvent($conn,$member->getUsername(),$stroke->getID(),$event->getID());
+                    $swim_times = $swim_time->listAllPBsForSwimmerByStroke($conn,$member->getUsername(),$stroke->getID());
                     
                     foreach ($swim_times as $swim_timesItem) {
                         $swim_time->setPKs($swim_timesItem["member"], $swim_timesItem["galaID"], $swim_timesItem["eventID"]);
