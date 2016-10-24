@@ -8,6 +8,12 @@
         header('location: ' . $domain . '/message.php?id=badaccess');
         die();
     }
+
+    if(!squadViewAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +53,12 @@
                     <th>Squad Description</th>
                     <th>Coach</th>
                     <th>Number of Members</th>
-                    <th>View Details</th>
+                    <?php
+                    if(squadFullAccess($connection,$currentUser,$memberValidation))
+                    {
+                        echo   '<th>View Details</th>';
+                    }
+                    ?>
                 </tr>
             <?php
                 require 'obj/squads.obj.php';
@@ -87,11 +98,23 @@
                     $squadViewLink = "squads/view.php?id=" . $squadItem->getID();
 
                     echo "<tr>";
-                    echo '<td data-th="Squad">' . $squadItem->getSquad() . '</td>';
-                    echo '<td data-th="Description">' . $squadItem->getDescription() . '</td>';
-                    echo '<td data-th="Coach"><a href="'.$squadCoachLink.'">' . $member->getFullNameByUsername($conn) . '</a></td>';
-                    echo '<td data-th="No. of Members"><a href="'.$squadCountLink.'">' . $squad["COUNT(*)"] . '</a></td>';
-                    echo '<td class="none"><a href="' . $squadViewLink . '">View Details</a></td>';
+                    //If user has full access then display links
+                    if(squadFullAccess($connection,$currentUser,$memberValidation))
+                    {
+                        echo '<td data-th="Squad">' . $squadItem->getSquad() . '</td>';
+                        echo '<td data-th="Description">' . $squadItem->getDescription() . '</td>';
+                        echo '<td data-th="Coach"><a href="'.$squadCoachLink.'">' . $member->getFullNameByUsername($conn) . '</a></td>';
+                        echo '<td data-th="No. of Members"><a href="'.$squadCountLink.'">' . $squad["COUNT(*)"] . '</a></td>';
+                        echo '<td class="none"><a href="' . $squadViewLink . '">View Details</a></td>';
+                    }
+                    else //otherwise display data only
+                    {
+                        echo '<td data-th="Squad">' . $squadItem->getSquad() . '</td>';
+                        echo '<td data-th="Description">' . $squadItem->getDescription() . '</td>';
+                        echo '<td data-th="Coach"> '. $member->getFullNameByUsername($conn) . '/td>';
+                        echo '<td data-th="No. of Members">'.$squad["COUNT(*)"].'</td>';
+                    }
+
                     echo "</tr>";
                 }
 

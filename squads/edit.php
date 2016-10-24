@@ -5,6 +5,8 @@
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
     }
+
+
     
     if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {        
             header( 'Location:' . $domain . '404.php' );
@@ -14,6 +16,12 @@
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
     require '../obj/squads.obj.php';
+
+    if(!squadFullAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
     
     if (isset($_POST['btnSubmit'])) {
         

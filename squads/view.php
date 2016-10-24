@@ -6,8 +6,16 @@
             header( 'Location:' . $domain . '404.php' );
             die();
     }
+
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
+
+    if(!squadFullAccess($connection,$currentUser,$memberValidation))
+    {
+        header( 'Location:' . $domain . 'message.php?id=badaccess' );
+        exit;
+    }
+
 ?>
 
 <!DOCTYPE html>
