@@ -138,7 +138,7 @@ a:hover{text-decoration:underline;-webkit-transition:0.5s;transition:0.5s;}
 .photo {padding:1rem;max-width:100%;}
 .banner {-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;display:inline-block;width:100%;}
 .banner h1 {display:inline-block;vertical-align:text-bottom;padding-left:1rem;color:#fef;}
-@media only screen and (min-width: 40.063em) { .banner {background:#fff url("../img/banner-l.jpg") no-repeat top center;min-height:10rem;} .banner h1{min-height:20rem;}}
+@media only screen and (min-width: 40.063em) { .banner {background:#fff url("../img/banner-l.jpg") no-repeat top center;min-height:10rem;} }
 @media only screen and (max-width: 40em) { .banner {background:#fff url("../img/banner-s.jpg") no-repeat top center;min-height:6.75rem;} .banner h1{min-height:12.5rem;}}
 
 @media only screen and (max-width: 40em) { 
