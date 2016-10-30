@@ -58,7 +58,6 @@
             <p>Below is a list of all the areas of the website you can access.</p>
                 
                 <?php
-                   //include 'obj/members.obj.php';
                     include 'obj/roles.obj.php';
 
                     $member = new Members();
@@ -74,16 +73,16 @@
 
                     <ul class="nobullet centre">
                         <li><a href="galas.php">View All</a></li>';
-                        if ($members_roles->isMemberGalaCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberWebCoordinator($conn,$_SESSION['username'])) {
-                            echo '<li><a href="galas/create.php">Create</a></li>
+                        if (galaFullAccess($connection,$currentUser,$memberValidation))
+                        {  echo '<li><a href="galas/create.php">Create</a></li>
                         <li><a href="galas.php">Edit</a></li>
                         <li><a href="galas.php">Delete</a></li>';
                         }
                     echo '</ul>
                 </div>';
 
-                if ($members_roles->isMemberGalaCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberWebCoordinator($conn,$_SESSION['username'])) {
-                            echo '<div class="panel large-4 medium-6 small-12 columns">
+                if (galaFullAccess($connection,$currentUser,$memberValidation)){
+                    echo '<div class="panel large-4 medium-6 small-12 columns">
                     <header>
                         <img src="img/icons/gala.png" alt="" class="middle" width="32px" />
                         <h3 class="centre">Gala Events</h3>
@@ -112,8 +111,8 @@
                 </div>';
                 }
 
-                if ($members_roles->isMemberPresident($conn,$_SESSION['username']) || $members_roles->isMemberSecretary($conn,$_SESSION['username']) || $members_roles->isMemberTreasurer($conn,$_SESSION['username']) || $members_roles->isMemberGalaCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberBetaLeagueCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberHeadCoach($conn,$_SESSION['username']) || $members_roles->isMemberCoach($conn,$_SESSION['username']) || $members_roles->isMemberWebCoordinator($conn,$_SESSION['username'])) {
-                            echo '<div class="panel large-4 medium-6 small-12 columns">
+                if (memberViewAccess($connection,$currentUser,$memberValidation)){
+                    echo '<div class="panel large-4 medium-6 small-12 columns">
                     <header>
                         <img src="img/icons/member.png" alt="" class="middle" width="32px" />
                         <h3 class="centre">Members</h3>
@@ -121,8 +120,8 @@
                     
                     <ul class="nobullet centre">
                         <li><a href="members.php" role="link">View All</a></li>';
-                        if ($members_roles->isMemberMembershipCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberWebCoordinator($conn,$_SESSION['username'])) {
-                        echo '<li><a href="members/create.php" role="link">Create</a></li>
+                        if (memberFullAccess($connection,$currentUser,$memberValidation)){
+                            echo '<li><a href="members/create.php" role="link">Create</a></li>
                         <li><a href="members.php" role="link">Edit</a></li> 
                         <li><a href="members.php" role="link">Delete</a></li>';  
                         }                  
@@ -138,7 +137,7 @@
                     
                     <ul class="nobullet centre">
                         <li><a href="news.php" role="link">View All</a></li>';
-                        if ($members_roles->isMemberPresident($conn,$_SESSION['username']) || $members_roles->isMemberSecretary($conn,$_SESSION['username']) || $members_roles->isMemberTreasurer($conn,$_SESSION['username']) || $members_roles->isMemberGalaCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberMembershipCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberBetaLeagueCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberHeadCoach($conn,$_SESSION['username']) || $members_roles->isMemberWebCoordinator($conn,$_SESSION['username'])) {
+                        if(newsFullAccess($connection, $currentUser, $memberValidation)){
                         echo '<li><a href="news/create.php" role="link">Create</a></li>
                         <li><a href="news.php" role="link">Edit</a></li> 
                         <li><a href="news.php" role="link">Delete</a></li>';  
@@ -154,7 +153,7 @@
 
                     <ul class="nobullet centre">
                         <li><a href="shop.php">View All</a></li>';
-                        if ($members_roles->isMemberWebCoordinator($conn,$_SESSION['username']) || $members_roles->isMemberSwimshop($conn,$_SESSION['username'])) {
+                        if(shopFullAccess($connection, $currentUser, $memberValidation)){
                         echo '<li><a href="shop/create.php">Create</a></li>
                         <li><a href="shop.php">Edit</a></li>
                         <li><a href="shop.php">Delete</a></li>';
@@ -162,50 +161,61 @@
                     echo '</ul>
                 </div>';
 
-                echo '<div class="panel large-4 medium-6 small-12 columns">
+                if((squadViewAccess($connection,$currentUser,$memberValidation))){
+                    echo '<div class="panel large-4 medium-6 small-12 columns">
                     <header>
                         <img src="img/icons/squad.png" alt="" class="middle" width="32px" />
                         <h3 class="centre">Squads</h3>
                     </header>
-
                     <ul class="nobullet centre">
-                        <li><a href="squads.php">View All</a></li>
-                        <li><a href="squads/create.php">Create</a></li>
-                        <li><a href="squads.php">Edit</a></li>
-                        <li><a href="squads.php">Delete</a></li>
-                    </ul>
-                </div>
+                        <li><a href="squads.php">View All</a></li>';
+                    if(squadFullAccess($connection, $currentUser, $memberValidation)) {
+                        echo '<li><a href = "squads/create.php" > Create</a ></li >
+                        <li ><a href = "squads.php" > Edit</a ></li >
+                        <li ><a href = "squads.php" > Delete</a ></li >';
+                        }
+                    echo '</ul>
+                </div>';
+                }
 
-                <div class="panel large-4 medium-6 small-12 columns">
+
+                echo'<div class="panel large-4 medium-6 small-12 columns">
                     <header>
                         <img src="img/icons/timetable.png" alt="" class="middle" width="32px" />
                         <h3 class="centre">Timetable</h3>
                     </header>
 
                     <ul class="nobullet centre">
-                        <li><a href="about/timetable.php">View All</a></li>
-                        <li><a href="#">Create</a></li>
+                        <li><a href="about/timetable.php">View All</a></li>';
+                        if(timetableFullAccess($connection, $currentUser, $memberValidation)) {
+                            echo '<li><a href="about/timetable/create.php">Create</a></li>
                         <li><a href="about/timetable.php">Edit</a></li>
-                        <li><a href="about/timetable.php">Delete</a></li>
-                    </ul>
+                        <li><a href="about/timetable.php">Delete</a></li>';
+                        }
+                    echo '</ul>
+                </div>';
+
+
+        if(venueViewAccess($connection, $currentUser, $memberValidation)) {
+            echo'<div class="panel large-4 medium-6 small-12 columns">
+                            <header>
+                                <img src="img/icons/venue.png" alt="" class="middle" width="32px" />
+                                <h3 class="centre">Venues</h3>
+                            </header>
+                            
+                            <ul class="nobullet centre">
+                                <li><a href="venues.php">View All</a></li>';
+                        if(newsFullAccess($connection, $currentUser, $memberValidation)){
+
+                        echo' <li><a href="venue/create.php">Create</a></li>
+                                <li><a href="venues.php">Edit</a></li>
+                                <li><a href="venues.php">Delete</a></li>';
+                        }
+                    echo'</ul>
+                        </div>             
                 </div>
-
-                <div class="panel large-4 medium-6 small-12 columns">
-                    <header>
-                        <img src="img/icons/venue.png" alt="" class="middle" width="32px" />
-                        <h3 class="centre">Venues</h3>
-                    </header>
-
-                    <ul class="nobullet centre">
-                        <li><a href="venues.php">View All</a></li>
-                        <li><a href="venue/create.php">Create</a></li>
-                        <li><a href="venues.php">Edit</a></li>
-                        <li><a href="venues.php">Delete</a></li>
-                    </ul>
-                </div>             
-                
-        </div>
-    </div>';
+            </div>';
+        }   
     ?>
     <?php include 'inc/footer.inc.php';?>
 </body>
