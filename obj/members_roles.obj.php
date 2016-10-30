@@ -534,7 +534,7 @@ class Members_Roles {
 
     //Checks if member is apart of the Committee.
     public function isMemberCommittee($conn, $member) {
-        $sql = "SELECT member FROM member m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14) AND z.member = :member";
+        $sql = "SELECT member FROM member m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,13,14) AND z.member = :member";
         //$sql = "SELECT member FROM members_roles WHERE roleID = 13 AND member = :member";
 
         $stmt = $conn->prepare($sql);
