@@ -154,3 +154,4 @@ a:hover{text-decoration:underline;-webkit-transition:0.5s;transition:0.5s;}
 
 .nohover:hover {text-decoration:none}
 nav {text-transform:uppercase !important;}
+.ui-datepicker{ z-index: 9999 !important;}
