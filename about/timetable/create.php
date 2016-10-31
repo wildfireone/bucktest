@@ -16,7 +16,7 @@
     }
 
     $timetable = new Timetable();
-    $connection = dbConnect();
+    //$connection = dbConnect();
 
     if (!isset($_POST["chkSquads"])) {
         $_POST["chkSquads"] = null;
@@ -34,6 +34,7 @@
             }
             
             $_SESSION['create'] = true;
+            dbClose($connection);
 
             header('Location:' .$domain . 'about/timetable.php');
             die();
@@ -42,8 +43,9 @@
         } else {
             $_SESSION['invalid'] = true;
         }
+
     }
-    dbClose($connection);
+
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +60,7 @@
 </head>
 
 <body>   
-    <?php include '../../inc/header.inc.php';?>   
+    <?php include '../../inc/header.inc.php';?>
     <br>
         
     <div class="row" id="content">

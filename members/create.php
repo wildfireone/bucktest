@@ -56,7 +56,7 @@
                 
                 $roles = array();
                 foreach ($_POST['chkRoles'] as $key => $value) {
-                    array_push($array, $value);        
+                    array_push($roles, $value);
                 }
                 foreach ($roles as $role) {
                     $members_rolesValidation->setRoleID($role);

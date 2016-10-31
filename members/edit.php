@@ -6,10 +6,14 @@
     require_once '../obj/members.obj.php';
     require_once '../obj/members_roles.obj.php';
 
+    $limited_edit = false;
+
     if (!isset($_SESSION['username'])) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
     }
+
+
 
     // Check for a parameter before we send the header
     if (is_null($_GET["u"])) {        
@@ -24,10 +28,15 @@
         }
 
         //No Full access? Show 403 error message
-        if(!memberFullAccess($connection,$currentUser,$memberValidation))
-        {
-            header( 'Location:' . $domain . 'message.php?id=badaccess' );
-            exit;
+        if(!memberFullAccess($connection,$currentUser,$memberValidation)) {
+            //Not full access and editing someone else's profile - see 403 page
+            if(!$_SESSION['username'] == $members->getUsername()) {
+                header( 'Location:' . $domain . 'message.php?id=badaccess' );
+                exit;
+            }
+            else{
+                $limited_edit = true;
+            }
         }
     }
     
@@ -44,12 +53,77 @@
 
     if(count($_POST['chkRoles']) > 0)
         {
-            $member_Validation->setFirstName($_POST['txtFirstName']);
+            //Personal Details
+                //Name
+         /*   $member_Validation->setFirstName($_POST['txtFirstName']);
+            $member_Validation->setMiddleName($_POST['txtMiddleName']);
+            $member_Validation->setLastName($_POST['txtLastName']);
+                //Dates and statues
+            $member_Validation->setDOB($_POST['txtDOB']);
+            $member_Validation->setGender($_POST['sltGender']);
+            $member_Validation->setStatus($_POST['sltStatus']);
+            $member_Validation->setGender($_POST['sltGender']);
+            $member_Validation->setRegisterDate($_POST['txtRegisterDate']);
 
+            //Contact Details
+                //Parent Info
+            $member_Validation->setParentTitle($_POST['txtParentTitle']);
+            $member_Validation->setParentName($_POST['txtParentName']);
+
+                //Addresses
+            $member_Validation->setAddress1($_POST['txtAddress1']);
+            $member_Validation->setAddress2($_POST['txtAddress2']);
+            $member_Validation->setCity($_POST['txtCity']);
+            $member_Validation->setCounty($_POST['txtCounty']);
+            $member_Validation->setPostcode($_POST['txtPostcode']);
+            $member_Validation->setCounty($_POST['txtCounty']);
+              //Phones and emails
+            $member_Validation->setTelephone($_POST['txtTelephone']);
+            $member_Validation->setMobile($_POST['txtMobile']);
+            $member_Validation->setEmail($_POST['txtEmail']);
+
+            //Swimming Details
+            $member_Validation->setSASANumber($_POST['txtSASANumber']);
+            $member_Validation->setSquadID($_POST['sltSquad']);
+            $member_Validation->setSwimmingHours($_POST['txtHours']);
+            $member_Validation->setMonthlyFee($_POST['txtFees']);
+            $member_Validation->setFeeAdjustment($_POST['txtAdjustment']);
+
+            $memberValidation->setNotes($_POST['txtNotes']);*/
+
+            $member_Validation->setSASANumber($_POST['txtSASANumber']);
+            $member_Validation->setStatus($_POST['sltStatus']);
+            $member_Validation->setFirstName($_POST['txtFirstName']);
+            $member_Validation->setMiddleName($_POST['txtMiddleName']);
+            $member_Validation->setLastName($_POST['txtLastName']);
+            $member_Validation->setGender($_POST['sltGender']);
+            $member_Validation->setDOB($_POST['txtDOB']);
+            $member_Validation->setAddress1($_POST['txtAddress1']);
+            $member_Validation->setAddress2($_POST['txtAddress2']);
+            $member_Validation->setCity($_POST['txtCity']);
+            $member_Validation->setCounty($_POST['txtCounty']);
+            $member_Validation->setPostcode($_POST['txtPostcode']);
+            $member_Validation->setTelephone($_POST['txtTelephone']);
+            $member_Validation->setMobile($_POST['txtMobile']);
+            $member_Validation->setEmail($_POST['txtEmail']);
+            $member_Validation->setParentTitle($_POST['txtParentTitle']);
+            $member_Validation->setParentName($_POST['txtParentName']);
+            $member_Validation->setSquadID($_POST['sltSquad']);
+            $member_Validation->setRegisterDate($_POST['txtRegisterDate']);
+            $member_Validation->setLastLoginDate(null);
+            $member_Validation->setMonthlyFee($_POST['txtFees']);
+            $member_Validation->setFeeAdjustment($_POST['txtAdjustment']);
+            $member_Validation->setSwimmingHours($_POST['txtHours']);
+            $member_Validation->setNotes($_POST['txtNotes']);
+
+
+
+            //Finally update user information before updating user roles..
             $member_Validation->update($connection);
             $_SESSION['update'] = true;
             $members_rolesValidation->setMember($member_Validation->getUsername());
 
+            //Other Details
             $roles = array();
             var_dump($_POST['chkRoles']);
             foreach ($_POST['chkRoles'] as $key => $value) {
@@ -61,7 +135,7 @@
                 $members_rolesValidation->setMember($_GET["u"]);
                 $members_rolesValidation->create($connection);
             }
-            header('Location:' .$domain . '/members/view.php?u=' . $member_Validation->getUsername());
+            header('Location:' .$domain . 'members/view.php?u=' . $member_Validation->getUsername());
             die();
         } else {
             $_SESSION['invalid'] = true;
