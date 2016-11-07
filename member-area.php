@@ -212,10 +212,10 @@
                                 <li><a href="venues.php">Delete</a></li>';
                         }
                     echo'</ul>
-                        </div>             
-                </div>
+                        </div>';
+        }
+        echo'  </div>
             </div>';
-        }   
     ?>
     <?php include 'inc/footer.inc.php';?>
 </body>
