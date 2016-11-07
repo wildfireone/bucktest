@@ -17,7 +17,7 @@
     }
 
 
-$connection = dbConnect();
+
 
     if (is_null($_GET["id"])) {        
         header( 'Location:' . $domain . '404.php' );
@@ -41,7 +41,6 @@ $connection = dbConnect();
             $_SESSION['error'] = true;
         }
     }
-    dbClose($connection);
 ?>
 
 <!DOCTYPE html>

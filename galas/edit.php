@@ -16,7 +16,6 @@
         exit;
     }
 
-$connection = dbConnect();
 
     if (is_null($_GET["id"])) {        
         header( 'Location:' . $domain . '404.php' );
@@ -31,7 +30,7 @@ $connection = dbConnect();
 
     if (isset($_POST['btnSubmit'])) {
         
-        $connection = dbConnect();
+
         $gala = new Galas($_GET['id']);
         
         if ($gala->isInputValid($connection,$_POST['txtID'], $_POST['txtTitle'], $_POST['txtDescription'], $_POST['txtDate'],$_POST['sltVenue'],$_POST['txtWarmUp'],$_POST['txtOrganiser'],$_POST['txtConfirm'],$_POST['txtCutOff'],$_POST['txtFees'],$_POST['txtNotes'])) {
@@ -72,7 +71,6 @@ $connection = dbConnect();
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
     } 
 ?>
 

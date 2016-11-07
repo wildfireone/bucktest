@@ -17,8 +17,7 @@
     }
     
     if (isset($_POST['btnSubmit'])) {
-        
-        $connection = dbConnect();
+
         $gala = new Galas();
 
         if ($gala->isInputValid($connection,$_POST['txtID'], $_POST['txtTitle'], $_POST['txtDescription'], $_POST['txtDate'],$_POST['sltVenue'],$_POST['txtWarmUp'],$_POST['txtOrganiser'],$_POST['txtConfirm'],$_POST['txtCutOff'],$_POST['txtFees'],$_POST['txtNotes'])) {
@@ -59,7 +58,7 @@
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
+
     } 
 ?>
 
@@ -265,7 +264,7 @@
                 }
 
                 echo '<div class="large-12 medium-12 small-12 columns">';
-            if(venueFullAccess($connection, $currentUser, $memberValidation)) {
+            if(venueFullAccess($connection, $currentUser, $memberValidation) && isset($_POST["sltVenue"])) {
                 echo linkButton("Edit this Venue", '../venues/edit.php?id='.$venues->getID(),true);
             }
                 echo '</div>';
