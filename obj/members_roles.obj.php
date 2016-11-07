@@ -65,7 +65,26 @@ class Members_Roles {
         } catch (PDOException $e) {
             return "Create failed: " . $e->getMessage();
         }
-    }    
+    }
+
+    public function delete($conn, $member) {
+        $sql = "DELETE FROM members_roles WHERE member = :member";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            $array = array();
+            foreach ($results as $row) {
+                array_push($array,$row["roleID"]);
+            }
+            return $array;
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
     
     public function getAllRoles($conn) {        
         $sql = "SELECT r.roleID, r.role FROM members_roles m, roles r WHERE m.roleID = r.id AND member = :member";
@@ -534,7 +553,7 @@ class Members_Roles {
 
     //Checks if member is apart of the Committee.
     public function isMemberCommittee($conn, $member) {
-        $sql = "SELECT member FROM member m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,13,14) AND z.member = :member";
+        $sql = "SELECT member FROM members m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,13,14) AND z.member = :member";
         //$sql = "SELECT member FROM members_roles WHERE roleID = 13 AND member = :member";
 
         $stmt = $conn->prepare($sql);
