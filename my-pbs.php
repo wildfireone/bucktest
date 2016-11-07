@@ -3,9 +3,29 @@
     require 'inc/connection.inc.php';
     require 'inc/security.inc.php';
 
+
     if (!isset($_SESSION['username'])) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
+    }
+
+    $user = false;
+
+    if (!isset($_GET["u"])) {
+        $user = true;
+    } else {
+        $members = new Members($_GET["u"]);
+        if (!$members->doesExist($connection)) {
+            header('Location:' . $domain . '404.php');
+            exit;
+        }
+        if (!memberFullAccess($connection, $currentUser, $memberValidation)) {
+            //Not full access and editing someone else's profile - see 403 page
+            if ($_SESSION['username'] !== $_GET["u"]) {
+                header('Location:' . $domain . 'message.php?id=badaccess');
+                exit;
+            }
+        }
     }
 
 ?>
@@ -47,8 +67,18 @@
 
                 $conn = dbConnect();
 
-                //$member = new Members($_SESSION["username"]);
-                $member = new Members("matbro17");
+
+                //Check if user is looking at their own PBs
+                if($user) {
+                    $member = new Members($_SESSION["username"]);
+                    $member->getAllDetails($conn);
+                }
+                //Or viewing a different member via URL parameters
+                else{
+                    $member = new Members($_GET["u"]);
+                    $member->getAllDetails($conn);
+                }
+
                 $member->getAllDetails($conn);
                 
                 $gala = new Galas();
