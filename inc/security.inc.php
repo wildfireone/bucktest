@@ -7,6 +7,11 @@
  * Security file that is included on all pages to check if user has access to certain areas of the website.
 **/
 
+//Debugging stuff
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 $domain='http://bucktest.dev/';
 
 //Switch include paths when on root or sub (sub) folder
@@ -38,14 +43,16 @@ $currentUser ="";
 if(isset($_SESSION["username"]))
 {
     $currentUser = new Members($_SESSION["username"]);
+    //var_dump($currentUser);
+    //var_dump($memberValidation->getAllRolesForMember($connection,$currentUser->getUsername()));
     //$currentUser->getUsername();
-    if ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername()))
-    {
-       // echo "Committee Member ";
-    }
-    else{
-        //echo "Other people";
-    }
+//    if ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername()))
+//    {
+//        echo "Committee Member ";
+//    }
+//    else{
+//        //echo "Other people";
+//    }
 }
 
 
@@ -64,7 +71,7 @@ function showEditLink($domain,$view, $edit, $parm, $currentUser, $connection, $m
 //Gala
 function galaFullAccess($connection,$currentUser,$memberValidation)
 {
-    if ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) || ($memberValidation->isMemberGalaCoordinator($connection,$currentUser))) {
+    if ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) || ($memberValidation->isMemberGalaCoordinator($connection,$currentUser->getUsername()))) {
         return true;
     }
     else{
@@ -88,7 +95,7 @@ function galaViewAccess($connection,$currentUser,$memberValidation)
 //Members
 function memberFullAccess($connection,$currentUser,$memberValidation)
 {
-    if ($memberValidation->isMemberMembershipCoordinator($connection,$currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) ) {
+    if ($memberValidation->isMemberMembershipCoordinator($connection,$currentUser->getUsername()) || ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()))  ) {
         return true;
     }
     else{
@@ -114,7 +121,7 @@ function memberViewAccess($connection,$currentUser,$memberValidation)
 function squadFullAccess($connection, $currentUser, $memberValidation)
 {
 
-    if ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) ) {
+    if ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername())|| ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername())))  {
         return true;
     }
     else{
@@ -140,7 +147,7 @@ function squadViewAccess($connection, $currentUser, $memberValidation)
 //Venues
 function venueFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) ) {
+    if ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername())|| ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername())))  {
         return true;
     }
     else{
@@ -154,7 +161,7 @@ function venueViewAccess($connection, $currentUser, $memberValidation)
     {
         return true;
     }
-    else if ($memberValidation->isMemberCoach($connection,$currentUser->getUsername())) {
+    else if ($memberValidation->isMemberCoach($connection,$currentUser->getUsername()) ||  !$memberValidation->isMemberSwimmer($connection,$currentUser->getUsername())) {
         return true;
     }
     else
@@ -174,19 +181,6 @@ function newsFullAccess($connection, $currentUser, $memberValidation)
     }
 }
 
-/*function newsViewAccess($connection, $currentUser, $memberValidation)
-{
-    if(newsFullAccess($connection, $currentUser, $memberValidation))
-    {
-        return true;
-    }
-    else if ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) ) {
-        return true;
-    }
-    else{
-        return false;
-    }
-}*/
 
 //Shop
 function shopFullAccess($connection, $currentUser, $memberValidation)
