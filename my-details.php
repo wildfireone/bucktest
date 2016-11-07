@@ -42,6 +42,7 @@
                 require 'obj/status.obj.php';
                 require 'obj/roles.obj.php';
                 require_once 'obj/members_roles.obj.php';
+                require 'obj/squads.obj.php';
 
                 $conn = dbConnect();
 
@@ -57,6 +58,7 @@
                 $status->getAllDetails($conn);  
 
                 $roles = New Roles();
+                $squads = New Squads();
                 $members_roles = New Members_Roles();
     
                 echo '<h3>' . $member->getFirstName() . ' ' . $member->getLastName() . '</h3>';
@@ -73,6 +75,7 @@
 
                 echo comboInputSetup(true,"Member Status","txtStatus",$member->getStatus(),$status->listAllStatus($conn),true);
                 echo textInputSetup(false,"SASA Membership","txtSASANumber",$member->getSASANumber(),15,true);
+                echo comboInputSetup(true, "Squad", "sltSquad", $member->getSquadID(), $squads->listAllSquads($conn), true);
                 echo dateInputSetup(true,"Date Joined","txtRegisterDate",$member->getRegisterDate(),null,null,true);
                 
                 echo '</fieldset></div><div class="large-6 medium-6 small-12 right"><fieldset><legend>Contact Details</legend>';
