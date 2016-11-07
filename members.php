@@ -49,6 +49,11 @@
                 require 'inc/forms.inc.php';
                 require_once 'obj/members_roles.obj.php';
 
+                if (isset($_SESSION['delete'])) {
+                    echo '<p class="alert-box success radius centre">Member deleted successfully!</p>';
+                    unset($_SESSION['delete']);
+                }
+
                 $conn = dbConnect();
 
                 $status = new Status();
@@ -147,7 +152,6 @@
                     {
                         $squadID = $_GET['squadID'];
                         $membersList = $memberItem->listAllSquadMembers($conn,$squadID);
-                        //var_dump($membersList);
                     }
                     else{
                         $membersList = $memberItem->listAllCurrentMembers($conn);
@@ -161,6 +165,9 @@
                             <th role="columnheader">Name</th>
                             <th role="columnheader">Squad</th>
                             <th role="columnheader">Role</th>
+                            <th role="columnheader">Details</th>
+                            <th role="columnheader">Peronal Bests</th>
+                            <th role="columnheader">Swim Times</th>
                             <th></th>
                         </tr>';
 
@@ -183,6 +190,8 @@
                     echo listMemberRoles($members_roles->getAllRolesForMember($conn, $memberItem->getUsername()), $roles->listAllRoles($conn));
                     echo '</td>';
                     echo '<td class="none"><a href="members/view.php?u=' . $memberItem->getUsername() . '">View Details</td>';
+                    echo '<td class="none"><a href="my-pbs.php?u=' . $memberItem->getUsername() . '">View PBs</td>';
+                    echo '<td class="none"><a href="my-results.php?u=' . $memberItem->getUsername() . '">Swim Times</td>';
                     echo "</tr>";
                 }
                 dbClose($conn);
