@@ -22,7 +22,7 @@
         $connection = dbConnect();
         $swim = new Swim_Times();
         
-        if ($swim->isInputValid($_POST["sltGala"],$_POST["sltEvent"],$_POST["sltMember"],$_POST["txtTime"],$_POST["txtRank"])) {   
+        if ($swim->isInputValid($_POST["sltGala"],$_POST["sltEvent"],$_POST["sltMember"],$_POST["txtTime"],$_POST["sltRank"])) {
             
             $swim->setMember($_POST["sltMember"]);
             $swim->setGalaID($_POST["sltGala"]);
@@ -41,7 +41,6 @@
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
     }
 ?>
 
@@ -142,7 +141,7 @@
                         if ($swim->isTimeValid($_POST["txtTime"])) {
                             echo textInputPostback(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", $_POST["txtTime"], 8);
                         } else {
-                            echo textInputPostbackError(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", "errTime", "Please enter a valid Time", 8);
+                            echo textInputPostbackError(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", "errTime", "errTime", "Please enter a valid Time", 8);
                         }
                     }
                 } else {
@@ -156,13 +155,6 @@
                     echo comboInputBlank(false,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
                 }
 
-              /*  if (isset($_POST["btnSubmit"])) {
-                    echo textInputPostback(false, "Rank", "txtRank", $_POST["txtRank"], 2);
-                } else {
-                    echo comboInputBlank(true,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
-
-                    //echo textInputBlank(false, "Rank", "txtRank", 2);
-                }*/
 
                 echo formEndWithButton("Record Swim Time");
 

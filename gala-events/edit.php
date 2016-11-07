@@ -10,7 +10,6 @@
         exit;
     }
 
-    $connection = dbConnect();
 
     if (is_null($_GET["id"]) || is_null($_GET["galaID"])) {        
         header( 'Location:' . $domain . '404.php' );
@@ -48,10 +47,9 @@
                 $_SESSION['error'] = true;
             }
         } else {
-            $_SESSION['invlaid'] = true;
+            $_SESSION['invalid'] = true;
         }
     }
-    dbClose($connection);
 ?>
 
 <!DOCTYPE html>

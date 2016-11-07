@@ -30,7 +30,6 @@
         } else {
             $_SESSION['error'] = true;
         }
-        dbClose($connection);
     }    
 ?>
 

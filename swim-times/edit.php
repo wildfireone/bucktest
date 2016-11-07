@@ -21,7 +21,7 @@
         $connection = dbConnect();
         $swim = new Swim_Times();
         
-        if ($swim->isInputValid($_POST["sltGala"],$_POST["sltEvent"],$_POST["sltMember"],$_POST["txtTime"],$_POST["txtRank"])) {   
+        if ($swim->isInputValid($_POST["sltGala"],$_POST["sltEvent"],$_POST["sltMember"],$_POST["txtTime"],$_POST["sltRank"])) {
             
             $swim->setMember($_GET["member"]);
             $swim->setGalaID($_GET["galaID"]);
@@ -51,7 +51,6 @@
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
     } 
 ?>
 
@@ -149,7 +148,8 @@
                         if ($swim->isTimeValid($_POST["txtTime"])) {
                             echo textInputPostback(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", $_POST["txtTime"], 8);
                         } else {
-                            echo textInputPostbackError(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", "errTime", "Please enter a valid Time", 8);
+                            //textInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength)
+                            echo textInputPostbackError(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", "errTime", "errTime", "Please enter a valid Time", 8);
                         }
                     }
                 } else {

@@ -46,7 +46,7 @@
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
+
     } 
 ?>
 
@@ -70,7 +70,7 @@
         
             <ul class="breadcrumbs">
                 <li><a href="../index.php" role="link">Home</a></li>
-                <li><a href="../gala-events.php" role="link">Gala Events</a></li>
+                <li><a href="../gala-events.php?id=<?php echo $_GET["id"]?>"role="link">Gala Events</a></li>
                 <li class="current">Create a Gala Event</li>
             </ul>
 

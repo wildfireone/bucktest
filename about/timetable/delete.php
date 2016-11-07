@@ -33,7 +33,6 @@
             $_SESSION['error'] = true;
         }
     }
-    dbClose($connection);
 ?>
 
 <!DOCTYPE html>
@@ -85,8 +84,7 @@
                 echo '<div class="panel"><p class="centre">Are you sure you want to delete the Timetable Item on <b>' . $day->getDay() . '</b> from <b>' . $_GET["time"] . '</b> at <b>' . $venue->getVenue() . '</b>?</p></div>';
                 
                 echo formEndWithDeleteButton("Delete");
-                
-                dbClose($conn);
+            
                 ?>
                 
         </div>

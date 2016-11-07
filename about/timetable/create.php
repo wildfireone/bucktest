@@ -34,7 +34,6 @@
             }
             
             $_SESSION['create'] = true;
-            dbClose($connection);
 
             header('Location:' .$domain . 'about/timetable.php');
             die();

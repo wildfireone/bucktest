@@ -40,7 +40,7 @@
             if ($venues->create($connection)) {
                 $_SESSION['update'] = true;
 
-                header('Location:' .$domain . '/venues/view.php?id=' . $venues->getID());
+                header('Location:' .$domain . 'venues/view.php?id=' . $venues->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;
