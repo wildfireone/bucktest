@@ -1,5 +1,5 @@
 <?php 
-    session_start(); 
+    session_start();
 
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
@@ -12,8 +12,6 @@
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
     }
-
-
 
     // Check for a parameter before we send the header
     if (is_null($_GET["u"])) {        
@@ -29,12 +27,12 @@
 
         //No Full access? Show 403 error message
         if(!memberFullAccess($connection,$currentUser,$memberValidation)) {
-            //Not full access and editing someone else's profile - see 403 page
-            if(!$_SESSION['username'] == $members->getUsername()) {
+        //Not full access and editing someone else's profile - see 403 page
+             if($_SESSION['username'] !== $_GET["u"]){
                 header( 'Location:' . $domain . 'message.php?id=badaccess' );
                 exit;
             }
-            else{
+            else if($_SESSION['username'] == $members->getUsername()) {
                 $limited_edit = true;
             }
         }
@@ -45,53 +43,70 @@
         $connection = dbConnect();
         $member_Validation = new Members($_GET["u"]);
         $members_rolesValidation = new Members_Roles();
-//25 parameter function - really?...
-        //($conn,$_POST['txtUsername'],$_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$member->getLastLoginDate(),$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes'])
-     //
-//if ($member_Validation->isInputValidEdit($_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST["sltSquad"],$_POST['txtRegisterDate'],$_POST["txtFees"],$_POST['txtAdjustment'],$_POST["txtHours"],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
 
 
-    if(count($_POST['chkRoles']) > 0)
-        {
-            //Personal Details
-                //Name
-         /*   $member_Validation->setFirstName($_POST['txtFirstName']);
-            $member_Validation->setMiddleName($_POST['txtMiddleName']);
-            $member_Validation->setLastName($_POST['txtLastName']);
-                //Dates and statues
-            $member_Validation->setDOB($_POST['txtDOB']);
-            $member_Validation->setGender($_POST['sltGender']);
-            $member_Validation->setStatus($_POST['sltStatus']);
-            $member_Validation->setGender($_POST['sltGender']);
-            $member_Validation->setRegisterDate($_POST['txtRegisterDate']);
+        //if ($member_Validation->isInputValid($connection, $_POST['txtUsername'],$_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST['sltSquad'],$_POST['txtRegisterDate'],null,$_POST['txtFees'], $_POST['txtAdjustment'],$_POST['txtHours'],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
 
-            //Contact Details
-                //Parent Info
-            $member_Validation->setParentTitle($_POST['txtParentTitle']);
-            $member_Validation->setParentName($_POST['txtParentName']);
 
-                //Addresses
-            $member_Validation->setAddress1($_POST['txtAddress1']);
-            $member_Validation->setAddress2($_POST['txtAddress2']);
-            $member_Validation->setCity($_POST['txtCity']);
-            $member_Validation->setCounty($_POST['txtCounty']);
-            $member_Validation->setPostcode($_POST['txtPostcode']);
-            $member_Validation->setCounty($_POST['txtCounty']);
-              //Phones and emails
-            $member_Validation->setTelephone($_POST['txtTelephone']);
-            $member_Validation->setMobile($_POST['txtMobile']);
-            $member_Validation->setEmail($_POST['txtEmail']);
+        if(!$limited_edit) {
 
-            //Swimming Details
-            $member_Validation->setSASANumber($_POST['txtSASANumber']);
-            $member_Validation->setSquadID($_POST['sltSquad']);
-            $member_Validation->setSwimmingHours($_POST['txtHours']);
-            $member_Validation->setMonthlyFee($_POST['txtFees']);
-            $member_Validation->setFeeAdjustment($_POST['txtAdjustment']);
+            if ((isset($_POST['chkRoles'])) && count($_POST['chkRoles']) > 0) {
+                $member_Validation->setSASANumber($_POST['txtSASANumber']);
+                $member_Validation->setStatus($_POST['sltStatus']);
+                $member_Validation->setFirstName($_POST['txtFirstName']);
+                $member_Validation->setMiddleName($_POST['txtMiddleName']);
+                $member_Validation->setLastName($_POST['txtLastName']);
+                $member_Validation->setGender($_POST['sltGender']);
+                $member_Validation->setDOB($_POST['txtDOB']);
+                $member_Validation->setAddress1($_POST['txtAddress1']);
+                $member_Validation->setAddress2($_POST['txtAddress2']);
+                $member_Validation->setCity($_POST['txtCity']);
+                $member_Validation->setCounty($_POST['txtCounty']);
+                $member_Validation->setPostcode($_POST['txtPostcode']);
+                $member_Validation->setTelephone($_POST['txtTelephone']);
+                $member_Validation->setMobile($_POST['txtMobile']);
+                $member_Validation->setEmail($_POST['txtEmail']);
+                $member_Validation->setParentTitle($_POST['txtParentTitle']);
+                $member_Validation->setParentName($_POST['txtParentName']);
+                $member_Validation->setSquadID($_POST['sltSquad']);
+                $member_Validation->setRegisterDate($_POST['txtRegisterDate']);
+                $member_Validation->setLastLoginDate(null);
+                $member_Validation->setMonthlyFee($_POST['txtFees']);
+                $member_Validation->setFeeAdjustment($_POST['txtAdjustment']);
+                $member_Validation->setSwimmingHours($_POST['txtHours']);
+                $member_Validation->setNotes($_POST['txtNotes']);
 
-            $memberValidation->setNotes($_POST['txtNotes']);*/
+                //Finally update user information before updating user roles..
 
-            $member_Validation->setSASANumber($_POST['txtSASANumber']);
+                if ($member_Validation->update($connection)) {
+                    $_SESSION['update'] = true;
+                    //Other Details
+                    $roles = array();
+
+                    //Delete current roles:
+                    $members_rolesValidation->delete($connection, $member_Validation->getUsername());
+
+                    foreach ($_POST['chkRoles'] as $key => $value) {
+                        array_push($roles, $value);
+                    }
+
+
+                    foreach ($roles as $role) {
+                        $members_rolesValidation->setRoleID($role);
+                        $members_rolesValidation->setMember($_GET["u"]);
+                        $members_rolesValidation->create($connection);
+                    }
+
+                    if ($_SESSION['update']) {
+                        header('Location:' . $domain . 'members/view.php?u=' . $member_Validation->getUsername());
+                        die();
+                    }
+
+                }
+
+            }
+        }
+        else if($limited_edit) {
             $member_Validation->setStatus($_POST['sltStatus']);
             $member_Validation->setFirstName($_POST['txtFirstName']);
             $member_Validation->setMiddleName($_POST['txtMiddleName']);
@@ -108,39 +123,24 @@
             $member_Validation->setEmail($_POST['txtEmail']);
             $member_Validation->setParentTitle($_POST['txtParentTitle']);
             $member_Validation->setParentName($_POST['txtParentName']);
-            $member_Validation->setSquadID($_POST['sltSquad']);
             $member_Validation->setRegisterDate($_POST['txtRegisterDate']);
-            $member_Validation->setLastLoginDate(null);
-            $member_Validation->setMonthlyFee($_POST['txtFees']);
-            $member_Validation->setFeeAdjustment($_POST['txtAdjustment']);
-            $member_Validation->setSwimmingHours($_POST['txtHours']);
-            $member_Validation->setNotes($_POST['txtNotes']);
-
 
 
             //Finally update user information before updating user roles..
-            $member_Validation->update($connection);
-            $_SESSION['update'] = true;
-            $members_rolesValidation->setMember($member_Validation->getUsername());
 
-            //Other Details
-            $roles = array();
-            var_dump($_POST['chkRoles']);
-            foreach ($_POST['chkRoles'] as $key => $value) {
-                array_push($roles, $value);
+            if ($member_Validation->update($connection)) {
+                $_SESSION['update'] = true;
             }
 
-            foreach ($roles as $role) {
-                $members_rolesValidation->setRoleID($role);
-                $members_rolesValidation->setMember($_GET["u"]);
-                $members_rolesValidation->create($connection);
+            if ($_SESSION['update']) {
+                header('Location:' . $domain . 'my-details.php');
+                die();
             }
-            header('Location:' .$domain . 'members/view.php?u=' . $member_Validation->getUsername());
-            die();
-        } else {
+
+        }
+        else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
     }
 ?>
 
@@ -156,7 +156,7 @@
 </head>
 
 <body>   
-    <?php include '../inc/header.inc.php';?>   
+    <?php include '../inc/header.inc.php';?>
     <br>
         
     <div class="row" id="content">
@@ -351,76 +351,83 @@
                 } else {
                     echo emailInputSetup(false,"Email","txtEmail",$member->getEmail(),250);
                 }
-                
-                echo '</fieldset></div><div class="large-12 medium-12 small-12 columns"><fieldset><legend>Swimming Details</legend>';
-                echo '<div class="large-6 medium-6 small-12 columns">';
 
-                if (isset($_POST["btnSubmit"])) {
-                    echo textInputPostback(false,"SASA Membership Number","txtSASANumber",$_POST["txtSASANumber"],15);              
-                } else {
-                    echo textInputSetup(false,"SASA Membership Number","txtSASANumber",$member->getSASANumber(),15);
-                }
+                //Standard Members cannot edit their own roles/swimming details.
+                if(!$limited_edit) {
 
-                if (isset($_POST["btnSubmit"])) {
-                    echo comboInputPostback(false, "Squad", "sltSquad", $_POST["sltSquad"], $squads->listAllSquads($conn));
-                } else {
-                    if (!is_null($member->getSquadID())) {
-                        echo comboInputSetup(false,"Squad","sltSquad",$member->getSquadID(), $squads->listAllSquads($conn));
+                    echo '</fieldset></div><div class="large-12 medium-12 small-12 columns"><fieldset><legend>Swimming Details</legend>';
+                    echo '<div class="large-6 medium-6 small-12 columns">';
+
+                    if (isset($_POST["btnSubmit"])) {
+                        echo textInputPostback(false, "SASA Membership Number", "txtSASANumber", $_POST["txtSASANumber"], 15);
                     } else {
-                        echo comboInputBlank(false,"Squad","sltSquad","Please select...", $squads->listAllSquads($conn));
+                        echo textInputSetup(false, "SASA Membership Number", "txtSASANumber", $member->getSASANumber(), 15);
                     }
-                }
 
-                if (isset($_POST["btnSubmit"])) {
-                    echo textInputPostback(false, "Swimming Hours", "txtHours", $_POST["txtHours"],4);
-                } else {
-                    echo textInputSetup(false,"Swimming Hours","txtHours",$member->getSwimmingHours(),4);
-                }
-
-                echo '</div><div class="large-6 medium-6 small-12 columns">';
-
-                if (isset($_POST["btnSubmit"])) {
-                    if ($member->isMonthlyFeeValid($_POST['txtFees'])) {
-                        echo moneyInputPostback(false, "Monthly Fee", "txtFees", $_POST["txtFees"],6);
+                    if (isset($_POST["btnSubmit"])) {
+                        echo comboInputPostback(false, "Squad", "sltSquad", $_POST["sltSquad"], $squads->listAllSquads($conn));
                     } else {
-                        echo moneyInputPostbackError(false, "Monthly Fee", "txtFees", $_POST["txtFees"],"errFees","Please enter a valid Fee",6);
+                        if (!is_null($member->getSquadID())) {
+                            echo comboInputSetup(false, "Squad", "sltSquad", $member->getSquadID(), $squads->listAllSquads($conn));
+                        } else {
+                            echo comboInputBlank(false, "Squad", "sltSquad", "Please select...", $squads->listAllSquads($conn));
+                        }
                     }
-                } else {
-                    echo moneyInputSetup(false,"Monthly Fee","txtFees",$member->getMonthlyFee(),6);
-                }
 
-                if (isset($_POST["btnSubmit"])) {
-                    if ($member->isFeeAdjustmentValid($_POST['txtAdjustment'])) {
-                        echo moneyInputPostback(false, "Fee Adjustment", "txtAdjustment", $_POST["txtAdjustment"],6);
+                    if (isset($_POST["btnSubmit"])) {
+                        echo textInputPostback(false, "Swimming Hours", "txtHours", $_POST["txtHours"], 4);
                     } else {
-                        echo moneyInputPostbackError(false, "Fee Adjustment", "txtAdjustment", $_POST["txtAdjustment"],"errFees","Please enter a valid Fee Adjustment",6);
+                        echo textInputSetup(false, "Swimming Hours", "txtHours", $member->getSwimmingHours(), 4);
                     }
-                } else {
-                    echo moneyInputSetup(false,"Fee Adjustment","txtAdjustment",$member->getFeeAdjustment(),6);
-                }
 
-                echo '</div></fieldset></div>';
-                echo '<div class="large-12 medium-12 small-12 columns"><fieldset><legend>Other Details</legend>';
+                    echo '</div><div class="large-6 medium-6 small-12 columns">';
 
-                if (isset($_POST["btnSubmit"])) {
-                    if (empty($_POST["chkRoles"])) {
-                        echo checkboxInputEmptyError(true, "Role(s)", "chkRoles", "errEmptyRoles", "Please select at least one role", $roles->listAllRoles($conn));
+                    if (isset($_POST["btnSubmit"])) {
+                        if ($member->isMonthlyFeeValid($_POST['txtFees'])) {
+                            echo moneyInputPostback(false, "Monthly Fee", "txtFees", $_POST["txtFees"], 6);
+                        } else {
+                            echo moneyInputPostbackError(false, "Monthly Fee", "txtFees", $_POST["txtFees"], "errFees", "Please enter a valid Fee", 6);
+                        }
                     } else {
-                        echo checkboxInputPostback(true, "Role(s)", "chkRoles", $_POST['chkRoles'], $roles->listAllRoles($conn));
+                        echo moneyInputSetup(false, "Monthly Fee", "txtFees", $member->getMonthlyFee(), 6);
                     }
-                } else {
-                    echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRolesForMember($conn,$member->getUsername()), $roles->listAllRoles($conn));
-                }  
 
-                if (isset($_POST["btnSubmit"])) {
-                    echo textareaInputPostback(false, "Notes", "txtNotes", $_POST['txtNotes'], 2500, 8);
-                } else {
-                    echo textareaInputSetup(false, "Notes", "txtNotes", $member->getNotes(), 2500, 8);
-                }                
+                    if (isset($_POST["btnSubmit"])) {
+                        if ($member->isFeeAdjustmentValid($_POST['txtAdjustment'])) {
+                            echo moneyInputPostback(false, "Fee Adjustment", "txtAdjustment", $_POST["txtAdjustment"], 6);
+                        } else {
+                            echo moneyInputPostbackError(false, "Fee Adjustment", "txtAdjustment", $_POST["txtAdjustment"], "errFees", "Please enter a valid Fee Adjustment", 6);
+                        }
+                    } else {
+                        echo moneyInputSetup(false, "Fee Adjustment", "txtAdjustment", $member->getFeeAdjustment(), 6);
+                    }
 
-                echo '</fieldset></div>';
+                    echo '</div></fieldset></div>';
+                    echo '<div class="large-12 medium-12 small-12 columns"><fieldset><legend>Other Details</legend>';
 
-                echo formEndWithButton("Save Changes","Delete");                
+                    if (isset($_POST["btnSubmit"])) {
+                        if (empty($_POST["chkRoles"])) {
+                            echo checkboxInputEmptyError(true, "Role(s)", "chkRoles", "errEmptyRoles", "Please select at least one role", $roles->listAllRoles($conn));
+                        } else {
+                            echo checkboxInputPostback(true, "Role(s)", "chkRoles", $_POST['chkRoles'], $roles->listAllRoles($conn));
+                        }
+                    } else {
+                        echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRolesForMember($conn, $member->getUsername()), $roles->listAllRoles($conn));
+                    }
+
+                    if (isset($_POST["btnSubmit"])) {
+                        echo textareaInputPostback(false, "Notes", "txtNotes", $_POST['txtNotes'], 2500, 8);
+                    } else {
+                        echo textareaInputSetup(false, "Notes", "txtNotes", $member->getNotes(), 2500, 8);
+                    }
+
+                    echo '</fieldset></div>';
+                    echo formEndWithButton("Save Changes","delete.php?u=" . $member->getUsername());
+                }
+                else{
+                    echo '</fieldset></div>';
+                    echo formEndWithButton("Save Changes");
+                }
 
                 dbClose($conn);
                 ?> 
