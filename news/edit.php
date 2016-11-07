@@ -28,13 +28,6 @@
             exit;
         }
 
-        //Does the user have the correct permissions?
-
-        if (!$memberValidation->isMemberCommittee($connection,$currentUser->getUsername()) || !$memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) )
-        {
-            header( 'Location:' . $domain . '404.php' );
-            exit;
-        }
     }
     
     if (isset($_POST['btnSubmit'])) {

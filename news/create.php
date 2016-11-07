@@ -29,7 +29,7 @@
             if ($news->create($connection)) {
                 $_SESSION['create'] = true;
 
-                header('Location:' .$domain . '/news/view.php?id=' . $news->getID());
+                header('Location:' .$domain . 'news/view.php?id=' . $news->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;
