@@ -18,63 +18,77 @@
         exit;
     }
 
+
     if (isset($_POST['btnSubmit'])) {
-        
-        $connection = dbConnect();
-        $memberValidation = new Members();
+
+        $member_Validation = new Members();
         $members_rolesValidation = new Members_Roles();
 
-        if ($memberValidation->isInputValid($connection, $_POST['txtUsername'],$_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST['sltSquad'],$_POST['txtRegisterDate'],null,$_POST['txtFees'], $_POST['txtAdjustment'],$_POST['txtHours'],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
-            $memberValidation->setUsername($_POST['txtUsername']);
-            $memberValidation->setSASANumber($_POST['txtSASANumber']);
-            $memberValidation->setStatus($_POST['sltStatus']);
-            $memberValidation->setFirstName($_POST['txtFirstName']);
-            $memberValidation->setMiddleName($_POST['txtMiddleName']);
-            $memberValidation->setLastName($_POST['txtLastName']);
-            $memberValidation->setGender($_POST['sltGender']);
-            $memberValidation->setDOB($_POST['txtDOB']);            
-            $memberValidation->setAddress1($_POST['txtAddress1']);
-            $memberValidation->setAddress2($_POST['txtAddress2']);
-            $memberValidation->setCity($_POST['txtCity']);
-            $memberValidation->setCounty($_POST['txtCounty']);
-            $memberValidation->setPostcode($_POST['txtPostcode']);
-            $memberValidation->setTelephone($_POST['txtTelephone']);
-            $memberValidation->setMobile($_POST['txtMobile']);
-            $memberValidation->setEmail($_POST['txtEmail']);
-            $memberValidation->setParentTitle($_POST['txtParentTitle']);
-            $memberValidation->setParentName($_POST['txtParentName']);
-            $memberValidation->setSquadID($_POST['sltSquad']);
-            $memberValidation->setRegisterDate($_POST['txtRegisterDate']);
-            $memberValidation->setLastLoginDate(null);
-            $memberValidation->setMonthlyFee($_POST['txtFees']);
-            $memberValidation->setFeeAdjustment($_POST['txtAdjustment']);
-            $memberValidation->setSwimmingHours($_POST['txtHours']);
-            $memberValidation->setNotes($_POST['txtNotes']);
-                        
-            if ($memberValidation->create($connection,$_POST['txtPassword'])) {
-                $members_rolesValidation->setMember($memberValidation->getUsername());
-                
-                $roles = array();
-                foreach ($_POST['chkRoles'] as $key => $value) {
-                    array_push($roles, $value);
-                }
-                foreach ($roles as $role) {
-                    $members_rolesValidation->setRoleID($role);
-                    $members_rolesValidation->create($connection);
-                }
-                
-                $_SESSION['create'] = true;
 
-                header('Location:' .$domain . 'members/view.php?id=' . $memberValidation->getID());
-                die();
+        //if ($member_Validation->isInputValid($connection, $_POST['txtUsername'],$_POST['txtSASANumber'],$_POST['sltStatus'],$_POST['txtFirstName'],$_POST['txtMiddleName'],$_POST['txtLastName'],$_POST['sltGender'],$_POST['txtDOB'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtMobile'],$_POST['txtEmail'],$_POST['txtParentTitle'],$_POST['txtParentName'],$_POST['sltSquad'],$_POST['txtRegisterDate'],null,$_POST['txtFees'], $_POST['txtAdjustment'],$_POST['txtHours'],$_POST['txtNotes']) && count($_POST['chkRoles']) > 0) {
+        if($member_Validation->isUsernameValid($connection,$_POST['txtUsername']) &&(isset($_POST['chkRoles']))&&(count($_POST['chkRoles'])) > 0 )
+        {
+
+
+        //if ((isset($_POST['chkRoles']))&&(count($_POST['chkRoles'])) > 0) {
+
+
+            $member_Validation->setUsername($_POST['txtUsername']);
+            $member_Validation->setSASANumber($_POST['txtSASANumber']);
+            $member_Validation->setStatus($_POST['sltStatus']);
+            $member_Validation->setFirstName($_POST['txtFirstName']);
+            $member_Validation->setMiddleName($_POST['txtMiddleName']);
+            $member_Validation->setLastName($_POST['txtLastName']);
+            $member_Validation->setGender($_POST['sltGender']);
+            $member_Validation->setDOB($_POST['txtDOB']);
+            $member_Validation->setAddress1($_POST['txtAddress1']);
+            $member_Validation->setAddress2($_POST['txtAddress2']);
+            $member_Validation->setCity($_POST['txtCity']);
+            $member_Validation->setCounty($_POST['txtCounty']);
+            $member_Validation->setPostcode($_POST['txtPostcode']);
+            $member_Validation->setTelephone($_POST['txtTelephone']);
+            $member_Validation->setMobile($_POST['txtMobile']);
+            $member_Validation->setEmail($_POST['txtEmail']);
+            $member_Validation->setParentTitle($_POST['txtParentTitle']);
+            $member_Validation->setParentName($_POST['txtParentName']);
+            $member_Validation->setSquadID($_POST['sltSquad']);
+            $member_Validation->setRegisterDate($_POST['txtRegisterDate']);
+            $member_Validation->setLastLoginDate(null);
+            $member_Validation->setMonthlyFee($_POST['txtFees']);
+            $member_Validation->setFeeAdjustment($_POST['txtAdjustment']);
+            $member_Validation->setSwimmingHours($_POST['txtHours']);
+            $member_Validation->setNotes($_POST['txtNotes']);
+
+            if ($member_Validation->create($connection, $_POST['txtPassword'])) {
+                if($member_Validation->createMember($connection))
+                {
+                    echo "Create member success";
+
+                    $members_rolesValidation->setMember($member_Validation->getUsername());
+
+                    $roles = array();
+                    foreach ($_POST['chkRoles'] as $key => $value) {
+                        array_push($roles, $value);
+                    }
+                    foreach ($roles as $role) {
+                        $members_rolesValidation->setRoleID($role);
+                        $members_rolesValidation->create($connection);
+                    }
+
+
+                    $_SESSION['create'] = true;
+                    header('Location:' .$domain . 'members/view.php?u=' . $member_Validation->getUsername());
+                    die();
+                }
+
             } else {
                 $_SESSION['error'] = true;
+                echo "Member not added";
             }
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
-    } 
+    }
 
 ?>
 
@@ -116,7 +130,14 @@
                     echo '<p class="alert-box error radius centre">Some of the input you provided was invalid. Please correct the highlighted errors and try again.</p>';
                     unset($_SESSION['invalid']);
                 }
-                if (isset($_SESSION['error'])) {
+
+             if (isset($_SESSION['create'])) {
+                echo '<p class="alert-box error radius centre">There was an error adding the new member. Please try again.</p>';
+                unset($_SESSION['create']);
+            }
+
+
+            if (isset($_SESSION['error'])) {
                     echo '<p class="alert-box error radius centre">There was an error adding the new member. Please try again.</p>';
                     unset($_SESSION['error']);
                 }
@@ -369,7 +390,6 @@
 
                 echo formEndWithButton("Add new member");                
 
-                dbClose($conn);
             ?>
             
         </div>
