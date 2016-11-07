@@ -17,8 +17,8 @@
                      <li><a href="' . $domain . 'upcoming-galas.php" role="link">Upcoming Galas</a></li>
                      <li><a href="' . $domain . 'gala-results.php" role="link">Gala Results</a></li> ';
         if (galaFullAccess($connection, $currentUser, $memberValidation)) {
-            echo '<li><a href="\'. $domain . \'galas.php" role="link">View All</a></li>
-                  <li><a href="\'. $domain . \'galas/create.php" role="link">Create</a></li>';
+            echo '<li><a href="'. $domain . 'galas.php" role="link">View All</a></li>
+                  <li><a href="'. $domain . 'galas/create.php" role="link">Create</a></li>';
             showEditLink($domain, '/galas/view.php', 'galas/edit.php', 'id', $_SESSION["username"], $connection, $memberValidation);
         }
         echo '</ul></li>';
@@ -59,9 +59,10 @@
                 echo '<li><a href="' . $domain . 'venues/create.php" role="link">Create</a></li>';
                 showEditLink($domain, '/venues/view.php', 'venues/edit.php', 'id', $_SESSION["username"], $connection, $memberValidation);
             }
+            echo '</ul>
+               </li>';
         }
-        echo '</ul>
-               </li>
+       echo'
                <li class="divider"></li>
                <li class="has-dropdown not-click">
                   <a href="' . $domain . 'news.php" role="link">News</a>
