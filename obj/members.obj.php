@@ -236,16 +236,22 @@ class Members {
         } else {
             return false;
         }
-    }    
+    }
 
     public function createMember($conn) {
         try {
-            $sql = "INSERT INTO members VALUES (:username, :sasaNumber, :status, :firstName, :middleName, :lastName, :gender, :dob, :address1, :address2, :city, :county, :postcode, :telephone, :mobile, :email, :parentTitle, :parentName, :squadID, :registerDate, :lastLoginDate, :monthlyFee, :feeAdjustment, :swimmingHours, :notes)";
-            
+            //$sql = "INSERT INTO members VALUES (:username, :sasaNumber, :status, :firstName, :middleName, :lastName, :gender, :dob, :address1, :address2, :city, :county, :postcode, :telephone, :mobile, :email, :parentTitle, :parentName, :squadID, :registerDate, :monthlyFee, :feeAdjustment, :swimmingHours, :notes)";
+            $sql = "INSERT INTO members VALUES (:sasaNumber, :sasaCategory, :username, :status, :userTypeOld, :firstName, :middleName, :lastName, :gender, :dob, :address1, :address2, :city, :county, :postcode, :telephone, :mobile, :email, :parentTitle, :parentName, :squadID, :registerDate, :lastLoginDate, :monthlyFee, :feeAdjustment, :swimmingHours, :notes)";
+
+
+
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
+
             $stmt->bindParam(':sasaNumber', $this->getSASANumber(), PDO::PARAM_STR);
+            $stmt->bindValue(':sasaCategory', null, PDO::PARAM_INT);
+            $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
             $stmt->bindParam(':status', $this->getStatus(), PDO::PARAM_INT);
+            $stmt->bindValue(':userTypeOld', null, PDO::PARAM_INT);
             $stmt->bindParam(':firstName', $this->getFirstName(), PDO::PARAM_STR);
             $stmt->bindParam(':middleName', $this->getMiddleName(), PDO::PARAM_STR);
             $stmt->bindParam(':lastName', $this->getLastName(), PDO::PARAM_STR);
@@ -263,17 +269,22 @@ class Members {
             $stmt->bindParam(':parentName', $this->getParentName(), PDO::PARAM_STR);
             $stmt->bindParam(':squadID', $this->getSquadID(), PDO::PARAM_INT);
             $stmt->bindParam(':registerDate', $this->getRegisterDate(), PDO::PARAM_STR);
-            $stmt->bindParam(':lastLoginDate', $this->getLastLoginDate(), PDO::PARAM_STR);
+            $stmt->bindValue(':lastLoginDate', null, PDO::PARAM_INT);
             $stmt->bindParam(':monthlyFee', $this->getMonthlyFee(), PDO::PARAM_STR);
             $stmt->bindParam(':feeAdjustment', $this->getFeeAdjustment(), PDO::PARAM_STR);
             $stmt->bindParam(':swimmingHours', $this->getSwimmingHours(), PDO::PARAM_INT);
             $stmt->bindParam(':notes', $this->getNotes(), PDO::PARAM_STR);
-            
+
+            var_dump($stmt);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
             dbClose($conn);
             return "Create failed: " . $e->getMessage();
+        }
+        catch (Exception $e) {
+            dbClose($conn);
+            return "create failed: " . $e->getMessage();
         }
     }
 
@@ -294,10 +305,11 @@ class Members {
     }
     
     public function update($conn) {
-        $sql = "UPDATE members SET sasaNumber = :sasaNumber, status = :status, firstName = :firstName, MiddleName = :middleName, lastName = :lastName, gender = :gender, dob = :dob, address1 = :address1, address2 = :address2, city = :city, county = :county, postcode = :postcode, telephone = :telephone, mobile = :mobile, email = :email, parentTitle = :parentTitle, parentName = :parentName, squadID = :squadID, registerDate = :registerDate, lastLoginDate = :lastLoginDate, monthlyFee = :monthlyFee, feeAdjustment = :feeAdjustment, swimmmingHours = :swimmingHours, notes = :notes WHERE username = :username";
-        
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $conn->setAttribute(\PDO::ATTR_EMULATE_PREPARES , true);
+        $sql = "UPDATE members SET sasaNumber = :sasaNumber, status = :status, firstName = :firstName, MiddleName = :middleName, lastName = :lastName, gender = :gender, dob = :dob, address1 = :address1, address2 = :address2, city = :city, county = :county, postcode = :postcode, telephone = :telephone, mobile = :mobile, email = :email, parentTitle = :parentTitle, parentName = :parentName, squadID = :squadID, registerDate = :registerDate, monthlyFee = :monthlyFee, feeAdjustment = :feeAdjustment, swimmingHours = :swimmingHours, notes = :notes WHERE username = :username";
         $stmt = $conn->prepare($sql);
-        //$stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
+        $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
         $stmt->bindParam(':sasaNumber', $this->getSASANumber(), PDO::PARAM_STR);
         $stmt->bindParam(':status', $this->getStatus(), PDO::PARAM_INT);
         $stmt->bindParam(':firstName', $this->getFirstName(), PDO::PARAM_STR);
@@ -317,12 +329,11 @@ class Members {
         $stmt->bindParam(':parentName', $this->getParentName(), PDO::PARAM_STR);
         $stmt->bindParam(':squadID', $this->getSquadID(), PDO::PARAM_INT);
         $stmt->bindParam(':registerDate', $this->getRegisterDate(), PDO::PARAM_STR);
-        $stmt->bindParam(':lastLoginDate', $this->getLastLoginDate(), PDO::PARAM_STR);
         $stmt->bindParam(':monthlyFee', $this->getMonthlyFee(), PDO::PARAM_STR);
         $stmt->bindParam(':feeAdjustment', $this->getFeeAdjustment(), PDO::PARAM_STR);
         $stmt->bindParam(':swimmingHours', $this->getSwimmingHours(), PDO::PARAM_INT);
         $stmt->bindParam(':notes', $this->getNotes(), PDO::PARAM_STR);
-        
+
         try {
             $stmt->execute();
             dbClose($conn);
@@ -331,22 +342,56 @@ class Members {
             dbClose($conn);
             return "Update failed: " . $e->getMessage();
         }
-    }    
-    
+        catch (Exception $e) {
+            dbClose($conn);
+            return "Update failed: " . $e->getMessage();
+        }
+
+    }
+
+    //Delete Members
+
     public function delete($conn) {
+        if ($this->deleteMember($conn) && $this->deleteUser($conn)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteUser($conn)
+    {
+        try {
+            $sql = "DELETE FROM users WHERE username = :username";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
+
+            echo "Delete user complete";
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return "Delete user failed: " . $e->getMessage();
+        }
+    }
+
+    public function deleteMember($conn)
+    {
         try {
             $sql = "DELETE FROM members WHERE username = :username";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
-            
+
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            return "Delete failed: " . $e->getMessage();
+            return "Delete member failed: " . $e->getMessage();
         }
     }
-    
+
+
+
     public function listAllMembers($conn, $name = null) {  
         $sql = "SELECT m.username, s.squad FROM members m LEFT JOIN squads s ON m.squadid = s.id";
         
