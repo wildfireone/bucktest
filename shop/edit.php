@@ -46,7 +46,7 @@
     
 <head>    
     <?php include '../inc/meta.inc.php';?>
-    <title>Edit | Shop | Bucksburn Amatuer Swimming Club</title>  
+    <title>Edit | Shop | Bucksburn Amateur Swimming Club</title>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>     
     <link href="../css/site.css" rel="stylesheet"/>

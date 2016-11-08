@@ -67,10 +67,17 @@
     
 <head>    
     <?php include '../inc/meta.inc.php';?>
-    <title>Create | Gala | Bucksburn Amatuer Swimming Club</title>   
+    <title>Create | Gala | Bucksburn Amateur Swimming Club</title>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
     <link href="../css/site.css" rel="stylesheet"/>
+    <script>
+        $("#txtTitle,#txtDate,#city,#state,#zip").change(function () {
+            var addressArray = [$("#txtTitle").val(), $("#txtDate").val()];
+            $("#txtID").text(addressArray.join(' '));
+            document.getElementById('txtID').innerHTML = addressArray.join(' ');
+        });
+    </script>
 </head>
 
 <body>   
