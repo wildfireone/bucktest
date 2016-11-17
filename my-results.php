@@ -159,10 +159,28 @@
                             }
                             
                             echo '<td data-th="Time" class="centre">' . $swim_time->getTime() . '</td>';
-                            
+
                             if (!is_null($swim_time->getRank())) {
-                                echo '<td data-th="Rank" class="centre">' . $swim_time->getRank() . '</td>';
-                            }                            
+                                $rank = $swim_time->getRank();
+                                //Switch rank with Title if required.
+                                switch ($rank)
+                                {
+                                    case -1:
+                                        echo '<td data-th="Rank" class="centre">Speeding Ticket</td>';
+                                        break;
+                                    case 99:
+                                        echo '<td data-th="Rank" class="centre">DQ</td>';
+                                        break;
+                                    case 98:
+                                        echo '<td data-th="Rank" class="centre">No Show</td>';
+                                        break;
+                                    default:
+                                        echo '<td data-th="Rank" class="centre">' . $rank . '</td>';
+                                        break;
+                                }
+                            }  else {
+                                echo '<td></td>';
+                            }
                             
                             echo '</tr>';
                         }

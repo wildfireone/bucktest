@@ -72,11 +72,26 @@
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
     <link href="../css/site.css" rel="stylesheet"/>
     <script>
-        $("#txtTitle,#txtDate,#city,#state,#zip").change(function () {
-            var addressArray = [$("#txtTitle").val(), $("#txtDate").val()];
-            $("#txtID").text(addressArray.join(' '));
-            document.getElementById('txtID').innerHTML = addressArray.join(' ');
-        });
+
+
+        function changeOutput(){
+            var input1 = document.getElementById("txtTitle").value;
+            var input2 = document.getElementById("txtDate").value;
+            document.getElementById("txtID").value = input1 + " metre x " + input2 + " metre";
+        }
+
+//        input.change(function () {
+//            //var addressArray = [input1.val(), input2.val()];
+//            //input3.val = addressArray;
+//            //$("#txtID").text(addressArray.join(' '));
+//            document.getElementById('txtID').innerHTML = input1.val() + input2.val();
+//        });
+
+//        $("#txtTitle,#txtDate").change(function())){
+//            var addressArray = [$("#txtTitle").val(), $("#txtDate").val()];
+//            $("#txtID").text(addressArray.join(' '));
+//            document.getElementById('txtID').innerHTML = addressArray.join(' ');
+//        });
     </script>
 </head>
 
