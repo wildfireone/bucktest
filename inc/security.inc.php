@@ -95,7 +95,7 @@ function galaViewAccess($connection,$currentUser,$memberValidation)
 //Members
 function memberFullAccess($connection,$currentUser,$memberValidation)
 {
-    if ($memberValidation->isMemberMembershipCoordinator($connection,$currentUser->getUsername()) || ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()))  ) {
+    if ($memberValidation->isMemberMembershipCoordinator($connection,$currentUser->getUsername()) || ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername()) || $memberValidation->isMemberCoach($connection,$currentUser->getUsername()))  ) {
         return true;
     }
     else{
@@ -121,7 +121,7 @@ function memberViewAccess($connection,$currentUser,$memberValidation)
 function squadFullAccess($connection, $currentUser, $memberValidation)
 {
 
-    if ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername())|| ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername())))  {
+    if ($memberValidation->isMemberWebCoordinator($connection,$currentUser->getUsername())|| ($memberValidation->isMemberCommittee($connection,$currentUser->getUsername())) || $memberValidation->isMemberCoach($connection,$currentUser->getUsername()))   {
         return true;
     }
     else{

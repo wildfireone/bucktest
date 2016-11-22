@@ -36,7 +36,7 @@
                 }
             ?> 
 
-            <p>This is a space for some explanatory text about the items contained in the BASC shop. There will also be a <a href="#">link to a form</a> which members can download, print off and hand back into the club to process their order. </p>
+            <p>This is a space for some explanatory text about the items contained in the BASC shop. </p>
 
             <table class="large-12 medium-12 small-12 columns">      
                 <tr>

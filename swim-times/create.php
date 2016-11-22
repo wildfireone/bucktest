@@ -34,6 +34,7 @@
 
             if ($swim->create($connection)) {
                 $_SESSION['create'] = true;
+                header('Location:' .$domain . '/galas/view.php?id=' . $_POST["sltGala"]);
 
             } else {
                 $_SESSION['error'] = true;

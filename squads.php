@@ -9,8 +9,7 @@
         die();
     }
 
-    if(!squadViewAccess($connection,$currentUser,$memberValidation))
-    {
+    if(!squadViewAccess($connection,$currentUser,$memberValidation)) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
         exit;
     }
@@ -99,8 +98,7 @@
 
                     echo "<tr>";
                     //If user has full access then display links
-                    if(squadFullAccess($connection,$currentUser,$memberValidation))
-                    {
+                    if(squadFullAccess($connection,$currentUser,$memberValidation)) {
                         echo '<td data-th="Squad">' . $squadItem->getSquad() . '</td>';
                         echo '<td data-th="Description">' . $squadItem->getDescription() . '</td>';
                         echo '<td data-th="Coach"><a href="'.$squadCoachLink.'">' . $member->getFullNameByUsername($conn) . '</a></td>';
@@ -111,7 +109,7 @@
                     {
                         echo '<td data-th="Squad">' . $squadItem->getSquad() . '</td>';
                         echo '<td data-th="Description">' . $squadItem->getDescription() . '</td>';
-                        echo '<td data-th="Coach"> '. $member->getFullNameByUsername($conn) . '/td>';
+                        echo '<td data-th="Coach"> '. $member->getFullNameByUsername($conn) . '</td>';
                         echo '<td data-th="No. of Members">'.$squad["COUNT(*)"].'</td>';
                     }
 

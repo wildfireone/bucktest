@@ -168,6 +168,7 @@
                 if (isset($_SESSION['username'])) {
                     echo '<div class="large-12 medium-12 small-12 columns">';
                     echo linkButton("Add Gala Events", "gala-events/create.php?id=" . $gala->getID(), true) . '<br>';
+                    echo linkButton("Return to Gala", "/galas/view.php?id=" . $gala->getID(), true) . '<br>';
                     echo '</div>';
                 }
                 
