@@ -24,7 +24,7 @@
     if (isset($_POST['btnSubmit'])) {
         
         $connection = dbConnect();
-        $venues = new Venues();
+        $venues = new Venues($_GET["id"]);
 
         if ($venues->isInputValid($_POST['txtVenue'],$_POST['txtAddress1'],$_POST['txtAddress2'],$_POST['txtCity'],$_POST['txtCounty'],$_POST['txtPostcode'],$_POST['txtTelephone'],$_POST['txtEmail'],$_POST['txtWebsite'])) {
             $venues->setVenue($_POST['txtVenue']);
@@ -37,7 +37,7 @@
             $venues->setEmail($_POST['txtEmail']);
             $venues->setWebsite($_POST['txtWebsite']);
             
-            if ($venues->create($connection)) {
+            if ($venues->update($connection)) {
                 $_SESSION['update'] = true;
 
                 header('Location:' .$domain . 'venues/view.php?id=' . $venues->getID());
@@ -48,7 +48,7 @@
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
+        //dbClose($connection);
     }    
 ?>
 

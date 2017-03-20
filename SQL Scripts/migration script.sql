@@ -118,7 +118,7 @@ FROM bmember;
 
 /* ****** MEMBERS *****
 /* To migrate member details into the Members table*/
-INSERT INTO members (SASANumber, SASACategoryOld, username, firstname, middlename, lastname, gender, dob, address1, address2, city, county, postcode, telephone, mobile, email, registerdate, parenttitle, parentname, lastlogindate, notes, statusold, swimmingHours, monthlyfee, feeadjustment)
+INSERT INTO members (SASANumber, SASACategory, username, firstname, middlename, lastname, gender, dob, address1, address2, city, county, postcode, telephone, mobile, email, registerdate, parenttitle, parentname, lastlogindate, notes, statusold, swimmingHours, monthlyfee, feeadjustment)
 SELECT mid, category, username, fname, mname, lname, gender, dob, address, address2, city, region, postcode, hometel, mobile, email, memregdate, ptitle, parentname, lastlogindate, comment, status, swimhours, monthlyfee, feeadjust
 FROM bmember;
 /* Update the genders */
@@ -190,7 +190,7 @@ UPDATE gala_events SET gender = 'F' WHERE gender = 'G';
 
 
 /* ***** galas ***** */
-INSERT INTO galas (id, title, description, date, venueold, warmuptime, organiser, fees, confirmationdate, cutoffdate, eventTypeOld)
+INSERT INTO galas (id, title, description, date, venueID, warmuptime, organiser, fees, confirmationdate, cutoffdate, eventTypeOld)
 SELECT 	gyrid, title, details, date, venue, warmup, organiser, swimfees, confirmdate, cutoffdate, eventType
 FROM bgaladetail;
 /* Update Time Criteria */

@@ -315,6 +315,7 @@ class Members {
         $stmt->bindParam(':firstName', $this->getFirstName(), PDO::PARAM_STR);
         $stmt->bindParam(':middleName', $this->getMiddleName(), PDO::PARAM_STR);
         $stmt->bindParam(':lastName', $this->getLastName(), PDO::PARAM_STR);
+        $stmt->bindParam(':lastName', $this->getLastName(), PDO::PARAM_STR);
         $stmt->bindParam(':gender', $this->getGender(), PDO::PARAM_STR);
         $stmt->bindParam(':dob', $this->getDOB(), PDO::PARAM_STR);
         $stmt->bindParam(':address1', $this->getAddress1(), PDO::PARAM_STR);

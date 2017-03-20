@@ -96,7 +96,7 @@ class News {
     }
     
     public function create($conn) {        
-            $sql = "INSERT INTO News (title, subTitle, author, date, mainBody) VALUES (:title, :subTitle, :author, CURDATE(), :mainBody)";
+            $sql = "INSERT INTO news (title, subTitle, author, date, mainBody) VALUES (:title, :subTitle, :author, CURDATE(), :mainBody)";
             $stmt = $conn->prepare($sql);
         
             $stmt->bindParam(':title', $this->getTitle(), PDO::PARAM_STR);

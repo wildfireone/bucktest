@@ -87,7 +87,7 @@ class Shop {
     }
     
     public function create($conn) {        
-            $sql = "INSERT INTO Shop (name, description, price, quantity) VALUES (:name, :description, :price, :quantity)";
+            $sql = "INSERT INTO shop (name, description, price, quantity) VALUES (:name, :description, :price, :quantity)";
             $stmt = $conn->prepare($sql);
                 
             $stmt->bindParam(':name', $this->getName(), PDO::PARAM_STR);

@@ -109,7 +109,7 @@ class Venues {
     }
     
     public function create($conn) {        
-            $sql = "INSERT INTO Venues (venue, address1, address2, city, county, postcode, telephone, email, website) VALUES (:venue, :address1, :address2, :city, :county, :postcode, :telephone, :email, :website)";
+            $sql = "INSERT INTO venues (venue, address1, address2, city, county, postcode, telephone, email, website) VALUES (:venue, :address1, :address2, :city, :county, :postcode, :telephone, :email, :website)";
             $stmt = $conn->prepare($sql);
                 
             $stmt->bindParam(':venue', $this->getVenue(), PDO::PARAM_STR);
