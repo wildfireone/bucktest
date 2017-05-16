@@ -51,6 +51,11 @@
                     unset($_SESSION['update']);
                 }
 
+                if (isset($_SESSION['updatePassword'])) {
+                    echo '<p class="alert-box success radius centre">Password updated!</p>';
+                    unset($_SESSION['updatePassword']);
+                }
+
                 $member = new Members($_SESSION["username"]);
                 $member->getAllDetails($conn);
                 
@@ -95,6 +100,8 @@
                 echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRolesForMember($conn,$member->getUsername()), $roles->listAllRoles($conn), true);
                 echo textareaInputSetup(false, "Notes", "txtNotes", $member->getNotes(), 100, 8, true);
                 echo linkButton("Update my details", "members/edit.php?u=".$member->getUsername());
+                echo "<div> <br/>";
+                echo linkButton("Update Password", "members/edit_pass.php?u=".$member->getUsername());
                 echo formEnd();                
 
                 dbClose($conn);

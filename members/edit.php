@@ -422,11 +422,11 @@
                     }
 
                     echo '</fieldset></div>';
-                    echo formEndWithButton("Save Changes","delete.php?u=" . $member->getUsername());
+                    echo formEndWithButton("Save Changes","delete.php?u=" . $member->getUsername(), "view.php?u=" . $member->getUsername());
                 }
                 else{
                     echo '</fieldset></div>';
-                    echo formEndWithButton("Save Changes");
+                    echo formEndWithButton("Save changes",false,"/my-details.php");
                 }
 
                 dbClose($conn);

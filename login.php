@@ -20,7 +20,7 @@ if (isset($_POST['btnSubmit'])) {
             $_SESSION['username'] = $_POST['txtUsername'];
             $member = new Members($_SESSION['username']);
             $member->getAllDetails($conn);
-            //$member->updateLastLogin($conn);
+            $member->updateLastLogin($conn);
             $_SESSION['firstName'] = $member->getFirstName();
             // update last login ti//me
             header('Location: ' . $domain . 'member-area.php');

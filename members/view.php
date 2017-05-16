@@ -32,30 +32,30 @@
 
 <!DOCTYPE html>
 <html lang="en-GB">
-    
-<head>    
+
+<head>
     <?php include '../inc/meta.inc.php';?>
     <title>View | Members | Bucksburn Amateur Swimming Club</title>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
+    <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <link href="../css/site.css" rel="stylesheet"/>
 </head>
 
-<body>   
-    <?php include '../inc/header.inc.php';?>   
+<body>
+    <?php include '../inc/header.inc.php';?>
     <br>
-        
+
     <div class="row" id="content">
         <div class="large-12 medium-12 small-12 columns">
-        
+
             <ul class="breadcrumbs">
                 <li><a href="../index.php" role="link">Home</a></li>
                 <li><a href="../members.php" role="link">Members</a></li>
                 <li class="current">View a Member</li>
             </ul>
-        
-            <h2>View a Member</h2>        
-          
+
+            <h2>View a Member</h2>
+
                 <?php
 
                 require '../inc/forms.inc.php';
@@ -75,15 +75,20 @@
                     unset($_SESSION['update']);
                 }
 
+                if (isset($_SESSION['updatePassword'])) {
+                    echo '<p class="alert-box success radius centre">Password updated!</p>';
+                    unset($_SESSION['updatePassword']);
+                }
+
                 $member = new Members($_GET["u"]);
                 $member->getAllDetails($conn);
-                
+
                 $status = new Status($member->getStatus());
-                $status->getAllDetails($conn);  
+                $status->getAllDetails($conn);
 
                 $roles = New Roles();
                 $members_roles = New Members_Roles();
-    
+
                 echo '<h3>' . $member->getFirstName() . ' ' . $member->getLastName() . '</h3>';
                 echo formStart();
 
@@ -99,7 +104,7 @@
                 echo comboInputSetup(true,"Member Status","txtStatus",$member->getStatus(),$status->listAllStatus($conn),true);
                 echo textInputSetup(false,"SASA Membership","txtSASANumber",$member->getSASANumber(),15,true);
                 echo dateInputSetup(true,"Date Joined","txtRegisterDate",$member->getRegisterDate(),null,null,true);
-                
+
                 echo '</fieldset></div><div class="large-6 medium-6 small-12 right"><fieldset><legend>Contact Details</legend>';
 
                 echo textInputSetup(false,"Parent Title</b> (Mr, Mrs or Ms)","txtParentTitle",$member->getParentTitle(),4,true);
@@ -112,10 +117,8 @@
                 echo telInputSetup(true,"Telephone","txtTelephone",$member->getTelephone(),12,true);
                 echo telInputSetup(false,"Mobile","txtMobile",$member->getMobile(),12,true);
                 echo emailInputSetup(false,"Email","txtEmail",$member->getEmail(),250,true);
-                
+
                 echo '</fieldset></div>';
-                //old broken
-                //echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRoles($conn), $roles->listAllRoles($conn), true);
 
                 //new working!
                 echo checkboxInputSetup(true, "Role(s)", "chkRoles", $members_roles->getAllRolesForMember($conn,$member->getUsername()), $roles->listAllRoles($conn), true);
@@ -125,15 +128,22 @@
                 //Only members with full access can edit members
                 if(memberFullAccess($connection,$currentUser,$memberValidation))
                 {
+                    $editLink = 'edit.php?u='.$member->getUsername();
+                    $editPassword = 'edit_pass.php?u='.$member->getUsername();
+
+
                     echo linkButton("Edit this Member", "edit.php?u=".$member->getUsername());
+                    echo "<div> <br/>";
+                    echo linkButton("Update Password", "edit_pass.php?u=".$member->getUsername());
+
                 }
 
-                echo formEnd();                
+                echo formEnd();
 
                 dbClose($conn);
             ?>
-              
-        </div> 
+
+        </div>
     </div>
     <?php include '../inc/footer.inc.php';?>
 </body>

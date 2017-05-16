@@ -2,6 +2,7 @@
     <a href="<?php echo $domain; ?>index.php" class="nohover">
         <div class="banner">
             <h1 class="middle centre">Bucksburn Amateur Swimming Club</h1>
+            <img  class="middle centre" src="<?=$domain?>/img/bn_logo_2.gif"/>
         </div>
     </a>
     <?php

@@ -4,8 +4,8 @@
 // Contains functions to return a new form item, previously submitted form item, or an invalid form item with an attached error
 
 
-
-function formStart($required=true) {
+function formStart($required = true)
+{
     if ($required) {
         return '<form action="" method="post">
                 <div class="row">
@@ -13,14 +13,15 @@ function formStart($required=true) {
                             <p class="required">* indicates a required field</p>
                             <div class="row">';
     } else {
-            return '<form action="" method="post">
+        return '<form action="" method="post">
                 <div class="row">
                     <div class="large-12 medium-12 small-12 columns"> 
                             <div class="row">';
     }
 }
 
-function linkButton($text, $link,$news=false) {
+function linkButton($text, $link, $news = false)
+{
     if ($news) {
         return '<div class="large-6 large-centered medium-6 medium-centered small-12 small-centered columns">
                 <a href="' . $link . '" class="medium radius button middle centre h6 capitalise">' . $text . '</a>
@@ -29,11 +30,21 @@ function linkButton($text, $link,$news=false) {
         return '</div><div class="row"><div class="large-6 large-centered medium-6 medium-centered small-12 small-centered columns">
                 <a href="' . $link . '" class="medium radius button middle centre h6 capitalise">' . $text . '</a>
             </div></div>';
-        }    
+    }
 }
 
-function formEndWithButton($buttonText,$delete=false) {
-    if (!$delete) {
+function linkButton2($text, $link)
+{
+
+    return '<div class="row"><div class="large-6 large-centered medium-6 medium-centered small-12 small-centered columns">
+                <a href="' . $link . '" class="medium radius button middle centre h6 capitalise">' . $text . '</a>
+            </div></div>';
+
+}
+
+function formEndWithButton($buttonText, $delete = false, $back = false)
+{
+    if (!$delete && !$back) {
         return '</div>                   
                     <div class="row">
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
@@ -41,8 +52,30 @@ function formEndWithButton($buttonText,$delete=false) {
                         </div>
                     </div>
                 </div></div>           
-            </form>'; 
-    } else {
+            </form>';
+    }
+    else if ($back && $delete) {
+        return '</div>                   
+                    <div class="row">
+                        <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
+                            <input type="submit" name="btnSubmit" value="' . $buttonText . '" class="medium radius button left h6 capitalise"/>
+                        </div>
+                        <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
+                            <a href="' . $delete . '" class="medium radius button alert right h6 capitalise">Delete</a> 
+                        </div>
+                    </div>
+                     <div class="row">                                   
+                         <div class="large-6 large-centered medium-6 medium-centered small-12 small-centered column">
+                            <a href="' . $back . '" class="medium radius button middle centre h6 capitalise">Back</a> 
+                        </div>
+                                              
+         
+                    </div>
+                </div></div>           
+            </form>';
+    }
+
+    else if ($delete) {
         return '</div>                   
                     <div class="row">
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
@@ -53,12 +86,27 @@ function formEndWithButton($buttonText,$delete=false) {
                         </div>
                     </div>
                 </div></div>           
-            </form>';   
-        }
+            </form>';
+    } else if ($back) {
+        return '</div>                   
+                    <div class="row">
+                        <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
+                            <input type="submit" name="btnSubmit" value="' . $buttonText . '" class="medium radius button left h6 capitalise"/>
+                        </div>
+                                              
+                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
+                            <a href="' . $back . '" class="medium radius button alert right h6 capitalise">Back</a>
+                        </div>
+                    </div>
+                </div></div>           
+            </form>';
+    }
+
 }
 
-function formEndWithDeleteButton($buttonText) {
-        return '</div>                   
+function formEndWithDeleteButton($buttonText)
+{
+    return '</div>                   
                     <div class="row">
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
                             <input type="submit" name="btnSubmit" value="' . $buttonText . '" class="medium radius button alert middle h6 capitalise"/>
@@ -68,11 +116,13 @@ function formEndWithDeleteButton($buttonText) {
             </form>';
 }
 
-function formEnd() {
+function formEnd()
+{
     return '</div></div></form>';
 }
 
-function textInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false) {
+function textInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -106,7 +156,8 @@ function textInputBlank($isRequired, $labelDescription, $labelControlName, $maxL
     }
 }
 
-function textInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $isReadOnly = false) {
+function textInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -140,7 +191,8 @@ function textInputSetup($isRequired, $labelDescription, $labelControlName, $text
     }
 }
 
-function textInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength) {
+function textInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -159,7 +211,8 @@ function textInputEmptyError($isRequired, $labelDescription, $labelControlName, 
     }
 }
 
-function textInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength) {
+function textInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -176,7 +229,8 @@ function textInputPostback($isRequired, $labelDescription, $labelControlName, $t
     }
 }
 
-function textInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength) {
+function textInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -195,7 +249,8 @@ function textInputPostbackError($isRequired, $labelDescription, $labelControlNam
     }
 }
 
-function textareaInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $rows, $isReadOnly = false) {
+function textareaInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $rows, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -229,7 +284,8 @@ function textareaInputBlank($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function textareaInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $rows, $isReadOnly = false) {
+function textareaInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $rows, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -263,7 +319,8 @@ function textareaInputSetup($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function textareaInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength, $rows) {
+function textareaInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength, $rows)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -282,7 +339,8 @@ function textareaInputEmptyError($isRequired, $labelDescription, $labelControlNa
     }
 }
 
-function textareaInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $rows) {
+function textareaInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $rows)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -299,7 +357,8 @@ function textareaInputPostback($isRequired, $labelDescription, $labelControlName
     }
 }
 
-function textareaInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength, $rows) {
+function textareaInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength, $rows)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -318,7 +377,8 @@ function textareaInputPostbackError($isRequired, $labelDescription, $labelContro
     }
 }
 
-function passwordInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false) {
+function passwordInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -352,7 +412,8 @@ function passwordInputBlank($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function passwordInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength) {
+function passwordInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -371,7 +432,8 @@ function passwordInputEmptyError($isRequired, $labelDescription, $labelControlNa
     }
 }
 
-function numberInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max, $isReadOnly = false) {
+function numberInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -405,7 +467,8 @@ function numberInputBlank($isRequired, $labelDescription, $labelControlName, $mi
     }
 }
 
-function numberInputSetup($isRequired, $labelDescription, $labelControlName, $number, $min, $max, $isReadOnly = false) {
+function numberInputSetup($isRequired, $labelDescription, $labelControlName, $number, $min, $max, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -439,7 +502,8 @@ function numberInputSetup($isRequired, $labelDescription, $labelControlName, $nu
     }
 }
 
-function numberInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $mix, $mac) {
+function numberInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $mix, $mac)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -458,7 +522,8 @@ function numberInputEmptyError($isRequired, $labelDescription, $labelControlName
     }
 }
 
-function numberInputPostback($isRequired, $labelDescription, $labelControlName, $number, $min, $max) {
+function numberInputPostback($isRequired, $labelDescription, $labelControlName, $number, $min, $max)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -476,7 +541,8 @@ function numberInputPostback($isRequired, $labelDescription, $labelControlName, 
     }
 }
 
-function numberInputPostbackError($isRequired, $labelDescription, $labelControlName, $number, $errorControlName, $errorMessage, $min, $max) {
+function numberInputPostbackError($isRequired, $labelDescription, $labelControlName, $number, $errorControlName, $errorMessage, $min, $max)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -495,7 +561,8 @@ function numberInputPostbackError($isRequired, $labelDescription, $labelControlN
     }
 }
 
-function dateInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max, $isReadOnly = false) {
+function dateInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -529,7 +596,8 @@ function dateInputBlank($isRequired, $labelDescription, $labelControlName, $min,
     }
 }
 
-function dateInputSetup($isRequired, $labelDescription, $labelControlName, $date, $min, $max, $isReadOnly = false) {
+function dateInputSetup($isRequired, $labelDescription, $labelControlName, $date, $min, $max, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -563,7 +631,8 @@ function dateInputSetup($isRequired, $labelDescription, $labelControlName, $date
     }
 }
 
-function dateInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $min, $max) {
+function dateInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $min, $max)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -582,7 +651,8 @@ function dateInputEmptyError($isRequired, $labelDescription, $labelControlName, 
     }
 }
 
-function dateInputPostback($isRequired, $labelDescription, $labelControlName, $date, $min, $max) {
+function dateInputPostback($isRequired, $labelDescription, $labelControlName, $date, $min, $max)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -600,7 +670,8 @@ function dateInputPostback($isRequired, $labelDescription, $labelControlName, $d
     }
 }
 
-function dateInputPostbackError($isRequired, $labelDescription, $labelControlName, $date, $errorControlName, $errorMessage, $min, $max) {
+function dateInputPostbackError($isRequired, $labelDescription, $labelControlName, $date, $errorControlName, $errorMessage, $min, $max)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -619,7 +690,8 @@ function dateInputPostbackError($isRequired, $labelDescription, $labelControlNam
     }
 }
 
-function emailInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false) {
+function emailInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -653,7 +725,8 @@ function emailInputBlank($isRequired, $labelDescription, $labelControlName, $max
     }
 }
 
-function emailInputSetup($isRequired, $labelDescription, $labelControlName, $email, $maxLength, $isReadOnly = false) {
+function emailInputSetup($isRequired, $labelDescription, $labelControlName, $email, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -687,7 +760,8 @@ function emailInputSetup($isRequired, $labelDescription, $labelControlName, $ema
     }
 }
 
-function emailInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength) {
+function emailInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -706,7 +780,8 @@ function emailInputEmptyError($isRequired, $labelDescription, $labelControlName,
     }
 }
 
-function emailInputPostback($isRequired, $labelDescription, $labelControlName, $email, $maxLength) {
+function emailInputPostback($isRequired, $labelDescription, $labelControlName, $email, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -723,7 +798,8 @@ function emailInputPostback($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function emailInputPostbackError($isRequired, $labelDescription, $labelControlName, $email, $errorControlName, $errorMessage, $maxLength) {
+function emailInputPostbackError($isRequired, $labelDescription, $labelControlName, $email, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -742,7 +818,8 @@ function emailInputPostbackError($isRequired, $labelDescription, $labelControlNa
     }
 }
 
-function telInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false) {
+function telInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -776,7 +853,8 @@ function telInputBlank($isRequired, $labelDescription, $labelControlName, $maxLe
     }
 }
 
-function telInputSetup($isRequired, $labelDescription, $labelControlName, $tel, $maxLength, $isReadOnly = false) {
+function telInputSetup($isRequired, $labelDescription, $labelControlName, $tel, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -810,7 +888,8 @@ function telInputSetup($isRequired, $labelDescription, $labelControlName, $tel, 
     }
 }
 
-function telInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength) {
+function telInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -829,7 +908,8 @@ function telInputEmptyError($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function telInputPostback($isRequired, $labelDescription, $labelControlName, $tel, $maxLength) {
+function telInputPostback($isRequired, $labelDescription, $labelControlName, $tel, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -846,7 +926,8 @@ function telInputPostback($isRequired, $labelDescription, $labelControlName, $te
     }
 }
 
-function telInputPostbackError($isRequired, $labelDescription, $labelControlName, $tel, $errorControlName, $errorMessage, $maxLength) {
+function telInputPostbackError($isRequired, $labelDescription, $labelControlName, $tel, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -865,7 +946,8 @@ function telInputPostbackError($isRequired, $labelDescription, $labelControlName
     }
 }
 
-function comboInputBlank($isRequired, $labelDescription, $labelControlName, $text, $options) {
+function comboInputBlank($isRequired, $labelDescription, $labelControlName, $text, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
@@ -873,10 +955,9 @@ function comboInputBlank($isRequired, $labelDescription, $labelControlName, $tex
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">
                 <option value="" selected="selected">' . $text . '</option>';
         foreach ($options as $key => $value) {
-            if($labelDescription === "Rank") {
+            if ($labelDescription === "Rank") {
                 $output .= '<option value="' . $value . '">' . $value . '</option>';
-            }
-            else{
+            } else {
                 $output .= '<option value="' . $key . '">' . $value . '</option>';
             }
         }
@@ -890,10 +971,9 @@ function comboInputBlank($isRequired, $labelDescription, $labelControlName, $tex
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">
                 <option value="" selected="selected">' . $text . '</option>';
         foreach ($options as $key => $value) {
-            if($labelDescription === "Rank") {
+            if ($labelDescription === "Rank") {
                 $output .= '<option value="' . $value . '">' . $value . '</option>';
-            }
-            else{
+            } else {
                 $output .= '<option value="' . $key . '">' . $value . '</option>';
             }
         }
@@ -904,7 +984,8 @@ function comboInputBlank($isRequired, $labelDescription, $labelControlName, $tex
     }
 }
 
-function comboInputEmptyError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $options) {
+function comboInputEmptyError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
                 <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -935,14 +1016,15 @@ function comboInputEmptyError($isRequired, $labelDescription, $labelControlName,
     }
 }
 
-function comboInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options) {
+function comboInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
         foreach ($options as $key => $value) {
-            if($labelDescription === "Rank") {
+            if ($labelDescription === "Rank") {
                 if ($value == $selected) {
                     $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
                 } else {
@@ -964,7 +1046,7 @@ function comboInputPostback($isRequired, $labelDescription, $labelControlName, $
                 <label><b>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
         foreach ($options as $key => $value) {
-            if($labelDescription === "Rank") {
+            if ($labelDescription === "Rank") {
                 if ($value == $selected) {
                     $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
                 } else {
@@ -984,7 +1066,8 @@ function comboInputPostback($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function comboInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false) {
+function comboInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             $output = '<div class="large-12 medium-12 small-12 columns">
@@ -992,14 +1075,13 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '" disabled>';
             foreach ($options as $key => $value) {
-                if($labelDescription === "Rank") {
+                if ($labelDescription === "Rank") {
                     if ($value == $selected) {
                         $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
                     } else {
                         $output .= '<option value="' . $value . '">' . $value . '</option>';
                     }
-                }
-                else {
+                } else {
                     if ($value == $selected || $key == $selected) {
                         $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
                     } else {
@@ -1017,14 +1099,13 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
             foreach ($options as $key => $value) {
-                if($labelDescription === "Rank") {
+                if ($labelDescription === "Rank") {
                     if ($value == $selected) {
                         $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
                     } else {
                         $output .= '<option value="' . $value . '">' . $value . '</option>';
                     }
-                }
-                else {
+                } else {
                     if ($value == $selected || $key == $selected) {
                         $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
                     } else {
@@ -1066,14 +1147,13 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                 <label><b>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
             foreach ($options as $key => $value) {
-                if($labelDescription === "Rank") {
+                if ($labelDescription === "Rank") {
                     if ($value == $selected) {
                         $output .= '<option selected="selected" value="' . $value . '">' . $value . '</option>';
                     } else {
                         $output .= '<option value="' . $value . '">' . $value . '</option>';
                     }
-                }
-                else {
+                } else {
                     if ($value == $selected || $key == $selected) {
                         $output .= '<option selected="selected" value="' . $key . '">' . $value . '</option>';
                     } else {
@@ -1089,7 +1169,8 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
     }
 }
 
-function checkboxInputBlank($isRequired, $labelDescription, $labelControlName, $options) {
+function checkboxInputBlank($isRequired, $labelDescription, $labelControlName, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
                 <label for="' . $labelControlName . '"><b>
@@ -1114,7 +1195,8 @@ function checkboxInputBlank($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function checkboxInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $options) {
+function checkboxInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -1125,7 +1207,7 @@ function checkboxInputEmptyError($isRequired, $labelDescription, $labelControlNa
         foreach ($options as $key => $value) {
             $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '"><label for="' . $labelControlName . '">' . $value . '</label>';
         }
-        
+
         $output .= '</div></div>';
         return $output;
     } else {
@@ -1142,7 +1224,8 @@ function checkboxInputEmptyError($isRequired, $labelDescription, $labelControlNa
     }
 }
 
-function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false) {
+function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false)
+{
     $array = array();
     foreach ($selected as $key => $value) {
         array_push($array, $value);
@@ -1154,12 +1237,12 @@ function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $
                     <span class="required">* </span>' . $labelDescription . '</b>
                 </label>';
             foreach ($options as $key => $value) {
-            if (in_array($key, $array)) {
-                $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '" checked disabled><label for="' . $labelControlName . '">' . $value . '</label>';
-            } else {
-                $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '" disabled><label for="' . $labelControlName . '">' . $value . '</label>';
+                if (in_array($key, $array)) {
+                    $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '" checked disabled><label for="' . $labelControlName . '">' . $value . '</label>';
+                } else {
+                    $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '" disabled><label for="' . $labelControlName . '">' . $value . '</label>';
+                }
             }
-        }
             $output .= '</div>';
             return $output;
         } else {
@@ -1168,15 +1251,15 @@ function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $
                     <span class="required">* </span>' . $labelDescription . '</b>
                 </label>';
             foreach ($options as $key => $value) {
-            if (in_array($key, $array)) {
-                $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '" checked><label for="' . $labelControlName . '">' . $value . '</label>';
-            } else {
-                $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '"><label for="' . $labelControlName . '">' . $value . '</label>';
+                if (in_array($key, $array)) {
+                    $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '" checked><label for="' . $labelControlName . '">' . $value . '</label>';
+                } else {
+                    $output .= '<input type="checkbox" name="' . $labelControlName . '[]" value="' . $key . '"><label for="' . $labelControlName . '">' . $value . '</label>';
+                }
             }
-        }
             $output .= '</div>';
             return $output;
-        }        
+        }
     } else {
         if ($isReadOnly) {
             $output = '<div class="large-12 medium-12 small-12 columns disabled">
@@ -1205,7 +1288,7 @@ function checkboxInputSetup($isRequired, $labelDescription, $labelControlName, $
             $output .= '</div>';
             return $output;
         }
-        
+
     }
 }
 
@@ -1225,12 +1308,13 @@ function listMemberRoles($selected, $options)
     return $output;
 }
 
-function checkboxInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options) {
+function checkboxInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options)
+{
     $array = array();
     foreach ($selected as $key => $value) {
-        array_push($array, $value);        
+        array_push($array, $value);
     }
-    
+
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
                 <label for="' . $labelControlName . '"><b>
@@ -1261,11 +1345,12 @@ function checkboxInputPostback($isRequired, $labelDescription, $labelControlName
     }
 }
 
-function moneyInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength) {
+function moneyInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>
+            <label for="' . $labelControlName . '"><b>
                 <span class="required">* </span>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
@@ -1278,7 +1363,7 @@ function moneyInputBlank($isRequired, $labelDescription, $labelControlName, $max
     } else {
         return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>' . $labelDescription . '</b></label>
+            <label for="' . $labelControlName . '"><b>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
             </div>
@@ -1290,12 +1375,13 @@ function moneyInputBlank($isRequired, $labelDescription, $labelControlName, $max
     }
 }
 
-function moneyInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $isReadOnly = false) {
+function moneyInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>
+            <label for="' . $labelControlName . '"><b>
                 <span class="required">* </span>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
@@ -1308,7 +1394,7 @@ function moneyInputSetup($isRequired, $labelDescription, $labelControlName, $tex
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>
+            <label for="' . $labelControlName . '"><b>
                 <span class="required">* </span>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
@@ -1323,7 +1409,7 @@ function moneyInputSetup($isRequired, $labelDescription, $labelControlName, $tex
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>' . $labelDescription . '</b></label>
+            <label for="' . $labelControlName . '"><b>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
         <span class="prefix">£</span>
             </div>
@@ -1335,7 +1421,7 @@ function moneyInputSetup($isRequired, $labelDescription, $labelControlName, $tex
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>' . $labelDescription . '</b></label>
+            <label for="' . $labelControlName . '"><b>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
         <span class="prefix">£</span>
             </div>
@@ -1348,12 +1434,13 @@ function moneyInputSetup($isRequired, $labelDescription, $labelControlName, $tex
     }
 }
 
-function moneyInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength) {
+function moneyInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
-            <label for="' . $labelControlName .'"><b>
+            <label for="' . $labelControlName . '"><b>
                 <span class="required">* </span>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
@@ -1367,7 +1454,7 @@ function moneyInputEmptyError($isRequired, $labelDescription, $labelControlName,
         return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
-            <label for="' . $labelControlName .'"><b>' . $labelDescription . '</b></label>
+            <label for="' . $labelControlName . '"><b>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
             </div>
@@ -1379,11 +1466,12 @@ function moneyInputEmptyError($isRequired, $labelDescription, $labelControlName,
     }
 }
 
-function moneyInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength) {
+function moneyInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>
+            <label for="' . $labelControlName . '"><b>
                 <span class="required">* </span>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
@@ -1396,7 +1484,7 @@ function moneyInputPostback($isRequired, $labelDescription, $labelControlName, $
     } else {
         return '<div class="large-12 medium-12 small-12 columns">
             <div class="row collapse">
-            <label for="' . $labelControlName .'"><b>' . $labelDescription . '</b></label>
+            <label for="' . $labelControlName . '"><b>' . $labelDescription . '</b></label>
             <div class="small-1 columns">
 		<span class="prefix">£</span>
             </div>
@@ -1408,7 +1496,8 @@ function moneyInputPostback($isRequired, $labelDescription, $labelControlName, $
     }
 }
 
-function moneyInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength) {
+function moneyInputPostbackError($isRequired, $labelDescription, $labelControlName, $text, $errorControlName, $errorMessage, $maxLength)
+{
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
                 <div class="row collapse">
@@ -1436,16 +1525,17 @@ function moneyInputPostbackError($isRequired, $labelDescription, $labelControlNa
     }
 }
 
-function numInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max) {
+function numInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max)
+{
     if ($isRequired) {
-            return '<div class="large-12 medium-12 small-12 columns">
+        return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <input type="number" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     } else {
-            return '<div class="large-12 medium-12 small-12 columns">
+        return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
                 <input type="number" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
@@ -1453,16 +1543,17 @@ function numInputBlank($isRequired, $labelDescription, $labelControlName, $min, 
     }
 }
 
-function numInputPostback($isRequired, $labelDescription, $labelControlName, $value, $min, $max) {
+function numInputPostback($isRequired, $labelDescription, $labelControlName, $value, $min, $max)
+{
     if ($isRequired) {
-            return '<div class="large-12 medium-12 small-12 columns">
+        return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <input type="number" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $value . '"  min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     } else {
-            return '<div class="large-12 medium-12 small-12 columns">
+        return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
                 <input type="number" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $value . '"  min="' . $min . '" max="' . $max . '"/>
                 </label>
@@ -1470,7 +1561,8 @@ function numInputPostback($isRequired, $labelDescription, $labelControlName, $va
     }
 }
 
-function numInputSetup($isRequired, $labelDescription, $labelControlName, $value, $min, $max, $isReadOnly=false) {
+function numInputSetup($isRequired, $labelDescription, $labelControlName, $value, $min, $max, $isReadOnly = false)
+{
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
@@ -1500,11 +1592,12 @@ function numInputSetup($isRequired, $labelDescription, $labelControlName, $value
                 <input type="number" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $value . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
-        }            
+        }
     }
 }
 
-function radioInputBlank($isRequired, $labelDescription, $labelControlName, $options) {
+function radioInputBlank($isRequired, $labelDescription, $labelControlName, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '"><b>
@@ -1527,7 +1620,8 @@ function radioInputBlank($isRequired, $labelDescription, $labelControlName, $opt
     }
 }
 
-function radioInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $options) {
+function radioInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $options)
+{
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
@@ -1538,7 +1632,7 @@ function radioInputEmptyError($isRequired, $labelDescription, $labelControlName,
         foreach ($options as $key => $value) {
             $output .= '<input type="radio" name="' . $labelControlName . '[]" value="' . $key . '"><label for="' . $labelControlName . '">' . $value . '</label>';
         }
-        
+
         $output .= '</div></div>';
         return $output;
     } else {
@@ -1555,7 +1649,8 @@ function radioInputEmptyError($isRequired, $labelDescription, $labelControlName,
     }
 }
 
-function radioInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false) {
+function radioInputSetup($isRequired, $labelDescription, $labelControlName, $selected, $options, $isReadOnly = false)
+{
 
     if ($isRequired) {
         if ($isReadOnly) {
@@ -1586,7 +1681,7 @@ function radioInputSetup($isRequired, $labelDescription, $labelControlName, $sel
             }
             $output .= '</div>';
             return $output;
-        }        
+        }
     } else {
         if ($isReadOnly) {
             $output = '<div class="large-12 medium-12 small-12 columns disabled">
@@ -1615,19 +1710,20 @@ function radioInputSetup($isRequired, $labelDescription, $labelControlName, $sel
             $output .= '</div>';
             return $output;
         }
-        
+
     }
 }
 
-function radioInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options) {
+function radioInputPostback($isRequired, $labelDescription, $labelControlName, $selected, $options)
+{
     if (!empty($selected)) {
         foreach ($selected as $key => $value) {
-            $input =  $value;       
+            $input = $value;
         }
     } else {
         $input = null;
     }
-    
+
     if ($isRequired) {
         $output = '<div class="large-12 medium-12 small-12 columns">
                 <label for="' . $labelControlName . '"><b>

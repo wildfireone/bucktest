@@ -2,10 +2,14 @@
 
 function login($username, $password, $conn) {
     
-    $sql = "SELECT username FROM users WHERE username = :username AND password = :password";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', htmlentities($username), PDO::PARAM_STR);
-    $stmt->bindParam(':password', md5(htmlentities($password)), PDO::PARAM_STR);
+
+
+    if(strlen($password['password']) == 32) // MD5 hash check
+    {
+        $sql = "SELECT username FROM users WHERE username = :username AND password = :password";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':username', htmlentities($username), PDO::PARAM_STR);
+        $stmt->bindParam(':password', md5(htmlentities($password)), PDO::PARAM_STR);
 
         try {
             $stmt->execute();
@@ -13,9 +17,32 @@ function login($username, $password, $conn) {
             if ($stmt->rowCount() == 1) {
                 return true;
             }
-        } catch (PDOException $e) {            
+        } catch (PDOException $e) {
             return "Query failed: " . $e->getMessage();
-        }   
+        }
+
+    } else{
+        try {
+            $sql = "SELECT username FROM users WHERE username = :username AND password = :password";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':username', htmlentities($username), PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            $hash = @$results[0]['password'];
+
+            if (isset($results)) {
+                if (password_verify($password, $hash)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Login failed: " . $e->getMessage();
+        }
+    }
 }
 
 function isEmailValid($email) {
