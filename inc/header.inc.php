@@ -76,7 +76,7 @@
         echo '</ul>
                </li>
                <li class="divider"></li>
-               <li class="lightgradient"><a href="' . $domain . 'gallery.php" role="link">Gallery</a></li>
+               <li class="lightgradient"><a href="' . $domain . 'gallery/" role="link">Gallery</a></li>
                <li class="divider"></li>
                <li class="has-dropdown not-click">
                   <a href="' . $domain . 'shop.php" role="link">Shop</a>
@@ -123,7 +123,7 @@
                <li class="divider"></li>
                <li class="lightgradient"><a href="' . $domain . 'news.php" role="link">News</a></li>
                <li class="divider"></li>
-               <li class="lightgradient"><a href="' . $domain . 'gallery.php" role="link">Gallery</a></li>
+               <li class="lightgradient"><a href="' . $domain . 'gallery" role="link">Gallery</a></li>
                <li class="divider"></li>
                <li class="lightgradient"><a href="' . $domain . 'shop.php" role="link">Shop</a></li>
                <li class="divider"></li>

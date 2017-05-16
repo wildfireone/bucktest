@@ -13,6 +13,7 @@
 //error_reporting(E_ALL);
 
 $domain = 'http://bucktest.dev/';
+$_SESSION['domain'] = $domain;
 
 //Switch include paths when on root or sub (sub) folder
 if (file_exists('obj/members.obj.php')) {
@@ -165,6 +166,19 @@ function newsFullAccess($connection, $currentUser, $memberValidation)
         return false;
     }
 }
+
+//Gallery
+//News
+function galleryFullAccess($connection, $currentUser, $memberValidation)
+{
+    if ($memberValidation->isMemberPresident($connection, $currentUser->getUsername()) || $memberValidation->isMemberSecretary($connection, $currentUser->getUsername()) || $memberValidation->isMemberTreasurer($connection, $currentUser->getUsername()) || $memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberBetaLeagueCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 
 
 //Shop
