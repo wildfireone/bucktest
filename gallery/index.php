@@ -106,7 +106,7 @@ extract($data);
         if ($albumList == null) {
             echo "<p>Sorry there hasn't been any gallery albums added currently. Please come back later.</p>";
         } else {
-            echo '<div class="row small-12 medium-up-6 large-up-6">';
+            echo '<ul class="small-block-grid-3 medium-block-grid-4" large-block-grid-4>';
 
 
             foreach ($albumList as $albums) {
@@ -120,16 +120,16 @@ extract($data);
                 $albumsLink = $domain . "gallery/view_album.php?a=" . $album->getAlbumID();
 
                 echo '
-                <div class="column img_wrap">
+                <li>
                     <h3 class="albumTitle">' . $album->getAlbumName() . '</h3>
                     <a href="' . $albumsLink . '"><img style="width:250px; height:250px;" class="thumbnail" src="' . $photos->getFullFilePath() . '"></a>
                     <p class="img__description"><b>Author:</b> ' . $author->getFullNameByUsername($conn) . '
                     </br><b>Description:</b> ' . $album->getAlbumDescription() . ' 
                     </br><b>Type:</b> ' . $album->displayType() . '
                     </p>
-                </div>';
+                </li>';
             }
-            echo '</div>';
+            echo '</ul>';
         }
 
         //If user has editing privileges then display create new album button

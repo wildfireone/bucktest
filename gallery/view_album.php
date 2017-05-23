@@ -22,11 +22,11 @@ $albums->setAlbumID($_GET['a']);
 $albums->getAllDetails($conn);
 
 if (!$albums->doesExist($conn)) {
-    header( 'Location:' . $domain . '404.php' );
+    header('Location:' . $domain . '404.php');
 }
 
 if (!isset($_SESSION['username']) && $albums->getVisibility() == 0) {
-    header('Location:' .$domain . '/login.php');
+    header('Location:' . $domain . '/login.php');
 }
 
 $members = new members($albums->getUserID());
@@ -119,7 +119,7 @@ extract($data);
             echo "<p>Sorry no photos are added to this album at the moment. Please come back later.</p>";
         } else {
 
-            echo '<div class="row small-12 medium-up-4 large-up-4 highslide">';
+            echo '<ul class="small-block-grid-3 medium-block-grid-4" large-block-grid-4">';
 
             foreach ($photoList as $photos) {
                 $photo = new gallery_photos();
@@ -131,23 +131,35 @@ extract($data);
                 $photoFileLink = $_SESSION['domain'] . $photo->getFullFilePath();
 
                 echo '
-        <div class="column">
+        <li>
         <a href="' . $photo->getFullFilePath() . '" class="highslide" onclick="return hs.expand(this)">
                 <img style="width:260px; height:260px;" class="thumbnail" src="' . $photo->getFullFilePath() . '" alt="Highslide JS"
                      title="Click to enlarge" />
             </a>
+         
+            <div class="text-center">
+                <a href="/gallery/view_photo.php?p=' . $photo->getPhotoID() . '" class="button">View</a>';
+                if($canEdit)
+                {
+                    echo ' <a href="/gallery/edit_photo.php?p=' . $photo->getPhotoID() . '" class="button">Edit</a>';
+                }
+                echo '
             
+            </div>
+   
+           
+           
             <div class="highslide-caption">
             <b>Title:</b> ' . $photo->getTitle() . '<br>
             <b>Description:</b> ' . $photo->getDescription() . '<br>
              <b>By:</b>' . $author->getFullNameByUsername($conn) . ' <br>
-            <b><a href="' . $photosLink . '">View the Photo</a></b>
+            <a href="/gallery/view_photo.php?p=' . $photo->getPhotoID() . '" class="button">View</a>
             </div>
 
-        </div>
+        </li>
     ';
             }
-            echo '</div>';
+            echo '</ul>';
         }
 
         if ($edit) {
