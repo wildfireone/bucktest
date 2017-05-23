@@ -21,8 +21,8 @@ $conn = dbConnect();
  */
 $options = array(
     'results_per_page' => 25,
-    'url'        => $domain.'news.php?page=*VAR*',
-    'db_handle'  => $conn
+    'url' => $domain . 'news.php?page=*VAR*',
+    'db_handle' => $conn
 );
 
 
@@ -31,17 +31,12 @@ $options = array(
  *
  * pagination(int $surrent_page, string $query, array $options)
  */
-try
-{
+try {
     $pagination = new pagination($page, 'SELECT id FROM news ORDER BY date DESC', $options);
-}
-catch(paginationException $e)
-{
+} catch (paginationException $e) {
     echo $e;
     exit();
 }
-
-
 
 
 ?>
@@ -75,13 +70,6 @@ catch(paginationException $e)
 
             <?php
 
-            if($pagination == true)
-            {
-                echo ' <div class="breadcrumbs">';
-                echo $pagination->links_html;
-                echo '</div>';
-
-            }
 
             require 'obj/news.obj.php';
             require_once 'obj/members.obj.php';
@@ -91,19 +79,23 @@ catch(paginationException $e)
                 unset($_SESSION['delete']);
             }
 
+            if ($pagination == true) {
+                echo ' <div class="breadcrumbs">';
+                echo $pagination->links_html;
+                echo '</div>';
+
+            }
+
             $conn = dbConnect();
 
             $newsItem = new News();
             $memberItem = new Members();
 
 
-
-
             /*
              * If all was successful, we can do something with our results
              */
-            if($pagination->success == true)
-            {
+            if ($pagination->success == true) {
                 /*
                  * Get the results
                  */
@@ -129,15 +121,16 @@ catch(paginationException $e)
                 /*
                  * Show the paginationd links ( 1 2 3 4 5 6 7 ) etc.
                  */
+                echo ' <div class="breadcrumbs">';
                 echo $pagination->links_html;
-
+                echo '</div>';
 
 
                 /*
                  * Get the total number of results if you like
                  */
-                echo"<h2>Statistics</h2>";
-                echo "The total number of news articles that been posted since <i>" . $newsItem->getOldestDate($conn) ."</i> is : <b>" . $pagination->total_results ." </b>";
+                echo "<h2>Statistics</h2>";
+                echo "The total number of news articles that been posted since <i>" . $newsItem->getOldestDate($conn) . "</i> is : <b>" . $pagination->total_results . " </b>";
             }
 
 

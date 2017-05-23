@@ -65,6 +65,14 @@
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>   
     <link href="../css/site.css" rel="stylesheet"/>
+    <script src='../tinymce/tinymce.min.js'></script>
+    <script>
+        tinymce.init({
+            selector: '#txtMainBody',
+            plugins: 'advlist, table, autolink, code, contextmenu, imagetools, fullscreen, hr,  colorpicker, preview, spellchecker, link, autosave, lists, visualblocks'
+
+        });
+    </script>
 </head>
 
 <body>   
