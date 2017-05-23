@@ -174,6 +174,24 @@ class News {
         }
     }
 
+    public function getOldestDate($conn)
+    {
+        $sql = "SELECT MIN(date) as 'Oldest' FROM news";
+
+        $stmt = $conn->prepare($sql);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            $date = new DateTime($results[0]["Oldest"]);
+            $date->setTimezone(new DateTimeZone('Europe/London'));
+            return $date->format('d/m/Y');
+
+        } catch (PDOException $e) {
+            return "Database query failed: " . $e->getMessage();
+        }
+    }
+
     public function doesExist($conn) {
         $sql = "SELECT id FROM news WHERE id = :id LIMIT 1";
         
