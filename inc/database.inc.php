@@ -9,5 +9,5 @@
                      // use 'csdm-mysql' to access CSDM mysql database server
   //$domain='http://www.bucksburnasc.org.uk/2015/'; // please finish with a '/' to ensure relative URLs work. Ta.
   $domain='http://bucktest.dev/';
-  $admin='1504693@rgu.ac.uk';
+  $admin='secretary@bucksburnasc.org.uk';
   ?>

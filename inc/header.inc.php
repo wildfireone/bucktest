@@ -2,7 +2,7 @@
     <a href="<?php echo $domain; ?>index.php" class="nohover">
         <div class="banner">
             <h1 class="middle centre">Bucksburn Amateur Swimming Club</h1>
-            <img  class="middle centre" src="<?=$domain?>/img/bn_logo_2.gif"/>
+            <img style="width:150px; height:150px;"  class="middle centre" src="<?=$domain?>/img/bucksburn_logo_blue.png"/>
         </div>
     </a>
     <?php
@@ -96,7 +96,6 @@
                      <li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
                      <li><a href="' . $domain . 'about/timetable.php" role="link">Timetable</a></li>
                      <li><a href="' . $domain . 'about/club-records.php" role="link">Club Records</a></li>
-                     <li><a href="' . $domain . 'about/join.php" role="link">Join Us</a></li>
                   </ul>
                </li>
                <li class="divider"></li>
@@ -134,7 +133,6 @@
                      <li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
                      <li><a href="' . $domain . 'about/timetable.php" role="link">Timetable</a></li>
                      <li><a href="' . $domain . 'about/club-records.php" role="link">Club Records</a></li>
-                     <li><a href="' . $domain . 'about/join.php" role="link">Join Us</a></li>
                   </ul>
                </li>
                <li class="divider"></li>
