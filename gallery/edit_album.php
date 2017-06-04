@@ -116,7 +116,7 @@ if (isset($_SESSION['username'])) {
 
 <head>
     <?php include '../inc/meta.inc.php'; ?>
-    <title>Create Album| Bucksburn Amateur Swimming Club</title>
+    <title>Edit Album| Bucksburn Amateur Swimming Club</title>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <link href="../css/site.css" rel="stylesheet"/>
@@ -132,6 +132,7 @@ if (isset($_SESSION['username'])) {
         <ul class="breadcrumbs">
             <li><a href="../index.php" role="link">Home</a></li>
             <li><a href="../gallery/index.php" role="link">Gallery</a></li>
+            <li><a href="../gallery/view_album.php?a=<?=$albums->getAlbumID()?>" role="link">View Album</a></li>
             <li class="current">Edit Album</li>
         </ul>
 

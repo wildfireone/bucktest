@@ -13,6 +13,7 @@ require '../inc/connection.inc.php';
 require '../inc/security.inc.php';
 require '../obj/gallery_albums.obj.php';
 require '../obj/gallery_photos.obj.php';
+require '../inc/pagination.inc.php';
 
 $data = array();
 $conn = dbConnect();
@@ -84,9 +85,14 @@ extract($data);
         <?php
 
         if (isset($_SESSION['create'])) {
+            echo '<p class="alert-box success radius centre">Album Successfully Added!</p>';
+            unset($_SESSION['create']);
+        }
+
+        if (isset($_SESSION['create'])) {
             echo '<br/>';
             echo '<div class="callout success">
-          <h5>Album Successfully Added!</h5>
+          <p>Album Successfully Added!</p>
           </div>';
             unset($_SESSION['create']);
         }
@@ -94,7 +100,7 @@ extract($data);
         if (isset($_SESSION['delete'])) {
             echo '<br/>';
             echo '<div class="callout alert">
-          <h5>Album Successfully Deleted!</h5>
+          <p>Album Successfully Deleted!</p>
           </div>';
             unset($_SESSION['delete']);
         }
@@ -106,7 +112,7 @@ extract($data);
         if ($albumList == null) {
             echo "<p>Sorry there hasn't been any gallery albums added currently. Please come back later.</p>";
         } else {
-            echo '<ul class="small-block-grid-3 medium-block-grid-4" large-block-grid-4>';
+            echo '<ul class="small-block-grid-3 medium-block-grid-4" large-block-grid-5>';
 
 
             foreach ($albumList as $albums) {
@@ -121,7 +127,7 @@ extract($data);
 
                 echo '
                 <li>
-                    <h3 class="albumTitle">' . $album->getAlbumName() . '</h3>
+                    <p class="albumTitle"><b>' . $album->getAlbumName() . '</b></p>
                     <a href="' . $albumsLink . '"><img style="width:250px; height:250px;" class="thumbnail" src="' . $photos->getFullFilePath() . '"></a>
                     <p class="img__description"><b>Author:</b> ' . $author->getFullNameByUsername($conn) . '
                     </br><b>Description:</b> ' . $album->getAlbumDescription() . ' 
@@ -136,7 +142,7 @@ extract($data);
         if ($create) {
             echo '<div class="large-2 large-centered medium-6 medium-centered small-12 small-centered columns">';
             echo '<div class ="row">
-            <a href="/gallery/create_album.php" class="button">Create new Album</a>
+            <a href="'.$domain.'gallery/create_album.php" class="button">Create new Album</a>
     </div>
     </div>';
         }

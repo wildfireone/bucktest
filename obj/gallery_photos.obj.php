@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Andrew Tait (1504693)
@@ -6,7 +7,6 @@
  * Time: 20:23
  * Gallery Photo Object class
  */
-
 class gallery_photos
 {
     //Gallery photos variables/properties
@@ -42,12 +42,12 @@ class gallery_photos
 
     public function getFullFilePath()
     {
-        return $_SESSION['domain'].$this->filePath;
+        return $_SESSION['domain'] . $this->filePath;
     }
 
     public function getLocalFilePath()
     {
-        return $_SERVER['DOCUMENT_ROOT']. $this->filePath;
+        return $_SERVER['DOCUMENT_ROOT'] . '/2016/' . $this->filePath;
     }
 
     public function getTitle()
@@ -76,7 +76,6 @@ class gallery_photos
         $date->setTimezone(new DateTimeZone('Europe/London'));
         return $date->format('d/m/Y');
     }
-
 
 
     //Setters
@@ -218,11 +217,26 @@ class gallery_photos
 
 
         try {
-            unlink($this->getLocalFilePath());
+            $filename = $this->getLocalFilePath();
+            var_dump($filename);
+
+            if ($filename) {
+                chmod($filename, 0777);
+
+                if (unlink($filename)) {
+                    echo 'File deleted';
+                } else {
+                    echo 'Cannot remove that file';
+                }
+
+            } else {
+                echo 'File does not exist';
+            }
+
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            return "Create failed: " . $e->getMessage();
+            return "Delete failed: " . $e->getMessage();
         }
     }
 
@@ -346,10 +360,10 @@ class gallery_photos
 
     public function uploadPhoto()
     {
-        $target_dir = $_SERVER['DOCUMENT_ROOT']."/uploads/photos/";
+        $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/photos/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
-        $filePath = "uploads/photos/" . basename($_FILES["fileToUpload"]["name"]) ;
+        $filePath = "uploads/photos/" . basename($_FILES["fileToUpload"]["name"]);
 
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -377,7 +391,7 @@ class gallery_photos
             return false;
         }
         // Allow certain file formats
-        if ($imageFileType != "jpg" && $imageFileType != "JPG"  && $imageFileType != "png" && $imageFileType != "jpeg"
+        if ($imageFileType != "jpg" && $imageFileType != "JPG" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif"
         ) {
             echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";

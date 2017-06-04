@@ -88,7 +88,7 @@ if (isset($_SESSION['username'])) {
                     <div class="large-12 medium-12 small-12 columns">
                         <label>
                             <span><b>Album Name</b></span>
-                            <input type="text" id="txtName" name="txtName" maxlength="20"/>
+                            <input type="text" id="txtName" name="txtName" maxlength="50"/>
                         </label>
                     </div>
                 </div>

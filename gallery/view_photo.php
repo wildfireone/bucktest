@@ -66,7 +66,7 @@ extract($data);
 
 <head>
     <?php include '../inc/meta.inc.php'; ?>
-    <title>View Album| Bucksburn Amateur Swimming Club</title>
+    <title>View Photo| Bucksburn Amateur Swimming Club</title>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <link href="../css/site.css" rel="stylesheet"/>
@@ -82,9 +82,17 @@ extract($data);
         <ul class="breadcrumbs">
             <li><a href="../index.php" role="link">Home</a></li>
             <li><a href="../gallery/index.php" role="link">Gallery</a></li>
-            <li class="current">View Album</li>
+            <li><a href="../gallery/view_album.php?a=<?=$albums->getAlbumID()?>" role="link">View Album</a></li>
+            <li class="current">View Photo</li>
         </ul>
-
+        <?php
+        if (isset($_SESSION['update'])) {
+            echo '<div class="alert-box success">
+          <p>Photo Successfully Updated!</p>
+          </div>';
+            unset($_SESSION['update']);
+        }
+        ?>
 
         <h1 class="pageTitle" >Gallery | View photo: <?=$photos->getTitle()?> </h1>
         <div class="small-6 small-centered large-10 large-centered columns">
@@ -107,7 +115,7 @@ extract($data);
                 <h4 align="center"> Photo details:
                     <?php
                     if ($edit) {
-                        echo ' <a href="/gallery/edit_photo.php?p=' . $photos->getPhotoID() . '" class="button">[Edit]</a>';
+                        echo ' <a href="'.$domain.'gallery/edit_photo.php?p=' . $photos->getPhotoID() . '" class="button">[Edit]</a>';
                     }
                     ?>
                 </h4>
@@ -144,7 +152,7 @@ extract($data);
             <div class="row ">
                 <div class="separator"></div>
                 <div class ="small-centered columns">
-                    <a href="/gallery/view_album.php?a=<?=$albums->getAlbumID()?>" class="button">Return to album</a>
+                    <a href="<?=$domain?>gallery/view_album.php?a=<?=$albums->getAlbumID()?>" class="button">Return to album</a>
                 </div>
             </div>
 

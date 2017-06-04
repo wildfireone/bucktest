@@ -7,7 +7,6 @@
  * Upload Photo to gallery page
  */
 
-
 session_start();
 require '../inc/connection.inc.php';
 require '../inc/security.inc.php';
@@ -94,9 +93,9 @@ if (isset($_SESSION['username'])) {
         <ul class="breadcrumbs">
             <li><a href="../index.php" role="link">Home</a></li>
             <li><a href="../gallery/index.php" role="link">Gallery</a></li>
-            <li class="current">Create Album</li>
+            <li class="current">Upload Photo</li>
         </ul>
-        <h2 class="text-center">Create Album</h2>
+        <h2 class="text-center">Upload Photo</h2>
 
         <?php
         if (isset($_SESSION['error'])) {

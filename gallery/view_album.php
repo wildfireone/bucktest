@@ -90,25 +90,27 @@ extract($data);
 
         if (isset($_SESSION['uploads'])) {
             echo '<br/>';
-            echo '<div class="callout success">
-          <h5>Photo Successfully uploaded!</h5>
+            echo '<div class="alert-box success">
+          <p>Photo Successfully uploaded!</p>
           </div>';
             unset($_SESSION['uploads']);
         }
 
+
+//        if (isset($_SESSION['delete'])) {
+//            echo '<p class="alert-box success radius centre">News Item deleted successfully!</p>';
+//            unset($_SESSION['delete']);
+//        }
+
         if (isset($_SESSION['deletePhoto'])) {
-            echo '<br/>';
-            echo '<div class="callout alert">
-          <h5>Photo Successfully Deleted!</h5>
+            echo '<div class="alert-box alert">
+          <p>Photo Successfully Deleted!</p>
           </div>';
             unset($_SESSION['deletePhoto']);
         }
 
         if (isset($_SESSION['update'])) {
-            echo '<br/>';
-            echo '<div class="callout success">
-          <h5>Album Successfully Updated!</h5>
-          </div>';
+            echo '<p class="alert-box success">Album Successfully Updated!</p>';
             unset($_SESSION['update']);
         }
 
@@ -128,20 +130,20 @@ extract($data);
                 $author->setUserName($photo->getUserID());
                 $author->getAllDetails($conn);
                 $photosLink = $_SESSION['domain'] . "gallery/view_photo.php?p=" . $photo->getPhotoID();
-                $photoFileLink = $_SESSION['domain'] . $photo->getFullFilePath();
+                $photoFileLink = $_SESSION['domain'] . $photo->getFilePath();
 
                 echo '
         <li>
-        <a href="' . $photo->getFullFilePath() . '" class="highslide" onclick="return hs.expand(this)">
-                <img style="width:260px; height:260px;" class="thumbnail" src="' . $photo->getFullFilePath() . '" alt="Highslide JS"
+        <a href="' .  $photoFileLink . '" class="highslide" onclick="return hs.expand(this)">
+                <img style="width:260px; height:260px;" class="thumbnail" src="' .  $photoFileLink . '" alt="Highslide JS"
                      title="Click to enlarge" />
             </a>
          
             <div class="text-center">
-                <a href="/gallery/view_photo.php?p=' . $photo->getPhotoID() . '" class="button">View</a>';
+                <a href="'.$domain.'gallery/view_photo.php?p=' . $photo->getPhotoID() . '" class="button">View</a>';
                 if($canEdit)
                 {
-                    echo ' <a href="/gallery/edit_photo.php?p=' . $photo->getPhotoID() . '" class="button">Edit</a>';
+                    echo ' <a href="'.$domain.'gallery/edit_photo.php?p=' . $photo->getPhotoID() . '" class="button">Edit</a>';
                 }
                 echo '
             
@@ -153,7 +155,7 @@ extract($data);
             <b>Title:</b> ' . $photo->getTitle() . '<br>
             <b>Description:</b> ' . $photo->getDescription() . '<br>
              <b>By:</b>' . $author->getFullNameByUsername($conn) . ' <br>
-            <a href="/gallery/view_photo.php?p=' . $photo->getPhotoID() . '" class="button">View</a>
+            <a href="'.$domain.'gallery/view_photo.php?p=' . $photo->getPhotoID() . '" class="button">View</a>
             </div>
 
         </li>
@@ -165,7 +167,7 @@ extract($data);
         if ($edit) {
             echo '<div class="large-2 large-centered medium-6 medium-centered small-12 small-centered columns">
     <div class="row">
-        <a href="/gallery/upload.php" class="button">Upload Photos</a>
+        <a href="'.$domain.'gallery/upload.php" class="button">Upload Photos</a>
     </div>
     </div>';
             $_SESSION['albumUpload'] = $albums->getAlbumID();
@@ -176,7 +178,7 @@ extract($data);
             <h4 align="center"> Album Details:
                 <?php
                 if ($edit) {
-                    echo ' <a href="/gallery/edit_album.php?a=' . $albums->getAlbumID() . '" class="button">[Edit]</a>';
+                    echo ' <a href="'.$domain.'gallery/edit_album.php?a=' . $albums->getAlbumID() . '" class="button">[Edit]</a>';
                 }
                 ?>
             </h4>
@@ -211,7 +213,7 @@ extract($data);
         <div class="row ">
             <div class="separator"></div>
             <div class="small-centered columns">
-                <a href="/gallery/" class="button">Return to gallery</a>
+                <a href="<?=$domain?>gallery/" class="button">Return to gallery</a>
             </div>
         </div>
 
