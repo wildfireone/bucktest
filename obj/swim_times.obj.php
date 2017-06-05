@@ -169,8 +169,8 @@ class Swim_Times {
     }
 
     public function listAllPBsForSwimmerByStroke($conn, $member, $stroke) {       
-        $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e WHERE t.member = :member AND e.strokeID = :stroke AND t.eventID = e.id GROUP BY t.member, e.id ORDER BY t.time ASC LIMIT 1";
-        
+        $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e WHERE t.member = :member AND e.strokeID = :stroke AND t.eventID = e.id GROUP BY e.lengthID ORDER BY t.time ASC";
+
         $stmt = $conn->prepare($sql); 
         $stmt->bindParam(':member', $member, PDO::PARAM_STR);
         $stmt->bindParam(':stroke', $stroke, PDO::PARAM_INT);
@@ -183,6 +183,49 @@ class Swim_Times {
             return "Database query failed: " . $e->getMessage();
         }
     }
+
+    public function listAllPBsForSwimmerByLength($conn, $member, $stroke, $length) {
+        $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND t.eventID = e.id  ORDER BY t.time ASC LIMIT 1";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+        $stmt->bindParam(':stroke', $stroke, PDO::PARAM_INT);
+        $stmt->bindValue(':length', $length, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            return "Database query failed: " . $e->getMessage();
+        }
+    }
+
+    public function listAllPBsForSwimmerByLengthAcc($conn, $member, $stroke, $length, $acc) {
+
+        if ($acc === null) {
+            $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e, galas g WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND e.galaID = g.id AND g.isAccredited is NULL AND t.eventID = e.id  ORDER BY t.time ASC LIMIT 1";
+            $stmt = $conn->prepare($sql);
+        } else {
+            $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e, galas g WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND e.galaID = g.id AND g.isAccredited = :acc AND t.eventID = e.id  ORDER BY t.time ASC LIMIT 1";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':acc', $acc, PDO::PARAM_INT);
+        }
+
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+        $stmt->bindParam(':stroke', $stroke, PDO::PARAM_INT);
+        $stmt->bindValue(':length', $length, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            return "Database query failed: " . $e->getMessage();
+        }
+    }
+
 
     public function isInputValid($gala, $event, $member, $time, $rank) {
         if ($this->isGalaValid($gala) && $this->isEventValid($event) && $this->isMemberValid($member) && $this->isTimeValid($time) && $this->isRankValid($rank)) {

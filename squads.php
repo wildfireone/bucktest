@@ -56,6 +56,7 @@
                     if(squadFullAccess($connection,$currentUser,$memberValidation))
                     {
                         echo   '<th>View Details</th>';
+                        echo   '<th>TimeSheets</th>';
                     }
                     ?>
                 </tr>
@@ -95,6 +96,7 @@
                     $squadCoachLink = "members/view.php?u=" . $squadItem->getCoach();
                     $squadCountLink = "members.php?squadID=" . $squadItem->getID();
                     $squadViewLink = "squads/view.php?id=" . $squadItem->getID();
+                    $squadTimeSheetLink = "squads/timesheet.php?squadID=" . $squadItem->getID();
 
                     echo "<tr>";
                     //If user has full access then display links
@@ -104,6 +106,7 @@
                         echo '<td data-th="Coach"><a href="'.$squadCoachLink.'">' . $member->getFullNameByUsername($conn) . '</a></td>';
                         echo '<td data-th="No. of Members"><a href="'.$squadCountLink.'">' . $squad["COUNT(*)"] . '</a></td>';
                         echo '<td class="none"><a href="' . $squadViewLink . '">View Details</a></td>';
+                        echo '<td class="none"><a href="' . $squadTimeSheetLink . '">Squad Timesheet</a></td>';
                     }
                     else //otherwise display data only
                     {

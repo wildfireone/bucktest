@@ -103,7 +103,7 @@
 
                 }
                 echo '</ol>';
-
+                    $swim_times = array();
                 foreach ($strokes as $strokeItem) {
                     $stroke->setID($strokeItem["strokeID"]);
                     $stroke->getAllDetails($conn);
@@ -119,25 +119,30 @@
                             <th class="centre">Time</th>
                             <th class="centre">Rank</th>
                         <tr>';
+;
+                    for($i = 1; $i <= 7; $i++)
+                    {
+                        $swim_times = $swim_time->listAllPBsForSwimmerByLength($conn,$member->getUsername(),$stroke->getID(), $i);
 
-                    $swim_times = $swim_time->listAllPBsForSwimmerByStroke($conn,$member->getUsername(),$stroke->getID());
-                    
-                    foreach ($swim_times as $swim_timesItem) {
-                        $swim_time->setPKs($swim_timesItem["member"], $swim_timesItem["galaID"], $swim_timesItem["eventID"]);
-                        $swim_time->getAllDetails($conn);
 
-                        $gala->setID($swim_timesItem["galaID"]);
-                        $gala->getAllDetails($conn);
-                        $event->setID($swim_timesItem["eventID"]);
-                        $event->getAllDetails($conn,$gala->getID());
-                        $length->setID($event->getLengthID());
-                        $length->getAllDetails($conn);
 
-                        echo '<tr>';
+                        foreach ($swim_times as $swim_timesItem) {
 
-                        echo '<td data-th="Length" class="centre">' . $length->getLength() . '</td>';
+                            $swim_time->setPKs($swim_timesItem["member"], $swim_timesItem["galaID"], $swim_timesItem["eventID"]);
+                            $swim_time->getAllDetails($conn);
 
-                        if (is_null($event->getAgeLower()) && is_null($event->getAgeUpper())) {
+                            $gala->setID($swim_timesItem["galaID"]);
+                            $gala->getAllDetails($conn);
+                            $event->setID($swim_timesItem["eventID"]);
+                            $event->getAllDetails($conn, $gala->getID());
+                            $length->setID($event->getLengthID());
+                            $length->getAllDetails($conn);
+
+                            echo '<tr>';
+
+                            echo '<td data-th="Length" class="centre">' . $length->getLength() . '</td>';
+
+                            if (is_null($event->getAgeLower()) && is_null($event->getAgeUpper())) {
                                 echo '<td class="none"></td>';
                             } elseif ($event->getAgeLower() == $event->getAgeUpper()) {
                                 echo '<td data-th="Age Group" class="centre">' . $event->getAgeLower() . ' years</td>';
@@ -147,36 +152,36 @@
                                 echo '<td data-th="Age Group" class="centre">' . $event->getAgeLower() . ' years and over</td>';
                             } else {
                                 echo '<td data-th="Age Group" class="centre">' . $event->getAgeLower() . ' - ' . $event->getAgeUpper() . ' years</td>';
-                        }
-
-                        echo '<td data-th="Gala" class="centre">' . $gala->getTitle() . '</td>
-                        <td data-th="Date" class="centre">' . date("d/m/Y", strtotime($gala->getDate())) . '</td>';
-                           
-                        echo '<td data-th="Time" class="centre">' . $swim_time->getTime() . '</td>';
-
-                        if (!is_null($swim_time->getRank())) {
-                            $rank = $swim_time->getRank();
-                            //Switch rank with Title if required.
-                            switch ($rank)
-                            {
-                                case -1:
-                                    echo '<td data-th="Rank" class="centre">Speeding Ticket</td>';
-                                    break;
-                                case 99:
-                                    echo '<td data-th="Rank" class="centre">DQ</td>';
-                                    break;
-                                case 98:
-                                    echo '<td data-th="Rank" class="centre">No Show</td>';
-                                    break;
-                                default:
-                                    echo '<td data-th="Rank" class="centre">' . $rank . '</td>';
-                                    break;
                             }
-                        }  else {
-                            echo '<td></td>';
+
+                            echo '<td data-th="Gala" class="centre">' . $gala->getTitle() . '</td>
+                        <td data-th="Date" class="centre">' . date("d/m/Y", strtotime($gala->getDate())) . '</td>';
+
+                            echo '<td data-th="Time" class="centre">' . $swim_time->getTime() . '</td>';
+
+                            if (!is_null($swim_time->getRank())) {
+                                $rank = $swim_time->getRank();
+                                //Switch rank with Title if required.
+                                switch ($rank) {
+                                    case -1:
+                                        echo '<td data-th="Rank" class="centre">Speeding Ticket</td>';
+                                        break;
+                                    case 99:
+                                        echo '<td data-th="Rank" class="centre">DQ</td>';
+                                        break;
+                                    case 98:
+                                        echo '<td data-th="Rank" class="centre">No Show</td>';
+                                        break;
+                                    default:
+                                        echo '<td data-th="Rank" class="centre">' . $rank . '</td>';
+                                        break;
+                                }
+                            } else {
+                                echo '<td></td>';
+                            }
+
+                            echo '</tr>';
                         }
-                            
-                        echo '</tr>';
                     }
 
                     echo '</table>';
