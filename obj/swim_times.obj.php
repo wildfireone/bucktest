@@ -185,7 +185,7 @@ class Swim_Times {
     }
 
     public function listAllPBsForSwimmerByLength($conn, $member, $stroke, $length) {
-        $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND t.eventID = e.id  ORDER BY t.time ASC LIMIT 1";
+        $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND t.eventID = e.id AND t.time != '59:59:59' AND t.time != '00:00:00'  ORDER BY t.time ASC LIMIT 1";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':member', $member, PDO::PARAM_STR);
@@ -204,10 +204,10 @@ class Swim_Times {
     public function listAllPBsForSwimmerByLengthAcc($conn, $member, $stroke, $length, $acc) {
 
         if ($acc === null) {
-            $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e, galas g WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND e.galaID = g.id AND g.isAccredited is NULL AND t.eventID = e.id  ORDER BY t.time ASC LIMIT 1";
+            $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time, g.id, g.isAccredited FROM swim_times t, gala_events e, galas g WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND e.galaID = g.id AND g.isAccredited is NULL AND t.eventID = e.id  AND t.time != '59:59:59' AND t.time != '00:00:00'  ORDER BY t.time ASC LIMIT 1";
             $stmt = $conn->prepare($sql);
         } else {
-            $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time FROM swim_times t, gala_events e, galas g WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND e.galaID = g.id AND g.isAccredited = :acc AND t.eventID = e.id  ORDER BY t.time ASC LIMIT 1";
+            $sql = "SELECT t.member, t.galaID, t.eventID, e.strokeID, e.lengthID, t.time, g.id, g.isAccredited FROM swim_times t, gala_events e, galas g WHERE t.member = :member AND e.strokeID = :stroke AND e.lengthID = :length AND e.galaID = g.id AND g.isAccredited = :acc AND t.eventID = e.id AND t.time != '59:59:59' AND t.time != '00:00:00'   ORDER BY t.time ASC LIMIT 1";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':acc', $acc, PDO::PARAM_INT);

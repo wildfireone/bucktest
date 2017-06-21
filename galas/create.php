@@ -50,7 +50,7 @@
             if ($gala->create($connection)) {
                 $_SESSION['create'] = true;
 
-                header('Location:' .$domain . '/galas/view.php?id=' . $gala->getID());
+                header('Location:' .$domain . 'galas/view.php?id=' . $gala->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;

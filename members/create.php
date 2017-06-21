@@ -37,9 +37,6 @@ if (isset($_POST['btnSubmit'])) {
                 if ($member_Validation->isUsernameValid($connection, $_POST['txtUsername']) && (isset($_POST['chkRoles'])) && (count($_POST['chkRoles'])) > 0) {
 
 
-                    //if ((isset($_POST['chkRoles']))&&(count($_POST['chkRoles'])) > 0) {
-
-
                     $member_Validation->setUsername($_POST['txtUsername']);
                     $member_Validation->setSASANumber($_POST['txtSASANumber']);
                     $member_Validation->setStatus($_POST['sltStatus']);
@@ -83,9 +80,8 @@ if (isset($_POST['btnSubmit'])) {
                                 $members_rolesValidation->create($connection);
                             }
 
-
                             $_SESSION['create'] = true;
-                            header('Location:' .$domain . 'members/view.php?u=' . $member_Validation->getUsername());
+                            header('Location:' . $domain . 'members/view.php?u=' . $member_Validation->getUsername());
                             die();
                         }
 
@@ -226,7 +222,7 @@ if (isset($_POST['btnSubmit'])) {
                 if ($member->isUsernameValid($conn, $_POST['txtUsername'])) {
                     echo textInputPostback(true, "Username", "txtUsername", $_POST["txtUsername"], 8);
                 } else {
-                    echo textInputPostbackError(true, "Username", "txtUsername", "errErrUsername", "This username is already taken. Please enter a unique username", "This username is already taken. Please enter a unique username",8);
+                    echo textInputPostbackError(true, "Username", "txtUsername", "errErrUsername", "This username is already taken. Please enter a unique username", "This username is already taken. Please enter a unique username", 8);
                 }
             }
         } else {

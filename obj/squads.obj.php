@@ -109,15 +109,15 @@ class Squads {
     public function listAllSquadsWithParam($conn, $squad='', $description='', $coach='') {
         try {
             // To return the Squad ID plus a count of how many members it has
-            $sql = "SELECT s.id, COUNT(*) FROM squads s LEFT JOIN members m ON s.id = m.squadid";
+            $sql = "SELECT s.id, COUNT(*) FROM squads s LEFT JOIN members m ON s.id = m.squadid WHERE m.status ='1'";
             if (!empty($squad)) {
-               $sql .= " WHERE LOWER(s.squad) LIKE :squad";
+               $sql .= " AND LOWER(s.squad) LIKE :squad";
             }
             if (!empty($description)) {
                 if (strpos($sql,'WHERE') !== false) {
                     $sql .= " AND LOWER(s.description) LIKE :description";
                 } else {
-                    $sql .= " WHERE LOWER(s.description) LIKE :description";
+                    $sql .= " AND LOWER(s.description) LIKE :description";
                 }
             }
             if (!empty($coach)) {

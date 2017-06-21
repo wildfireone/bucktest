@@ -21,6 +21,13 @@ if (!squadFullAccess($connection, $currentUser, $memberValidation)) {
     exit;
 }
 
+require '../obj/squads.obj.php';
+$conn = dbConnect();
+
+
+$squadItem = new Squads($_GET["squadID"]);
+$squadItem->getAllDetails($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +35,7 @@ if (!squadFullAccess($connection, $currentUser, $memberValidation)) {
 
 <head>
     <?php include '../inc/meta.inc.php'; ?>
-    <title>Squad Timesheets | Members | Bucksburn Amateur Swimming Club</title>
+    <title>Squad Timesheets | <?php echo $squadItem->getSquad() ?> | Bucksburn Amateur Swimming Club</title>
     <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <link href="../css/site.css" rel="stylesheet"/>
@@ -47,7 +54,6 @@ require '../obj/gala_events.obj.php';
 require '../obj/strokes.obj.php';
 require '../obj/lengths.obj.php';
 require '../obj/swim_times.obj.php';
-require '../obj/squads.obj.php';
 require_once '../obj/members_roles.obj.php';
 
 $conn = dbConnect();
@@ -95,7 +101,7 @@ $im = array();
                         <table width="100%" border="0" cellspacing="0" cellpadding="4">
                             <tr>
                                 <th align="left" width="60%">&nbsp;BUCKSBURN AMATEUR SWIMMING CLUB - SQUAD PB
-                                    TIMESHEET
+                                    TIMESHEET (SHORT TIMES ONLY)
                                 </th>
                                 <th align="right" width="40%"><?php echo $squadItem->getSquad() ?></th>
                             </tr>
@@ -110,6 +116,8 @@ $im = array();
                             <tr class="titletext">
                                 <th>Name</th>
                                 <th>Type</th>
+                                <th>25</th>
+                                <th>Date</th>
                                 <th>50</th>
                                 <th>Date</th>
                                 <th>100</th>
@@ -119,8 +127,6 @@ $im = array();
                                 <th>400</th>
                                 <th>Date</th>
                                 <th>800</th>
-                                <th>Date</th>
-                                <th>1500</th>
 
                                 <th>Date</th>
                                 <th>100</th>
@@ -155,8 +161,6 @@ $im = array();
                                             $swim_time->setPKs($swim_timesItem["member"], $swim_timesItem["galaID"], $swim_timesItem["eventID"]);
 
                                             $swim_time->getAllDetails($conn);
-                                            //var_dump($swim_timesItem);
-                                            //Get data
                                             $gala->setID($swim_timesItem["galaID"]);
                                             $gala->getAllDetails($conn);
 
@@ -262,7 +266,7 @@ $im = array();
                                style="page-break-before: always">
                             <tr>
                                 <th align="left" width="60%">&nbsp;BUCKSBURN AMATEUR SWIMMING CLUB -SQUAD PB TIMESHEET
-                                    (Page 2)
+                                    (Page 2) (SHORT TIMES ONLY)
                                 </th>
                                 <th align="right" width="40%"><?php echo $squadItem->getSquad() ?>&nbsp;&nbsp;&nbsp;
                                 </th>

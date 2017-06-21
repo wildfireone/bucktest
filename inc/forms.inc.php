@@ -53,8 +53,7 @@ function formEndWithButton($buttonText, $delete = false, $back = false)
                     </div>
                 </div></div>           
             </form>';
-    }
-    else if ($back && $delete) {
+    } else if ($back && $delete) {
         return '</div>                   
                     <div class="row">
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
@@ -73,9 +72,7 @@ function formEndWithButton($buttonText, $delete = false, $back = false)
                     </div>
                 </div></div>           
             </form>';
-    }
-
-    else if ($delete) {
+    } else if ($delete) {
         return '</div>                   
                     <div class="row">
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
@@ -304,11 +301,21 @@ function textareaInputSetup($isRequired, $labelDescription, $labelControlName, $
         }
     } else {
         if ($isReadOnly) {
-            return '<div class="large-12 medium-12 small-12 columns">
+            if ($labelDescription == 'Notes') {
+                return '<fieldset><legend>Notes</legend>
+                    <div class="large-12 medium-12 small-12 columns">
+            
+                <p>' . $text . '</p>
+                </label></fieldset></div>
+            </div>';
+            } else {
+
+                return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
                 <textarea id="' . $labelControlName . '" name="' . $labelControlName . '" rows="' . $rows . '" maxlength="' . $maxLength . '" readonly>' . htmlspecialchars($text) . '</textarea>
                 </label>
             </div>';
+            }
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
@@ -1098,6 +1105,7 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
+
             foreach ($options as $key => $value) {
                 if ($labelDescription === "Rank") {
                     if ($value == $selected) {
@@ -1146,6 +1154,9 @@ function comboInputSetup($isRequired, $labelDescription, $labelControlName, $sel
             $output = '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
                 <select id="' . $labelControlName . '" name="' . $labelControlName . '">';
+            if ($labelDescription === "Squad") {
+                $output .= '<option value="" selected="selected">No Squad</option>;';
+            }
             foreach ($options as $key => $value) {
                 if ($labelDescription === "Rank") {
                     if ($value == $selected) {

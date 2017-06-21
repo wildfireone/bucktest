@@ -132,7 +132,7 @@ class Galas {
     }
     
     public function create($conn) {
-        $sql = "INSERT INTO galas VALUES (:id, :title, :description, :thedate, :venueID, :warmUpTime, :organiser, :fees, :confirmationDate, :cutOffDate, :notes, :isAccredited, :isLongCourse)";
+        $sql = "INSERT INTO `galas` (`id`, `title`, `description`, `date`, `venueID`, `warmUpTime`, `organiser`, `fees`, `confirmationDate`, `cutOffDate`, `notes`, `isLongCourse`, `isAccredited`) VALUES (:id, :title, :description, :thedate, :venueID, :warmUpTime, :organiser, :fees, :confirmationDate, :cutOffDate, :notes, :isLongCourse, :isAccredited)";
         
         $stmt = $conn->prepare($sql);
 
@@ -147,8 +147,9 @@ class Galas {
         $stmt->bindParam(':confirmationDate', $this->getConfirmationDate(), PDO::PARAM_STR);
         $stmt->bindParam(':cutOffDate', $this->getCutOffDate(), PDO::PARAM_STR);
         $stmt->bindParam(':notes', $this->getNotes(), PDO::PARAM_STR);
-        $stmt->bindParam(':isAccredited', $this->getIsAccredited(), PDO::PARAM_INT);
         $stmt->bindParam(':isLongCourse', $this->getIsLongCourse(), PDO::PARAM_INT);
+        $stmt->bindParam(':isAccredited', $this->getIsAccredited(), PDO::PARAM_INT);
+
 
         try {
             $stmt->execute(); 

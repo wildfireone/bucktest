@@ -54,7 +54,9 @@
                 <li class="current">My Personal Bests</li>
             </ul>
         
-            <h2>My Personal Bests</h2>        
+            <h2>My Personal Bests</h2>
+            <p><b>Note</b>: That these times do not distinguish between short-course or long-course times. <br/>
+                They are simply the best of either expressed in that format.</p>
           
                 <?php
                 require 'inc/forms.inc.php';
@@ -117,7 +119,6 @@
                             <th class="centre">Gala</th>
                             <th class="centre">Date</th>  
                             <th class="centre">Time</th>
-                            <th class="centre">Rank</th>
                         <tr>';
 ;
                     for($i = 1; $i <= 7; $i++)
@@ -159,26 +160,26 @@
 
                             echo '<td data-th="Time" class="centre">' . $swim_time->getTime() . '</td>';
 
-                            if (!is_null($swim_time->getRank())) {
-                                $rank = $swim_time->getRank();
-                                //Switch rank with Title if required.
-                                switch ($rank) {
-                                    case -1:
-                                        echo '<td data-th="Rank" class="centre">Speeding Ticket</td>';
-                                        break;
-                                    case 99:
-                                        echo '<td data-th="Rank" class="centre">DQ</td>';
-                                        break;
-                                    case 98:
-                                        echo '<td data-th="Rank" class="centre">No Show</td>';
-                                        break;
-                                    default:
-                                        echo '<td data-th="Rank" class="centre">' . $rank . '</td>';
-                                        break;
-                                }
-                            } else {
-                                echo '<td></td>';
-                            }
+//                            if (!is_null($swim_time->getRank())) {
+//                                $rank = $swim_time->getRank();
+//                                //Switch rank with Title if required.
+//                                switch ($rank) {
+//                                    case -1:
+//                                        echo '<td data-th="Rank" class="centre">Speeding Ticket</td>';
+//                                        break;
+//                                    case 99:
+//                                        echo '<td data-th="Rank" class="centre">DQ</td>';
+//                                        break;
+//                                    case 98:
+//                                        echo '<td data-th="Rank" class="centre">No Show</td>';
+//                                        break;
+//                                    default:
+//                                        echo '<td data-th="Rank" class="centre">' . $rank . '</td>';
+//                                        break;
+//                                }
+//                            } else {
+//                                echo '<td></td>';
+//                            }
 
                             echo '</tr>';
                         }

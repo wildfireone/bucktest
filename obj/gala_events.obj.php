@@ -227,7 +227,7 @@ class GalaEvents {
     }
 
     public function listAllGalaEventsForMemberAndStroke($conn, $galaID, $member, $stroke) {       
-        $sql = "SELECT DISTINCT s.eventID FROM swim_times s, gala_events e WHERE s.eventID = e.id AND s.galaID = :galaID AND s.member = :member AND e.strokeID = :stroke ORDER BY e.lengthID ASC, e.ageLower ASC, e.ageUpper ASC";
+        $sql = "SELECT DISTINCT s.eventID FROM swim_times s, gala_events e WHERE s.eventID = e.id AND s.galaID = :galaID AND s.member = :member AND e.strokeID = :stroke AND s.time != '59:59:59' AND s.time != '00:00:00' ORDER BY e.lengthID ASC, e.ageLower ASC, e.ageUpper ASC";
         
         $stmt = $conn->prepare($sql); 
         $stmt->bindParam(':galaID', $galaID, PDO::PARAM_STR);

@@ -356,7 +356,8 @@ class Members
     {
         try {
             //$sql = "INSERT INTO members VALUES (:username, :sasaNumber, :status, :firstName, :middleName, :lastName, :gender, :dob, :address1, :address2, :city, :county, :postcode, :telephone, :mobile, :email, :parentTitle, :parentName, :squadID, :registerDate, :monthlyFee, :feeAdjustment, :swimmingHours, :notes)";
-            $sql = "INSERT INTO members VALUES (:sasaNumber, :sasaCategory, :username, :status, :userTypeOld, :firstName, :middleName, :lastName, :gender, :dob, :address1, :address2, :city, :county, :postcode, :telephone, :mobile, :email, :parentTitle, :parentName, :squadID, :registerDate, :lastLoginDate, :monthlyFee, :feeAdjustment, :swimmingHours, :notes, :reset)";
+            $sql = "INSERT INTO members (`sasaNumber`, `sasaCategory`, `username`, `status`, `firstName`, `middleName`, `lastName`, `parentTitle`, `parentName`, `gender`, `dob`, `address1`, `address2`, `city`, `county`, `postcode`, `telephone`, `mobile`, `email`, `squadID`, `registerDate`, `lastLoginDate`, `notes`, `swimmingHours`, `monthlyFee`, `feeAdjustment`, `reset`)
+                                VALUES (:sasaNumber, :sasaCategory, :username, :status, :firstName, :middleName, :lastName, :parentTitle, :parentName, :gender, :dob, :address1, :address2, :city, :county, :postcode, :telephone, :mobile, :email, :squadID, :registerDate, :lastLoginDate, :notes, :swimmingHours, :monthlyFee, :feeAdjustment, :reset)";
 
 
             $stmt = $conn->prepare($sql);
@@ -365,7 +366,6 @@ class Members
             $stmt->bindValue(':sasaCategory', null, PDO::PARAM_INT);
             $stmt->bindParam(':username', $this->getUsername(), PDO::PARAM_STR);
             $stmt->bindParam(':status', $this->getStatus(), PDO::PARAM_INT);
-            $stmt->bindValue(':userTypeOld', null, PDO::PARAM_INT);
             $stmt->bindParam(':firstName', $this->getFirstName(), PDO::PARAM_STR);
             $stmt->bindParam(':middleName', $this->getMiddleName(), PDO::PARAM_STR);
             $stmt->bindParam(':lastName', $this->getLastName(), PDO::PARAM_STR);
@@ -742,10 +742,10 @@ class Members
     //List all members which are in a squad (via url parameter)
     public function listAllSquadMembers($conn, $squadID, $name = null)
     {
-        $sql = "SELECT m.username, s.squad FROM members m  LEFT JOIN squads s ON m.squadid = s.id WHERE m.squadid = '$squadID'";
+        $sql = "SELECT m.username, s.squad FROM members m  LEFT JOIN squads s ON m.squadid = s.id WHERE m.squadid = '$squadID' AND m.status='1'";
 
         if (!is_null($name)) {
-            $sql .= " WHERE m.firstName = :name OR m.lastName = :name";
+            $sql .= " AND m.firstName = :name OR m.lastName = :name";
         }
 
         $stmt = $conn->prepare($sql);
