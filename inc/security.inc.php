@@ -167,6 +167,18 @@ function newsFullAccess($connection, $currentUser, $memberValidation)
     }
 }
 
+
+//Pages
+function pagesFullAccess($connection, $currentUser, $memberValidation)
+{
+    if ($memberValidation->isMemberPresident($connection, $currentUser->getUsername()) || $memberValidation->isMemberSecretary($connection, $currentUser->getUsername()) || $memberValidation->isMemberTreasurer($connection, $currentUser->getUsername()) || $memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberBetaLeagueCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 //Gallery
 //News
 function galleryFullAccess($connection, $currentUser, $memberValidation)
