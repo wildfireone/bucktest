@@ -9939,3 +9939,14 @@ nav {
 .ui-datepicker {
     z-index: 9999 !important;
 }
+
+/*slick center slider images*/
+.sc div { text-align: center; }
+.sc img { margin: auto; }
+
+/*File table*/
+
+#FileTable {
+    max-height: 320px;
+    overflow-y: scroll;
+}

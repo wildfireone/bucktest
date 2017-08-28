@@ -96,10 +96,10 @@
                <li class="has-dropdown not-click">
                   <a href="#" role="link">About</a>
                   <ul class="dropdown">
-                     <li><a href="' . $domain . 'about.php" role="link">About BASC</a></li>
+                     <li><a href="' . $domain . 'pages/view.php?id=1" role="link">About BASC</a></li>
                      <li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
                      <li><a href="' . $domain . 'about/timetable.php" role="link">Timetable</a></li>
-                     <li><a href="' . $domain . 'about/club-records.php" role="link">Club Records</a></li>
+                     <li><a href="' . $domain . 'pages/view.php?id=3" role="link">Club Records</a></li>
                   
                ';
         if (pagesFullAccess($connection, $currentUser, $memberValidation)) {

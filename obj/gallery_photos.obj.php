@@ -47,7 +47,7 @@ class gallery_photos
 
     public function getLocalFilePath()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . '/2016/' . $this->filePath;
+        return $_SERVER['DOCUMENT_ROOT'] . $this->filePath;
     }
 
     public function getTitle()
@@ -217,21 +217,22 @@ class gallery_photos
 
 
         try {
-            $filename = $this->getLocalFilePath();
-            var_dump($filename);
+//            $filename = $this->getLocalFilePath();
+//            var_dump($filename);
+//
+//            if ($filename) {
+//                chmod($filename, 0777);
+//                if (unlink('../'.$filename)) {
+//                    echo 'File deleted';
+//                } else {
+//                    echo 'Cannot remove that file';
+//                }
+//
+//            } else {
+//                echo 'File does not exist';
+//            }
 
-            if ($filename) {
-                chmod($filename, 0777);
-
-                if (unlink($filename)) {
-                    echo 'File deleted';
-                } else {
-                    echo 'Cannot remove that file';
-                }
-
-            } else {
-                echo 'File does not exist';
-            }
+            unlink('../'.$this->getFilePath());
 
             $stmt->execute();
             return true;
@@ -360,13 +361,27 @@ class gallery_photos
 
     public function uploadPhoto()
     {
-        $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/photos/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        if (!is_dir('../uploads/photos/'. $this->getAlbumID().'/')) {
+            mkdir('../uploads/photos/'.$this->getAlbumID().'/', 0777, true);
+        }
 
-        $filePath = "uploads/photos/" . basename($_FILES["fileToUpload"]["name"]);
+        $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/photos/" . $this->getAlbumID()."/";
+
+        $randString = sha1(uniqid(mt_rand(), true));
+        $fileName = $_FILES["fileToUpload"]["name"]; //the original file name
+        $splitName = explode(".", $fileName); //split the file name by the dot
+        $fileExt = end($splitName); //get the file extension
+        $newFileName  = strtolower($randString.'.'.$fileExt); //join file name and ext.
+
+        $target_file = $target_dir . basename($newFileName);
+        $filePath = "uploads/photos/" . $this->getAlbumID()."/" . basename($newFileName);
 
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+
+
+
         // Check if image file is a actual image or fake image
         if (isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -404,11 +419,11 @@ class gallery_photos
             return false;
             // if everything is ok, try to uploads file
         } else {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],  $target_file)) {
                 $this->setFilePath($filePath);
                 return true;
 
-                echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+                echo "The file " . basename( $target_file) . " has been uploaded.";
             } else {
                 echo "Sorry, there was an error uploading your file.";
                 return false;

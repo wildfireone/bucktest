@@ -256,7 +256,7 @@ class pages
 
 
 
-    public function displayVisiblity()
+    public function displayVisibility()
     {
         switch ($this->getVisibility()) {
             case 0:

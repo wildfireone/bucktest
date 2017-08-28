@@ -11,6 +11,7 @@ session_start();
 require '../inc/connection.inc.php';
 require '../inc/security.inc.php';
 require '../obj/pages.obj.php';
+require '../obj/files.obj.php';
 
 if (!isset($_SESSION['username'])) {
     header('Location:' . $domain . 'message.php?id=badaccess');
@@ -78,7 +79,6 @@ if (isset($_POST['btnSubmit'])) {
         tinymce.init({
             selector: '#txtMainBody',
             plugins: 'advlist, table, autolink, code, contextmenu, imagetools, fullscreen, hr,  colorpicker, preview, spellchecker, link, autosave, lists, visualblocks'
-
         });
     </script>
 </head>
@@ -92,76 +92,153 @@ if (isset($_POST['btnSubmit'])) {
 
         <ul class="breadcrumbs">
             <li><a href="../index.php" role="link">Home</a></li>
-            <li><a href="/pages/view.php?id=<?php echo $pages->getPageID();?>" role="link">Page</a></li>
+            <li><a href="/pages/view.php?id=<?php echo $pages->getPageID(); ?>" role="link">Page</a></li>
             <li class="current">Edit a Page Item</li>
         </ul>
 
-        <h2>Edit a Page Item</h2>
+        <h2>Edit a Page Item
 
-        <?php
-        require '../inc/forms.inc.php';
 
-        $conn = dbConnect();
+            <?php
+            require '../inc/forms.inc.php';
 
-        if (isset($_SESSION['invalid'])) {
-            echo '<p class="alert-box error radius centre">Some of the input you provided was invalid. Please correct the highlighted errors and try again.</p>';
-            unset($_SESSION['invalid']);
-        }
-        if (isset($_SESSION['error'])) {
-            echo '<p class="alert-box error radius centre">There was an error creating the page item. Please try again.</p>';
-            unset($_SESSION['error']);
-        }
 
-        echo formStart();
+            $conn = dbConnect();
 
-        $pages = new pages($_GET["id"]);
-        $pages->getAllDetails($conn);
-
-        if (isset($_POST["btnSubmit"])) {
-            if (empty($_POST["txtTitle"])) {
-                echo textInputEmptyError(true, "Page Title", "txtTitle", "errEmptyTitle", "Please enter a Page Title", 250);
-            } else {
-                echo textInputPostback(true, "Page Title", "txtTitle", $_POST["txtTitle"], 250);
+            if (isset($_SESSION['invalid'])) {
+                echo '<p class="alert-box error radius centre">Some of the input you provided was invalid. Please correct the highlighted errors and try again.</p>';
+                unset($_SESSION['invalid']);
             }
-        } else {
-            echo textInputSetup(true, "Page Title", "txtTitle", $pages->getPageTitle(), 250);
-        }
+            if (isset($_SESSION['error'])) {
+                echo '<p class="alert-box error radius centre">There was an error creating the page item. Please try again.</p>';
+                unset($_SESSION['error']);
+            }
 
-        if (isset($_POST["btnSubmit"])) {
-            echo textInputPostback(false, "Page Description", "txtDescription", $_POST["txtSubTitle"], 250);
-        } else {
-            echo textInputSetup(false, "Page Description", "txtDescription", $pages->getPageDescription(), 250);
-        }
-        ?>
-        <div class="row">
-            <div class="large-12 medium-12 small-12 columns">
-                <label><b>
-                        <span class="required">* </span>Visibility (Publicly accessible?)</b>
-                    <input type='hidden' value='0' name='chkVisibility'/>
-                    <input id="chkVisibility" type="checkbox" name="chkVisibility"
-                           value="1" <?php echo($pages->getVisibility() == 1 ? 'checked' : ''); ?>/>
+            echo formStart();
 
-                </label>
+            $pages = new pages($_GET["id"]);
+            $pages->getAllDetails($conn);
+
+            if (isset($_POST["btnSubmit"])) {
+                if (empty($_POST["txtTitle"])) {
+                    echo textInputEmptyError(true, "Page Title", "txtTitle", "errEmptyTitle", "Please enter a Page Title", 250);
+                } else {
+                    echo textInputPostback(true, "Page Title", "txtTitle", $_POST["txtTitle"], 250);
+                }
+            } else {
+                echo textInputSetup(true, "Page Title", "txtTitle", $pages->getPageTitle(), 250);
+            }
+
+            if (isset($_POST["btnSubmit"])) {
+                echo textInputPostback(false, "Page Description", "txtDescription", $_POST["txtSubTitle"], 250);
+            } else {
+                echo textInputSetup(false, "Page Description", "txtDescription", $pages->getPageDescription(), 250);
+            }
+            ?>
+            <div class="row">
+                <div class="large-12 medium-12 small-12 columns">
+                    <label><b>
+                            <span class="required">* </span>Visibility (Publicly accessible?)</b>
+                        <input type='hidden' value='0' name='chkVisibility'/>
+                        <input id="chkVisibility" type="checkbox" name="chkVisibility"
+                               value="1" <?php echo($pages->getVisibility() == 1 ? 'checked' : ''); ?>/>
+
+                    </label>
+                </div>
             </div>
-        </div>
-        <?php
-        if (isset($_POST["btnSubmit"])) {
-            if (empty($_POST["txtMainBody"])) {
-                echo textareaInputEmptyError(true, "Main Body", "txtMainBody", "errEmptyBody", "Please enter a Main Body", 100000, 20);
+            <?php
+            if (isset($_POST["btnSubmit"])) {
+                if (empty($_POST["txtMainBody"])) {
+                    echo textareaInputEmptyError(true, "Main Body", "txtMainBody", "errEmptyBody", "Please enter a Main Body", 100000, 20);
+                } else {
+                    echo textareaInputPostback(true, "Main Body", "txtMainBody", $_POST["txtMainBody"], 100000, 20);
+                }
             } else {
-                echo textareaInputPostback(true, "Main Body", "txtMainBody", $_POST["txtMainBody"], 100000, 20);
+                echo textareaInputSetup(true, "Main Body", "txtMainBody", $pages->getPageContent(), 100000, 20);
             }
-        } else {
-            echo textareaInputSetup(true, "Main Body", "txtMainBody", $pages->getPageContent(), 100000, 20);
-        }
+            ?>
 
-        echo formEndWithButton("Save changes", "delete.php?id=" . $pages->getPageID());
+            <br/>
+            <h3 class="centre">Add Files to page</h3>
+            <div id="FileTable">
+                <table class="large-12 medium-12 small-12 columns fileTable" style=" overflow-y: scroll;">
+                    <tr>
+                        <th>File Title</th>
+                        <th>File Description</th>
+                        <th>Uploader</th>
+                        <th>Type</th>
+                        <th>Visibility</th>
+                        <th>View</th>
+                        <th>Add</th>
+                    </tr>
+                    <?php
+                    require_once '../obj/members.obj.php';
 
-        dbClose($conn);
-        ?>
+                    $conn = dbConnect();
 
+                    $files = new files();
+                    $member = new Members();
+                    $fileList = $files->listAllFiles($conn);
+
+                    foreach ($fileList as $fileItem) {
+
+                        $files->setFileID($fileItem['fileID']);
+                        $files->getAllDetails($conn);
+                        $member->setUsername($files->getUserID());
+
+                        $fileAuthorLink = "../members/view.php?u=" . $files->getUserID();
+                        $fileViewLink = "../" . "files/view.php?id=" . $files->getFileID();
+                        $fileDirectLink =  "../" . $files->getFilePath();
+
+                        echo "<tr>";
+
+                        echo '<td data-th="File Title">' . $files->getTitle() . '</td>';
+                        echo '<td data-th="Description">' . $files->getDescription() . '</td>';
+                        echo '<td data-th="Uploader"><a href="' . $fileAuthorLink . '">' . $member->getFullNameByUsername($conn) . '</a></td>';
+                        echo '<td data-th="Type">' . $files->displayType() . '</td>';
+                        echo '<td data-th="Visibility">' . $files->displayVisibility() . '</td>';
+                        echo '<td data-th="View"><a href="' . $fileViewLink . '">View</a></td>';
+
+                        if ($files->getType() == 0) {
+                            echo '<td data-th="View"><button type="button" data-value0="0" data-value1="' . $fileDirectLink . '">Add inline</button></td>';
+                        } else {
+                            echo '<td data-th="View"><button type="button" data-value0="1"  data-value1="' . $fileViewLink . '">Add inline</button></td>';
+                        }
+
+
+                        echo "</tr>";
+                    }
+
+                    echo '</table>';
+                    echo '</div>';
+
+                    echo formEndWithButton("Save changes", "delete.php?id=" . $pages->getPageID());
+
+
+                    ?>
+
+
+            </div>
     </div>
-</div>
-<?php include '../inc/footer.inc.php'; ?>
+    <script>
+        $('button').on('click tap', function (e) {
+            console.log('<a href="' + $(this).data("value1") + '"></a>');
+
+
+            switch ($(this).data("value0")) {
+                case 0:
+                    var string = '';
+                    tinymce.activeEditor.execCommand('mceInsertContent', false, '<a href="'+ $(this).data("value1")+'"><img style="width:260px; height:260px;" src="' + $(this).data("value1") + '"/></a>');
+                    break;
+                case 1:
+                    tinymce.activeEditor.execCommand('mceInsertContent', false, '<a class="button" href="' + $(this).data("value1") + '">Download Here</a>');
+                    break;
+
+            }
+
+        });
+    </script>
+<!--    <script src="--><?php //echo $domain ?><!--/js/files.js" type="text/javascript" charset="utf-8"></script>-->
+    <?php include '../inc/footer.inc.php'; ?>
 </body>
 </html>

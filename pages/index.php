@@ -81,7 +81,6 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
                 $pages->getAllDetails($conn);
                 $member->setUsername($pages->getUserID());
 
-                //set hyperlink to point to member search with squadID parameter
                 $pageAuthorLink = "../members/view.php?u=" . $pages->getUserID();
                 $pageViewLink = "view.php?id=" . $pages->getPageID();
                 $pageEditLink = "edit.php?id=" . $pages->getPageID();
@@ -93,7 +92,7 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
                 echo '<td data-th="Author"><a href="' . $pageAuthorLink . '">' . $member->getFullNameByUsername($conn) . '</a></td>';
                 echo '<td data-th="Created">' . $pages->getCreatedDate() . '</td>';
                 echo '<td data-th="Modified">' . $pages->getModifiedDate() . '</td>';
-                echo '<td data-th="Visibility">' . $pages->displayVisiblity() . '</td>';
+                echo '<td data-th="Visibility">' . $pages->displayVisibility() . '</td>';
                 echo '<td data-th="View"><a href="' . $pageViewLink . '">View</a></td>';
                 echo '<td data-th="Edit"><a href="' . $pageEditLink . '">Edit</a></td>';
 
@@ -107,8 +106,8 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
             echo '<div class="large-2 large-centered medium-6 medium-centered small-12 small-centered columns">';
             echo '<div class ="row">
             <a href="' . $domain . 'pages/create.php" class="button">Create new Page</a>
-    </div>
-    </div>';
+            </div>
+            </div>';
             ?>
 
 

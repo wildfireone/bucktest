@@ -64,7 +64,7 @@ if (isset($_SESSION['username'])) {
             $_SESSION['delete'] = true;
             header('Location:' . $domain . 'files');
         } else {
-            $_SESSION['error'] = true;
+            $_SESSION['errorDelete'] = true;
         }
     }
 
@@ -105,10 +105,19 @@ if (isset($_SESSION['username'])) {
         if (isset($_SESSION['error'])) {
             echo '<br/>';
             echo '<div class="callout warning">
-          <h5>Profile Update Failed</h5>
+          <h5>File Update Failed</h5>
           <p>Form incomplete, errors are highlighted below.</p>
           </div>';
             unset($_SESSION['error']);
+        }
+
+        if (isset($_SESSION['errorDelete'])) {
+            echo '<br/>';
+            echo '<div class="callout warning">
+          <h5>File deletion failed</h5>
+          <p>Form incomplete, errors are highlighted below.</p>
+          </div>';
+            unset($_SESSION['errorDelete']);
         }
 
         ?>

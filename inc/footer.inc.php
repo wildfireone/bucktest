@@ -6,17 +6,19 @@
 	    </div>
 	</div>
 </footer>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.1/js/foundation.min.js"></script>
-<script>
-jQuery(window).scroll(function() {
-    if (scroll >= 50) {
-        $('#logo-image').attr('src', 'img/Acme_Monogram_Colour.png')
-        $(".important-class").addClass("padding-on-my-header");
-    }
-    if (scroll < 50) {
-        $(".important-class").removeClass("padding-on-my-header");
-        $('#logo-image').attr('src', 'img/Acme_Colour.png')
-    }
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="<?php echo $domain ?>/css/slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('.sc').slick({
+        dots: true,
+        speed: 150,
+        centerMode: true,
+        autoplay: true,
+        infinite: true,
+    });
 });
-</script>-->
+</script>

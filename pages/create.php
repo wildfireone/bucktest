@@ -26,29 +26,29 @@
 
         $connection = dbConnect();
         $pages = new pages();
-        $member = new Members($_SESSION['username']);
-        $member->getAllDetails($connection);
+        $members = new Members($_SESSION['username']);
+        $members->getAllDetails($connection);
 
         if ($pages->isInputValid($_POST['txtTitle'], $_POST['txtDescription'], $_POST['txtMainBody'])) {
             $pages->setPageTitle($_POST['txtTitle']);
             $pages->setPageDescription($_POST['txtDescription']);
             $pages->setPageContent($_POST['txtMainBody']);
             $pages->setVisibility(htmlentities($_POST['chkVisibility']));
-            $pages->setUserID($member->getUsername());
+            $pages->setUserID($members->getUsername());
 
 
             if ($pages->create($connection)) {
+                echo "success";
                 $_SESSION['create'] = true;
-
                 header('Location:' .$domain . 'pages/view.php?id=' . $pages->getPageID());
                 die();
             } else {
+                echo "fail";
                 $_SESSION['error'] = true;
             }
         } else {
             $_SESSION['invalid'] = true;
         }
-        dbClose($connection);
     }
 ?>
 

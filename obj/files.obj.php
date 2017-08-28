@@ -168,7 +168,7 @@ class files
         }
 
         try {
-            unlink($this->getFilePath());
+            unlink('../'.$this->getFilePath());
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
@@ -334,10 +334,8 @@ class files
     {
 
         $fileRename = $this->renameFile($_FILES["fileToUpload"]["name"]);
-        echo $fileRename;
         $uploadOk = 1;
         $imageFileType = pathinfo(basename($_FILES["fileToUpload"]["name"]), PATHINFO_EXTENSION);
-        echo $imageFileType;
 
         //Set file type
         switch ($imageFileType) {
@@ -359,9 +357,17 @@ class files
                     }
                 }
                 $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/files/images/";
-                $target_file = $target_dir . $fileRename;
 
-                $filePath = "uploads/files/images/" . $fileRename;
+                //Change image file name to random sha hash.
+                $randString = sha1(uniqid(mt_rand(), true));
+                $fileName = $_FILES["fileToUpload"]["name"]; //the original file name
+                $splitName = explode(".", $fileName); //split the file name by the dot
+                $fileExt = end($splitName); //get the file extension
+                $newFileName  = strtolower($randString.'.'.$fileExt); //join file name and ext.
+
+                $target_file = $target_dir . $newFileName;
+
+                $filePath = "uploads/files/images/" . $newFileName;
                 break;
 
             //Documents
@@ -392,10 +398,6 @@ class files
                 $target_file = $target_dir . $fileRename;
                 break;
         }
-
-        echo "Type:" . $this->getType();
-        echo $target_file;
-
 
         //File checks
 
