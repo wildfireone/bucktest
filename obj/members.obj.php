@@ -119,7 +119,10 @@ class Members
 
     public function getLastLoginDate()
     {
-        return $this->lastLoginDate;
+        //Convert mysql date format to UK format
+        $date = new DateTime($this->lastLoginDate);
+        $date->setTimezone(new DateTimeZone('Europe/London'));
+        return $date->format('d/m/Y H:i:s');
     }
 
     public function getMonthlyFee()

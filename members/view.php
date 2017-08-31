@@ -104,6 +104,7 @@
                 echo comboInputSetup(true,"Member Status","txtStatus",$member->getStatus(),$status->listAllStatus($conn),true);
                 echo textInputSetup(false,"SASA Membership","txtSASANumber",$member->getSASANumber(),15,true);
                 echo dateInputSetup(true,"Date Joined","txtRegisterDate",$member->getRegisterDate(),null,null,true);
+                echo dateInputSetup(false,"Last Login Date","txtLoginDate",$member->getLastLoginDate(),null,null,true);
 
                 echo '</fieldset></div><div class="large-6 medium-6 small-12 right"><fieldset><legend>Contact Details</legend>';
 

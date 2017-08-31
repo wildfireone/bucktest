@@ -6,6 +6,8 @@
         header('location: ' . $domain . '/message.php?id=badaccess');
         die();
     }
+
+    $currentUser->setLastLoginDate( $_SESSION['lastLogin']);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +54,7 @@
             <p>Hello <b><?php echo $_SESSION['firstName']; ?></b>, welcome to your member's area.</p>
 
             <div class="large-12 medium-12 small-12 panel">
-                <p>You have no new notifications.</p>
+                <p>Your last login date was: <b><?php echo  $currentUser->getLastLoginDate();?></b></p>
             </div>
 
             <p>Below is a list of all the areas of the website you can access.</p>
