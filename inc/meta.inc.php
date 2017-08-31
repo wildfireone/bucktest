@@ -7,12 +7,25 @@
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
 <!--highslide js START-->
-<script type="text/javascript" src="<?php echo $domain ?>/highslide/highslide-with-gallery.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>/highslide/highslide.css"/>
+<script type="text/javascript" src="<?php echo $domain ?>highslide/highslide-with-gallery.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>highslide/highslide.css"/>
 
 <!--Slick.js START-->
-<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>/css/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>/css/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>css/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>css/slick/slick-theme.css">
+
+<!--Favicon code-->
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="<?php echo $domain ?>apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="<?php echo $domain ?>favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="<?php echo $domain ?>favicon-16x16.png">
+<link rel="manifest" href="<?php echo $domain ?>manifest.json">
+<link rel="mask-icon" href="<?php echo $domain ?>safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+
 
 <!--
     2) Optionally override the settings defined at the top
@@ -20,7 +33,7 @@
 -->
 
 <script type="text/javascript">
-    hs.graphicsDir = '<?php echo $domain ?>/highslide/graphics/';
+    hs.graphicsDir = '<?php echo $domain ?>highslide/graphics/';
     hs.align = 'center';
     hs.transitions = ['expand', 'crossfade'];
     hs.outlineType = 'rounded-white';

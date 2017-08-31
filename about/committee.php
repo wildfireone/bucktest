@@ -30,7 +30,7 @@
     
         <h2>Committee</h2>
             
-        <p>Some descriptive text about the committee.</p>
+        <p>The committee for the current session:</p>
             
         <?php
             require_once '../obj/members_roles.obj.php';

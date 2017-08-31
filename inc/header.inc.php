@@ -89,7 +89,7 @@
         }
 
 
-       echo'
+        echo '
                </ul>
                </li>
                <li class="divider"></li>
@@ -100,8 +100,16 @@
                      <li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
                      <li><a href="' . $domain . 'about/timetable.php" role="link">Timetable</a></li>
                      <li><a href="' . $domain . 'pages/view.php?id=3" role="link">Club Records</a></li>
-                  
-               ';
+               
+           </ul></li>
+               <li class="divider"></li>
+               <li><a href="' . $domain . 'contact.php" role="link">Contact</a></li>
+               <li class="divider"></li>
+                <li class="has-dropdown not-click">
+                 <a href="#" role="link">Members Area</a>
+                 <ul class="dropdown">
+               <li><a href="' . $domain . 'member-area.php">View</a></li>
+               <li><a href="' . $domain . 'my-details.php">My Details</a></li>';
         if (pagesFullAccess($connection, $currentUser, $memberValidation)) {
             echo '  
                <li class="divider"></li>
@@ -113,11 +121,20 @@
             </ul>
                </li>';
         }
-            echo' </ul></li>
+        if (filesFullAccess($connection, $currentUser, $memberValidation)) {
+            echo '  
                <li class="divider"></li>
-               <li><a href="' . $domain . 'contact.php" role="link">Contact</a></li>
-               <li class="divider"></li>
-               <li><a href="' . $domain . 'member-area.php">Member Area</a></li>
+               <li class="has-dropdown not-click">
+                  <a href="#" role="link">Files</a>
+                  <ul class="dropdown">
+                     <li><a href="' . $domain . 'files/" role="link">View All</a></li>
+                     <li><a href="' . $domain . 'files/upload.php" role="link">Upload</a></li>
+            </ul>
+               </li>';
+        }
+
+        echo '</ul></li>
+               
                <li class="divider"></li>
                <li class="has-form"> <a href="' . $domain . 'logout.php" class="small button">Logout</a> </li>
                <li class="divider"></li>
