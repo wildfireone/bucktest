@@ -21,12 +21,13 @@
     } else {
         $connection = dbConnect();
         $files= new files($_GET["id"]);
+        $files->getAllDetails($connection);
         if (!$files->doesExist($connection)) {
             header('Location:' . $domain . '404.php');
             exit;
         }
 
-        if (!isset($_SESSION['username']) && $files->getVisibility() == 0) {
+        if (!isset($_SESSION['username']) && $files->getVisibility()  == 0) {
             header('Location:' . $domain . 'login.php');
             exit;
         }
@@ -78,6 +79,7 @@
 
         echo '<META HTTP-EQUIV="Refresh" CONTENT="5; URL='.$downloadLink.'">';
 
+        echo '<a href="javascript: history.go(-1)" class="button">Go Back</a>';
         dbClose($conn);
         ?>
 

@@ -11,6 +11,7 @@
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
     require '../obj/pages.obj.php';
+    require '../obj/files.obj.php';
 
     if (!isset($_SESSION['username'])) {
         header( 'Location:' . $domain . 'message.php?id=badaccess' );
@@ -136,14 +137,73 @@
         } else {
             echo textareaInputBlank(true, "Main Body", "txtMainBody", 5000, 15);
         }
-
-        echo formEndWithButton("Add New Page");
         ?>
+        <br/>
+        <h3 class="centre">Add Files to page</h3>
+        <div id="FileTable">
+            <table class="large-12 medium-12 small-12 columns fileTable" style=" overflow-y: scroll;">
+                <tr>
+                    <th>File Title</th>
+                    <th>File Description</th>
+                    <th>Uploader</th>
+                    <th>Type</th>
+                    <th>Visibility</th>
+                    <th>View</th>
+                    <th>Add</th>
+                </tr>
+                <?php
+                require_once '../obj/members.obj.php';
 
+                $conn = dbConnect();
+
+                $files = new files();
+                $member = new Members();
+                $fileList = $files->listAllFiles($conn);
+
+                foreach ($fileList as $fileItem) {
+
+                    $files->setFileID($fileItem['fileID']);
+                    $files->getAllDetails($conn);
+                    $member->setUsername($files->getUserID());
+
+                    $fileAuthorLink = "../members/view.php?u=" . $files->getUserID();
+                    $fileViewLink = "../" . "files/view.php?id=" . $files->getFileID();
+                    $fileDirectLink =  "../" . $files->getFilePath();
+
+                    echo "<tr>";
+
+                    echo '<td data-th="File Title">' . $files->getTitle() . '</td>';
+                    echo '<td data-th="Description">' . $files->getDescription() . '</td>';
+                    echo '<td data-th="Uploader"><a href="' . $fileAuthorLink . '">' . $member->getFullNameByUsername($conn) . '</a></td>';
+                    echo '<td data-th="Type">' . $files->displayType() . '</td>';
+                    echo '<td data-th="Visibility">' . $files->displayVisibility() . '</td>';
+                    echo '<td data-th="View"><a href="' . $fileViewLink . '">View</a></td>';
+
+                    if ($files->getType() == 0) {
+                        echo '<td data-th="View"><button type="button" data-value0="0" data-value1="' . $fileDirectLink . '">Add inline</button></td>';
+                    } else {
+                        echo '<td data-th="View"><button type="button" data-value0="1"  data-value1="' . $fileViewLink . '">Add inline</button></td>';
+                    }
+
+
+                    echo "</tr>";
+                }
+
+                echo '</table>';
+                echo '</div>';
+
+                echo formEndWithButton("Add New Page");
+
+
+                ?>
+
+
+        </div>
 
 
     </div>
 </div>
+<script src="<?php echo $domain ?>/js/files.js" type="text/javascript" charset="utf-8"></script>
 <?php include '../inc/footer.inc.php';?>
 </body>
 

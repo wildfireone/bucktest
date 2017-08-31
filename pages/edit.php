@@ -63,6 +63,15 @@ if (isset($_POST['btnSubmit'])) {
     }
     dbClose($connection);
 }
+
+if (isset($_POST['btnAddFiles'])) {
+    $_SESSION['addFiles'] = $pages->getPageID();
+    header('Location:' . $domain . 'files/upload.php');
+    die();
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -159,7 +168,10 @@ if (isset($_POST['btnSubmit'])) {
             ?>
 
             <br/>
-            <h3 class="centre">Add Files to page</h3>
+            <br/>
+            <h3 class="centre">Add Files to page    <input name="btnAddFiles" value="Upload File" class="button" type="submit"></h3>
+
+
             <div id="FileTable">
                 <table class="large-12 medium-12 small-12 columns fileTable" style=" overflow-y: scroll;">
                     <tr>
@@ -220,25 +232,7 @@ if (isset($_POST['btnSubmit'])) {
 
             </div>
     </div>
-    <script>
-        $('button').on('click tap', function (e) {
-            console.log('<a href="' + $(this).data("value1") + '"></a>');
-
-
-            switch ($(this).data("value0")) {
-                case 0:
-                    var string = '';
-                    tinymce.activeEditor.execCommand('mceInsertContent', false, '<a href="'+ $(this).data("value1")+'"><img style="width:260px; height:260px;" src="' + $(this).data("value1") + '"/></a>');
-                    break;
-                case 1:
-                    tinymce.activeEditor.execCommand('mceInsertContent', false, '<a class="button" href="' + $(this).data("value1") + '">Download Here</a>');
-                    break;
-
-            }
-
-        });
-    </script>
-<!--    <script src="--><?php //echo $domain ?><!--/js/files.js" type="text/javascript" charset="utf-8"></script>-->
+    <script src="<?php echo $domain ?>/js/files.js" type="text/javascript" charset="utf-8"></script>
     <?php include '../inc/footer.inc.php'; ?>
 </body>
 </html>

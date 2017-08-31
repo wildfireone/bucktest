@@ -120,6 +120,11 @@ if (isset($_SESSION['username'])) {
             unset($_SESSION['errorDelete']);
         }
 
+        if (isset($_SESSION['upload'])) {
+            echo '<p class="alert-box success radius centre">File uploaded successfully!</p>';
+            unset($_SESSION['upload']);
+        }
+
         ?>
         <h2 class="text-center">Files | Edit file: <?= $files->getTitle() ?></h2>
 

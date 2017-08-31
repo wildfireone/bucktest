@@ -41,7 +41,13 @@ if (isset($_SESSION['username'])) {
                 echo "file uploaded";
                 if ($files->create($conn)) {
                     $_SESSION['upload'] = true;
-                    header( 'Location:' . $domain . 'files');
+                    if (isset($_SESSION['addFiles'])) {
+                        $pageID = $_SESSION['addFiles'];
+                        unset($_SESSION['addFiles']);
+                        header('Location:' . $domain . 'pages/edit.php?id='. $pageID);
+                    } else {
+                        header('Location:' . $domain . 'files');
+                    }
                 }
             }
         } else {
