@@ -29,7 +29,7 @@
             if ($shop->update($connection)) {
                 $_SESSION['update'] = true;
 
-                header('Location:' .$domain . '/shop/view.php?id=' . $shop->getID());
+                header('Location:' .$domain . 'shop/view.php?id=' . $shop->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;

@@ -56,9 +56,11 @@ function formEndWithButton($buttonText, $delete = false, $back = false)
     } else if ($back && $delete) {
         return '</div>                   
                     <div class="row">
+          
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
                             <input type="submit" name="btnSubmit" value="' . $buttonText . '" class="medium radius button left h6 capitalise"/>
                         </div>
+                        
                         <div class="large-4 large-centered medium-6 medium-centered small-12 small-centered columns">
                             <a href="' . $delete . '" class="medium radius button alert right h6 capitalise">Delete</a> 
                         </div>
@@ -67,10 +69,10 @@ function formEndWithButton($buttonText, $delete = false, $back = false)
                          <div class="large-6 large-centered medium-6 medium-centered small-12 small-centered column">
                             <a href="' . $back . '" class="medium radius button middle centre h6 capitalise">Back</a> 
                         </div>
-                                              
-         
+                                           
                     </div>
-                </div></div>           
+                </div>       
+                </div>     
             </form>';
     } else if ($delete) {
         return '</div>                   

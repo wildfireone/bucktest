@@ -119,6 +119,11 @@ class Members
 
     public function getLastLoginDate()
     {
+        return $this->lastLoginDate;
+    }
+
+    public function displayLastLoginDate()
+    {
         //Convert mysql date format to UK format
         $date = new DateTime($this->lastLoginDate);
         $date->setTimezone(new DateTimeZone('Europe/London'));

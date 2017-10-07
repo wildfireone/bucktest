@@ -29,7 +29,7 @@
             if ($shop->create($connection)) {
                 $_SESSION['create'] = true;
 
-                header('Location:' .$domain . '/shop/view.php?id=' . $shop->getID());
+                header('Location:' .$domain . 'shop/view.php?id=' . $shop->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;

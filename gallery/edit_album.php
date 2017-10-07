@@ -69,7 +69,7 @@ if (isset($_SESSION['username'])) {
 
             if ($albums->update($conn)) {
                 $_SESSION['update'] = true;
-                header( 'Location:' . $domain . '/gallery/view_album.php?a=' . $albums->getAlbumID() );
+                header( 'Location:' . $domain . 'gallery/view_album.php?a=' . $albums->getAlbumID() );
             }
         } else {
             $_SESSION['error'] = true;
@@ -105,7 +105,7 @@ if (isset($_SESSION['username'])) {
     extract($data);
 
 } else {
-    header('Location:' .$domain . '/login.php');
+    header('Location:' .$domain . 'login.php');
 }
 
 

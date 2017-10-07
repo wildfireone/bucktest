@@ -29,7 +29,7 @@ session_start();
             if ($squad->create($connection)) {
                 $_SESSION['create'] = true;
 
-                header('Location:' .$domain . '/squads/view.php?id=' . $squad->getID());
+                header('Location:' .$domain . 'squads/view.php?id=' . $squad->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;

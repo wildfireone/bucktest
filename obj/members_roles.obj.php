@@ -503,6 +503,26 @@ class Members_Roles {
             return "Query failed: " . $e->getMessage();
         }  
     }
+
+    public function isMemberMeetSecretary($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID = 19 AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
     
     public function listAllCoaches($conn) {
         $sql = "SELECT m.username, CONCAT(m.firstName, ' ', m.lastName) AS name FROM members m, members_roles r WHERE r.roleID = 16 AND r.member = m.username";
@@ -524,7 +544,7 @@ class Members_Roles {
     }
 
     public function listCommittee($conn) {
-        $sql = "SELECT m.username, r.id FROM members m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14) AND z.member = m.username ORDER BY r.id ASC";
+        $sql = "SELECT m.username, r.id FROM members m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,19) AND z.member = m.username ORDER BY r.id ASC";
         //$sql = "SELECT m.username, r.id FROM members m, members_roles z, roles r WHERE z.roleID = r.id AND z.member = m.username AND z.roleID IN () ORDER BY r.id DESC";
 
         $stmt = $conn->prepare($sql);
@@ -553,7 +573,7 @@ class Members_Roles {
 
     //Checks if member is apart of the Committee.
     public function isMemberCommittee($conn, $member) {
-        $sql = "SELECT member FROM members m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,13,14) AND z.member = :member";
+        $sql = "SELECT member FROM members m, members_roles z, roles r WHERE z.roleID = r.id AND r.id IN (1,2,3,4,5,6,7,8,9,10,11,13,14,19) AND z.member = :member";
         //$sql = "SELECT member FROM members_roles WHERE roleID = 13 AND member = :member";
 
         $stmt = $conn->prepare($sql);

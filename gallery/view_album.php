@@ -26,7 +26,7 @@ if (!$albums->doesExist($conn)) {
 }
 
 if (!isset($_SESSION['username']) && $albums->getVisibility() == 0) {
-    header('Location:' . $domain . '/login.php');
+    header('Location:' . $domain . 'login.php');
 }
 
 $members = new members($albums->getUserID());

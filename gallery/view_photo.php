@@ -22,7 +22,7 @@ $photos->getAllDetails($conn);
 
 
 if (!$photos->doesExist($conn)) {
-    header('Location:' .$domain . '/404.php');
+    header('Location:' .$domain . '404.php');
 }
 
 
@@ -32,7 +32,7 @@ $albums->getAllDetails($conn);
 
 
 if (!isset($_SESSION['username']) && $albums->getVisibility() == 0) {
-    header('Location:' .$domain . '/login.php');
+    header('Location:' .$domain . 'login.php');
 }
 
 $members->getAllDetails($conn);

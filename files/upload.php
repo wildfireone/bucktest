@@ -20,7 +20,7 @@ if (isset($_SESSION['username'])) {
 
     if (!filesFullAccess($conn, $currentUser, $memberValidation)) {
 
-        header('Location:' . $domain . '/login.php');
+        header('Location:' . $domain . 'login.php');
     }
 
     if (isset($_POST['btnSubmit'])) {
@@ -55,7 +55,7 @@ if (isset($_SESSION['username'])) {
         }
     }
 } else {
-    header('Location:' . $domain . '/login.php');
+    header('Location:' . $domain . 'login.php');
 }
 
 

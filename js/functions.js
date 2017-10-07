@@ -1,5 +1,6 @@
-$(function() {
-    $('[type="date"]').datepicker({
+$.noConflict();
+jQuery(document).ready(function ($) {
+    $(".datepick").datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat:'yy-mm-dd',

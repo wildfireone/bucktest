@@ -65,7 +65,7 @@ if (isset($_SESSION['username'])) {
 
 
 } else {
-    header('Location:' .$domain . '/login.php');
+    header('Location:' .$domain . 'login.php');
 }
 
 

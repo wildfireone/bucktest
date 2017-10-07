@@ -24,7 +24,7 @@
         
         <ul class="breadcrumbs">
             <li><a href="../index.php" role="link">Home</a></li>
-            <li><a href="../about.php" role="link">About</a></li>
+            <li><a href="../pages/view.php?id=1" role="link">About</a></li>
             <li class="current">Club Records</li>
         </ul>
             

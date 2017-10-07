@@ -54,31 +54,44 @@
         }
     });
 </script>
+
 <!--highslide js END-->
+<script type="text/javascript" src="<?php echo $domain ?>js/foundation.min.js"></script>
+<script type="text/javascript" src="<?php echo $domain ?>js/functions.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+<link  href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script type="text/javascript">
+
+</script>
 
 <?php
 //Relative paths for local js files
 //foundation
-if(file_exists('js/foundation.min.js')) {
-    echo'<script src="js/foundation.min.js"></script>
-        <script src="js/functions.js"></script>';
-} elseif(file_exists('../js/foundation.min.js')) {
-    echo'<script src="../js/foundation.min.js"></script>';
-}
-elseif(file_exists('../../js/foundation.min.js')) {
-    echo'<script src="../../js/foundation.min.js"></script>';
-}
 
-//custom functions
-if(file_exists('js/functions.js')) {
-    echo'<script src="js/functions.js"></script>
-        <script src="js/functions.js"></script>';
-} elseif(file_exists('../js/functions.js')) {
-    echo'<script src="../js/functions.js"></script>';
-}
-elseif(file_exists('../../js/functions.js')) {
-    echo'<script src="../../js/functions.js"></script>';
-}
+//
+//if(file_exists('js/foundation.min.js')) {
+//    echo'<script src="js/foundation.min.js"></script>
+//        <script src="js/functions.js"></script>';
+//} elseif(file_exists('../js/foundation.min.js')) {
+//    echo'<script src="../js/foundation.min.js"></script>';
+//}
+//elseif(file_exists('../../js/foundation.min.js')) {
+//    echo'<script src="../../js/foundation.min.js"></script>';
+//}
+//
+//
+////custom functions
+//if(file_exists('js/functions.js')) {
+//    echo'<script src="js/functions.js"></script>
+//        <script src="js/functions.js"></script>';
+//} elseif(file_exists('../js/functions.js')) {
+//    echo'<script src="../js/functions.js"></script>';
+//}
+//elseif(file_exists('../../js/functions.js')) {
+//    echo'<script src="../../js/functions.js"></script>';
+//}
 ?>
 
 
