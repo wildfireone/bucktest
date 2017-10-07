@@ -34,7 +34,7 @@
                 <p>You could try:</p>
                 <ul>';
 
-                if (isset($_SESSION['username'])) {
+                if (!isset($_SESSION['username'])) {
                     echo '<li><a href="login.php">Logging in</a> to the website</li>';
                 }
                     
