@@ -44,8 +44,8 @@ if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {
 <head>
     <?php include '../inc/meta.inc.php'; ?>
     <title><?php echo $pages->getPageTitle() ?> | Bucksburn Amateur Swimming Club</title>
-    <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <link href="../css/site.css" rel="stylesheet"/>
 </head>
 

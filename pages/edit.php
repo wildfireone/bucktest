@@ -80,8 +80,8 @@ if (isset($_POST['btnAddFiles'])) {
 <head>
     <?php include '../inc/meta.inc.php'; ?>
     <title>Edit | Page | Bucksburn Amateur Swimming Club</title>
-    <link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <link href="../css/site.css" rel="stylesheet"/>
     <script src='../tinymce/tinymce.min.js'></script>
     <script>

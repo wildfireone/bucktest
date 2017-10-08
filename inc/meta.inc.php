@@ -2,9 +2,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="swimming, competitive, non-competitive, swim, club, learn, coaching, freestyle, butterfly, breaststroke, backcrawl, BASC, Bucksburn, Aberdeen, Aberdeenshire, Scotland">
 <meta name="description" content="Bucksburn Amateur Swimming Club (BASC) is a swimming club based in Aberdeen and aims to provide an opportunity for all individauls to reach their full potential, whether through competition or not.">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 
 <!--highslide js START-->
 <script type="text/javascript" src="<?php echo $domain ?>highslide/highslide-with-gallery.js"></script>
@@ -59,9 +59,9 @@
 <script type="text/javascript" src="<?php echo $domain ?>js/foundation.min.js"></script>
 <script type="text/javascript" src="<?php echo $domain ?>js/functions.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
-<link  href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
-<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link  href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-1.9.0.js"></script>
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <script type="text/javascript">
 
 </script>

@@ -32,7 +32,7 @@ lang : {
 	fullExpandText : '1:1',
 	restoreTitle : 'Click to close image, click and drag to move. Use arrow keys for next and previous.'
 },
-// See http://highslide.com/ref for examples of settings  
+// See http://highslide.com/ref for examples of settings
 graphicsDir : 'highslide/graphics/',
 expandCursor : 'zoomin.cur', // null disables
 restoreCursor : 'zoomout.cur', // null disables
@@ -757,7 +757,7 @@ init : function () {
 		hs.clearing = hs.createElement('div', null, 
 			{ clear: 'both', paddingTop: '1px' }, null, true);
 		
-		// http://www.robertpenner.com/easing/ 
+		// https://www.robertpenner.com/easing/ 
 		Math.linearTween = function (t, b, c, d) {
 			return c*t/d + b;
 		};

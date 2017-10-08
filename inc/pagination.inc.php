@@ -14,7 +14,7 @@
  *
  * @url       https://github.com/BenGriffiths/pdo-mysqli-pagination
  *
- * @license   MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license   MIT License (https://www.opensource.org/licenses/mit-license.php)
  */
 class Pagination
 {

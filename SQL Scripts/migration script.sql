@@ -190,8 +190,8 @@ UPDATE gala_events SET gender = 'F' WHERE gender = 'G';
 
 
 /* ***** galas ***** */
-INSERT INTO galas (id, title, description, date, venueID, warmuptime, organiser, fees, confirmationdate, cutoffdate, eventTypeOld)
-SELECT 	gyrid, title, details, date, venue, warmup, organiser, swimfees, confirmdate, cutoffdate, eventType
+INSERT INTO galas (id, title, description, date, venueold, venueID, warmuptime, organiser, fees, confirmationdate, cutoffdate, eventTypeOld)
+SELECT 	gyrid, title, details, date, venue,NULL, warmup, organiser, swimfees, confirmdate, cutoffdate, eventType
 FROM bgaladetail;
 /* Update Time Criteria */
 UPDATE galas SET isLongCourse = true WHERE eventTypeOld = 'L';
@@ -288,7 +288,7 @@ ALTER TABLE club_records DROP COLUMN maletime;*/
 
 
 /* ***** SWIM TIMES ***** */
-INSERT INTO swim_times (member, galaID, swimeventID, time, rank)
+INSERT INTO swim_times (member, galaID, eventID, time, rank)
 SELECT username, gyrid, eid, time, rank
 FROM bgalaresult;
 

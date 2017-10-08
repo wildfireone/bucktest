@@ -12,7 +12,7 @@
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 ob_start();
-$domain = 'http://bucktest.dev/';
+$domain = 'https://bucktest.dev/';
 $_SESSION['domain'] = $domain;
 
 //Switch include paths when on root or sub (sub) folder
