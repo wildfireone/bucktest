@@ -1,7 +1,6 @@
 $('button').on('click tap', function (e) {
     console.log('<a href="' + $(this).data("value1") + '"></a>');
 
-
     switch ($(this).data("value0")) {
         case 0:
             var string = '';
