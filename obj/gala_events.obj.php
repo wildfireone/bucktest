@@ -262,7 +262,19 @@ class GalaEvents {
     //List all ranks for swim times in array
     public function listRanks()
     {
-        $ranks = array(-1,1,2,3,4,5,6,7,8,98,99);
+        $ranks = array(
+            -1  => "Speeding Ticket",
+            1  => "1",
+            2  => "2",
+            3  => "3",
+            4  => "4",
+            5  => "5",
+            6  => "6",
+            7  => "7",
+            8  => "8",
+            98  => "No Show",
+            99  => "DQ",
+        );
        return $ranks;
     }
 

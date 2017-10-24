@@ -120,21 +120,25 @@ function formEnd()
     return '</div></div></form>';
 }
 
-function textInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false)
+
+
+function textInputBlank($isRequired, $labelDescription, $labelControlName, $maxLength, $isReadOnly = false, $placeholder = false)
 {
+    if(!$placeholder) {$placeholder = "";}
+
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" maxlength="' . $maxLength . '" readonly/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" maxlength="' . $maxLength . '" readonly/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" maxlength="' . $maxLength . '"/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" maxlength="' . $maxLength . '"/>
                 </label>
             </div>';
         }
@@ -142,34 +146,35 @@ function textInputBlank($isRequired, $labelDescription, $labelControlName, $maxL
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" maxlength="' . $maxLength . '" readonly/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" maxlength="' . $maxLength . '" readonly/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" maxlength="' . $maxLength . '"/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" maxlength="' . $maxLength . '"/>
                 </label>
             </div>';
         }
     }
 }
 
-function textInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $isReadOnly = false)
+function textInputSetup($isRequired, $labelDescription, $labelControlName, $text, $maxLength, $isReadOnly = false, $placeholder = false)
 {
+    if(!$placeholder) {$placeholder = "";}
     if ($isRequired) {
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '" readonly/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '" readonly/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '"/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '"/>
                 </label>
             </div>';
         }
@@ -177,38 +182,40 @@ function textInputSetup($isRequired, $labelDescription, $labelControlName, $text
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '" readonly/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '" readonly/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '"/>
+                <input type="text" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" value="' . htmlspecialchars($text) . '" maxlength="' . $maxLength . '"/>
                 </label>
             </div>';
         }
     }
 }
 
-function textInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength)
+function textInputEmptyError($isRequired, $labelDescription, $labelControlName, $errorControlName, $errorMessage, $maxLength, $placeholder = false)
 {
+    if(!$placeholder) {$placeholder = "";}
     if ($isRequired) {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>                
-                <input type="text" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" maxlength="' . $maxLength . '"/>
+                <input type="text" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" maxlength="' . $maxLength . '"/>
                 </label>
             </div>';
     } else {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
                 <label><b>' . $labelDescription . '</b>                
-                <input type="text" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" maxlength="' . $maxLength . '"/>
+                <input type="text" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '"  placeholder="' . $placeholder . '" maxlength="' . $maxLength . '"/>
                 </label>
             </div>';
     }
 }
+
 
 function textInputPostback($isRequired, $labelDescription, $labelControlName, $text, $maxLength)
 {
@@ -570,6 +577,7 @@ function numberInputPostbackError($isRequired, $labelDescription, $labelControlN
     }
 }
 
+
 function dateInputBlank($isRequired, $labelDescription, $labelControlName, $min, $max, $isReadOnly = false)
 {
     if ($isRequired) {
@@ -577,14 +585,14 @@ function dateInputBlank($isRequired, $labelDescription, $labelControlName, $min,
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '" readonly/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '" readonly/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
         }
@@ -592,13 +600,13 @@ function dateInputBlank($isRequired, $labelDescription, $labelControlName, $min,
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '" readonly/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '" readonly/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
         }
@@ -612,14 +620,14 @@ function dateInputSetup($isRequired, $labelDescription, $labelControlName, $date
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '" disabled/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '" disabled/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
         }
@@ -627,13 +635,13 @@ function dateInputSetup($isRequired, $labelDescription, $labelControlName, $date
         if ($isReadOnly) {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '" disabled/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '" disabled/>
                 </label>
             </div>';
         } else {
             return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
         }
@@ -647,14 +655,14 @@ function dateInputEmptyError($isRequired, $labelDescription, $labelControlName, 
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>                
-                <input type="date" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     } else {
         return '<div class="large-12 medium-12 small-12 columns">
          <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
                 <label><b>' . $labelDescription . '</b>                
-                <input type="date" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     }
@@ -666,14 +674,14 @@ function dateInputPostback($isRequired, $labelDescription, $labelControlName, $d
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     } else {
         return '<div class="large-12 medium-12 small-12 columns">
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     }
@@ -686,14 +694,14 @@ function dateInputPostbackError($isRequired, $labelDescription, $labelControlNam
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
                 <label><b>
                     <span class="required">* </span>' . $labelDescription . '</b>
-                <input type="date"  class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick"  class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     } else {
         return '<div class="large-12 medium-12 small-12 columns">
             <label for="' . $labelControlName . '" id="' . $errorControlName . '" class="errlabel">' . $errorMessage . '</label>
                 <label><b>' . $labelDescription . '</b>
-                <input type="date"  class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
+                <input type="text"  class="datepick"  class="errinput" id="' . $labelControlName . '" name="' . $labelControlName . '" value="' . $date . '" min="' . $min . '" max="' . $max . '"/>
                 </label>
             </div>';
     }
