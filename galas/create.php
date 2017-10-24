@@ -69,8 +69,7 @@
     <?php include '../inc/meta.inc.php';?>
     <title>Create | Gala | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
-    <link href="../css/site.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
     <script>
 
 
@@ -134,7 +133,7 @@
 
                 if (isset($_POST["btnSubmit"]) || isset($_POST["sltVenue"])) {
                     if (empty($_POST["txtID"])) {
-                        echo textInputEmptyError(true, "ID", "txtID", "errEmptyID", "Please enter an ID", 8);
+                        echo textInputEmptyError(true, "ID", "txtID", "errEmptyID", "Please enter an ID", 8, false, "GalaID (E.g. Gala123) (Four Letters + Three Numbers)");
                     } else {
                         if ($gala->isIDValid($conn,$_POST["txtID"])) {
                             echo textInputPostback(true, "ID", "txtID", $_POST["txtID"], 8);
@@ -143,7 +142,7 @@
                         }
                     }
                 } else {
-                    echo textInputBlank(true,"ID","txtID",8);
+                    echo textInputBlank(true,"ID","txtID",8, false, "GalaID (E.g. Gala123) (Four Letters + Three Numbers)");
                 }
 
                 if (isset($_POST["btnSubmit"]) || isset($_POST["sltVenue"])) {

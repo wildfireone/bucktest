@@ -25,8 +25,7 @@
     <?php include '../inc/meta.inc.php';?>
     <title>View | Gala | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
-    <link href="../css/site.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
 </head>
 
 <body>   
@@ -112,7 +111,7 @@
                 if (!empty($gala->getNotes())) { echo '<b>Notes</b>: ' . $gala->getNotes(); }
                 echo '</p>';
 
-                echo '<p class="centre"><b>Can all swimmers please confirm their attendance by ' . date("l jS F Y", strtotime($gala->getCutOffDate())) . '</b></p>';
+                echo '<p class="centre"><b>Can all swimmers please confirm their attendance by ' . date("l jS F Y", strtotime($gala->getConfirmationDate())) . '</b></p>';
 
                 echo '<h3>Gala Events</h3>';
 

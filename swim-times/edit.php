@@ -61,8 +61,7 @@
     <?php include '../inc/meta.inc.php';?>
     <title>Edit | Swim Time | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
-    <link href="../css/site.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
 </head>
 
 <body>   
@@ -158,14 +157,14 @@
 
 
             if (isset($_POST["btnSubmit"])) {
-                echo comboInputPostback(false, "Rank", "sltRank", $_POST["sltRank"], $event->listRanks());
+                echo comboInputPostback(false, "Swim Rank", "sltRank", $_POST["sltRank"], $event->listRanks());
 
              if (is_null($swimTime->getRank())) {
-                echo comboInputBlank(false,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
+                echo comboInputBlank(false,"Swim Rank","sltRank", "Please select a Rank...",$event->listRanks());
              }
             }
             else {
-                echo comboInputSetup(false,"Rank","sltRank",$swimTime->getRank(),$event->listRanks());
+                echo comboInputSetup(false,"Swim Rank","sltRank",$swimTime->getRank(),$event->listRanks());
             }
 
                 echo formEndWithButton("Save Changes", $domain . "swim-times/delete.php?galaID=" . $gala->getID() . "&eventID=" . $event->getID() . "&member=" . $swimTime->getMember());

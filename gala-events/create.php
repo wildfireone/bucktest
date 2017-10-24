@@ -57,8 +57,7 @@
     <?php include '../inc/meta.inc.php';?>
     <title>Create | Gala Events | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>   
-    <link href="../css/site.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
 </head>
 
 <body>   
@@ -113,16 +112,16 @@
 
                 if (isset($_POST["btnSubmit"]) || isset($_POST["sltGala"])) {
                     if (empty($_POST["txtID"])) {
-                        echo textInputEmptyError(true, "ID", "txtID", "errEmptyID", "Please enter an ID", 16);
+                        echo textInputEmptyError(true, "ID", "txtID", "errEmptyID", "Please enter an ID", 16,  "GalaEventID (E.g. IM100A1-100) (Stoke + length + ID)");
                     } else {
                         if ($event->isIDValid($_POST["txtID"],$_POST["sltGala"],$conn)) {
-                            echo textInputPostback(true, "ID", "txtID", $_POST["txtID"], 16);
+                            echo textInputPostback(true, "ID", "txtID", $_POST["txtID"], 16, false, "GalaEventID (E.g. IM100A1-100) (Stoke + length + ID)");
                         } else {
                             echo textInputPostbackError(true, "ID", "txtID", $_POST["txtID"], "errID","Please enter a unique ID",16);
                         }
                     }
                 } else {
-                    echo textInputBlank(true,"ID","txtID",16);
+                    echo textInputBlank(true,"ID","txtID",16, false, "GalaEventID (E.g. IM100A1-100) (Stoke + length + ID)");
                 }
 
                 if (isset($_POST["btnSubmit"]) || isset($_POST["sltGala"])) {

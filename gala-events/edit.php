@@ -59,8 +59,7 @@
     <?php include '../inc/meta.inc.php';?>
     <title>Edit | Gala Events | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>     
-    <link href="../css/site.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
 </head>
 
 <body>   

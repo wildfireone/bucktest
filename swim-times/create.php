@@ -52,8 +52,7 @@
     <?php include '../inc/meta.inc.php';?>
     <title>Create | Swim Time | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>    
-    <link href="../css/site.css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
 </head>
 
 <body>   
@@ -137,7 +136,7 @@
 
                 if (isset($_POST["btnSubmit"])) {
                     if (empty($_POST["txtTime"])) {
-                        echo textInputEmptyError(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", "errEmptyTime", "Please enter a Time", 8);
+                        echo textInputEmptyError(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", "errEmptyTime", "Please enter a Time", 8, "Time Format: mm:ss:tt (00:00:00) e.g 01:20:33");
                     } else {
                         if ($swim->isTimeValid($_POST["txtTime"])) {
                             echo textInputPostback(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", $_POST["txtTime"], 8);
@@ -146,14 +145,14 @@
                         }
                     }
                 } else {
-                    echo textInputBlank(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", 8);
+                    echo textInputBlank(true, "Time</b> (e.g. mm:ss.tt)", "txtTime", 8, false, "Time Format: mm:ss:tt (00:00:00) e.g 01:20:33");
                 }
 
 
                 if (isset($_POST["btnSubmit"])) {
-                        echo comboInputPostback(false, "Rank", "sltRank", $_POST["sltRank"], $event->listRanks());
+                        echo comboInputPostback(false, "Swim Rank", "sltRank", $_POST["sltRank"], $event->listRanks());
                 } else {
-                    echo comboInputBlank(false,"Rank","sltRank", "Please select a Rank...",$event->listRanks());
+                    echo comboInputBlank(false,"Swim Rank","sltRank", "Please select a Rank...",$event->listRanks());
                 }
 
 

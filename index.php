@@ -13,7 +13,7 @@ require 'inc/security.inc.php';
     <title>Home | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
-    <link href="css/site.css" rel="stylesheet"/>
+    <link href="css/site.min.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -138,6 +138,16 @@ require 'inc/security.inc.php';
     </div>
 </div>
 <?php include 'inc/footer.inc.php'; ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sc').slick({
+            dots: true,
+            speed: 150,
+            centerMode: true,
+            autoplay: true,
+            infinite: true,
+        });
+    });
+</script>
 </body>
-
 </html>

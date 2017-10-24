@@ -30,7 +30,7 @@ if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {
 
 
     //File details - Extension and  file name
-    $fileLink = $domain . $files->getFilePath();
+    $fileLink = '../'.$files->getFilePath();
 
     $fileExt = $files->getFileDetails(0);
     $fileName = $files->getFileDetails(1);
@@ -76,6 +76,7 @@ if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {
 
     header('Content-Description:File Transfer');
     header("Content-Disposition: attachment; filename=" . $fileName . "");
+    header("Content-Length: " . filesize($fileLink));
     header("Cache-control: private");
     readfile($fileLink);
 }

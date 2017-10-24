@@ -2,6 +2,23 @@
     session_start();
     require 'inc/connection.inc.php';
     require 'inc/security.inc.php';
+    include 'inc/forms.inc.php';
+
+//Get Shop Description if exists
+$conn = dbConnect();
+
+
+$shopPage = new Pages();
+$shopPage->setPageTitle('Shop Description');
+
+//Edit Shop Description
+if (isset($_POST['btnEditShopDescription'])) {
+    $_SESSION['editDescription'] = 'shop.php';
+    $shopPage->getAllDetailsByTitle($conn);
+    header('Location:' . $domain . 'pages/edit.php?id=' .  $shopPage->getPageID());
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +29,7 @@
     <title>Shop | Bucksburn Amateur Swimming Club</title>    
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>   
-    <link href="css/site.css" rel="stylesheet"/>
+    <link href="css/site.min.css" rel="stylesheet"/>
 </head>
 
 <body>   
@@ -34,9 +51,28 @@
                     echo '<p class="alert-box success radius centre">Shop Item deleted successfully!</p>';
                     unset($_SESSION['delete']);
                 }
+
+
+
+                if($shopPage->getAllDetailsByTitle($conn))
+                {
+                    echo'<p>'.$shopPage->getPageContent().'</p>';
+
+                    if (isset($_SESSION["username"]) && (pagesFullAccess($connection, $currentUser, $memberValidation))) {
+                        echo '<form action="" method="post"><input name="btnEditShopDescription" value="Edit Shop Page Description" class="button"
+                                                        type="submit"></h3></form>';
+                        //echo linkButton2("Edit Shop Page Description", '/pages/edit.php?id=' . $shopPage->getPageID());
+
+                        echo '<br/>';
+                    }
+
+                } else{ //Otherwise show placeholder text
+                    echo '<p>This is a space for some explanatory text about the items contained in the BASC shop. </p>';
+                }
+
             ?> 
 
-            <p>This is a space for some explanatory text about the items contained in the BASC shop. </p>
+
 
             <table class="large-12 medium-12 small-12 columns">      
                 <tr>
@@ -50,7 +86,7 @@
             <?php
                 require 'obj/shop.obj.php';
                 
-                $conn = dbConnect();
+
 
                 $shopItem = new Shop();
                 $shopList = $shopItem->listAllShopItems($conn);
