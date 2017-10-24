@@ -2,22 +2,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="swimming, competitive, non-competitive, swim, club, learn, coaching, freestyle, butterfly, breaststroke, backcrawl, BASC, Bucksburn, Aberdeen, Aberdeenshire, Scotland">
 <meta name="description" content="Bucksburn Amateur Swimming Club (BASC) is a swimming club based in Aberdeen and aims to provide an opportunity for all individauls to reach their full potential, whether through competition or not.">
+<script defer src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-<script src="https://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script defer src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+
+<!--<!--Jquery-->
+<!--<script src="https://code.jquery.com/jquery-1.9.0.min.js"></script>-->
+<!--<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>-->
+<!--<link  href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>-->
+
+
+<!--Main Site CSS-->
+<link href="<?php echo $domain ?>css/site.min.css" rel="stylesheet"/>
 
 <!--highslide js START-->
-<script type="text/javascript" src="<?php echo $domain ?>highslide/highslide-with-gallery.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>highslide/highslide.css"/>
+<script type="text/javascript" src="<?php echo $domain ?>highslide/highslide-with-gallery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>highslide/highslide.min.css"/>
 
 <!--Slick.js START-->
-<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>css/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>css/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>css/slick/slick.min.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $domain ?>css/slick/slick-theme.min.css">
 
-<!--Favicon code-->
-
-
-
+<!--Favicon code START-->
 <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $domain ?>apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $domain ?>favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $domain ?>favicon-16x16.png">
@@ -25,7 +32,7 @@
 <link rel="mask-icon" href="<?php echo $domain ?>safari-pinned-tab.svg" color="#5bbad5">
 <meta name="theme-color" content="#ffffff">
 
-
+<!--Favicon codeEND -->
 
 <!--
     2) Optionally override the settings defined at the top
@@ -54,17 +61,10 @@
         }
     });
 </script>
-
 <!--highslide js END-->
-<script type="text/javascript" src="<?php echo $domain ?>js/foundation.min.js"></script>
-<script type="text/javascript" src="<?php echo $domain ?>js/functions.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
-<link  href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="https://code.jquery.com/jquery-1.9.0.js"></script>
-<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-<script type="text/javascript">
 
-</script>
+<script  defer type="text/javascript" src="<?php echo $domain ?>js/foundation.min.js"></script>
+<script  defer type="text/javascript" src="<?php echo $domain ?>js/functions.js"></script>
 
 <?php
 //Relative paths for local js files

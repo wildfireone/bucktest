@@ -2,11 +2,23 @@
     <a href="<?php echo $domain; ?>index.php" class="nohover">
         <div class="banner">
             <h1 class="middle centre">Bucksburn Amateur Swimming Club</h1>
-            <img style="width:150px; height:150px;" class="middle centre"
-                 src="<?= $domain ?>/img/bucksburn_logo_blue.png"/>
+            <img class="middle centre"
+                 src="<?php echo $domain; ?>img/bucksburn_logo_blue.png"/>
         </div>
     </a>
     <?php
+
+    //Page List variables
+
+    $pages = new pages();
+    $member = new Members();
+    if (isset($_SESSION["username"])) {
+        $pageLinks = $pages->listAllPages($connection);
+    } else {
+        $pageLinks = $pages->listAllPublicPages($connection);
+    }
+
+
     if (isset($_SESSION["username"])) {
         echo '<div class="contain-to-grid header-section">
       <nav role="navigation" class="top-bar important-class" data-topbar>
@@ -95,12 +107,23 @@
                <li class="divider"></li>
                <li class="has-dropdown not-click">
                   <a href="#" role="link">About</a>
-                  <ul class="dropdown">
-                     <li><a href="' . $domain . 'pages/view.php?id=1" role="link">About BASC</a></li>
+                  <ul class="dropdown">';
+                        //Loop through pages system
+                        if($pagesLinks !== false) {
+                            foreach ($pageLinks as $pageItem) {
+
+                                $pages->setPageID($pageItem['pageID']);
+                                $pages->getAllDetails($connection);
+                                //Filter out description pages
+                                if (strpos($pages->getPageTitle(), 'Description') == false) {
+                                    echo '<li><a href="' . $domain . 'pages/view.php?id=' . $pages->getPageID() . '" role="link">' . $pages->getPageTitle() . '</a></li>';
+                                }
+                            }
+                        }
+                     echo '  
                      <li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
                      <li><a href="' . $domain . 'about/timetable.php" role="link">Timetable</a></li>
-                     <li><a href="' . $domain . 'pages/view.php?id=3" role="link">Club Records</a></li>
-               
+      
            </ul></li>
                <li class="divider"></li>
                <li><a href="' . $domain . 'contact.php" role="link">Contact</a></li>
@@ -161,11 +184,21 @@
                <li class="divider"></li>
                <li class="has-dropdown not-click">
                   <a href="#" role="link">About</a>
-                  <ul class="dropdown">
-                     <li><a href="' . $domain . 'pages/view.php?id=1" role="link">About BASC</a></li>
-                     <li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
+                  <ul class="dropdown">';
+                    //Loop through pages system
+                    if($pagesLinks !== false) {
+                        foreach ($pageLinks as $pageItem) {
+                            $pages->setPageID($pageItem['pageID']);
+                            $pages->getAllDetails($connection);
+                            //Filter out description pages
+                            if (strpos($pages->getPageTitle(), 'Description') == false) {
+                                echo '<li><a href="' . $domain . 'pages/view.php?id=' . $pages->getPageID() . '" role="link">' . $pages->getPageTitle() . '</a></li>';
+                            }
+                        }
+                    }
+                     echo '<li><a href="' . $domain . 'about/committee.php" role="link">Committee</a></li>
                      <li><a href="' . $domain . 'about/timetable.php" role="link">Timetable</a></li>
-                     <li><a href="' . $domain . 'pages/view.php?id=3" role="link">Club Records</a></li>
+                   
                   </ul>
                </li>
                <li class="divider"></li>
