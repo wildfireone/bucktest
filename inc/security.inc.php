@@ -12,7 +12,7 @@
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 ob_start();
-$domain = 'https://bucktest.dev/';
+$domain = 'http://bucktest.dev/';
 $_SESSION['domain'] = $domain;
 
 //Switch include paths when on root or sub (sub) folder
@@ -34,6 +34,18 @@ if (file_exists('obj/members_roles.obj.php')) {
     require_once '../../obj/members_roles.obj.php';
 
 }
+
+//Pages include
+
+if (file_exists('obj/pages.obj.php')) {
+    require_once 'obj/pages.obj.php';
+} elseif (file_exists('../obj/pages.obj.php')) {
+    require_once '../obj/pages.obj.php';
+} elseif (file_exists('../../obj/pages.obj.php')) {
+    require_once '../../obj/pages.obj.php';
+}
+
+
 
 $connection = dbConnect();
 $memberValidation = New Members_Roles();

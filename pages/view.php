@@ -12,7 +12,6 @@ session_start();
 
 require '../inc/connection.inc.php';
 require '../inc/security.inc.php';
-require '../obj/pages.obj.php';
 
 
 // Check for a parameter before we send the header
@@ -46,7 +45,6 @@ if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {
     <title><?php echo $pages->getPageTitle() ?> | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
-    <link href="../css/site.css" rel="stylesheet"/>
 </head>
 
 <body>

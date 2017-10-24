@@ -137,6 +137,33 @@ class pages
         }
     }
 
+
+    public function getAllDetailsByTitle($conn)
+    {
+        $sql = "SELECT * from pages WHERE pageTitle = :pageTitle ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':pageTitle', $this->getPageTitle(), PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            foreach ($results as $row) {
+                $this->setPageID($row['pageID']);
+                $this->setUserID($row["userID"]);
+                $this->setPageTitle($row['pageTitle']);
+                $this->setPageContent($row['pageContent']);
+                $this->setPageDescription($row['pageDescription']);
+                $this->setCreatedDate($row['createdDate']);
+                $this->setModifiedDate($row['modifiedDate']);
+                $this->setVisibility($row['visibility']);
+            }
+            return true;
+        } catch (PDOException $e) {
+            return "Query Get all page details by title failed: " . $e->getMessage();
+        }
+    }
+
     //Delete individual file or all files upload a user
     public function delete($conn, $userID = null)
     {
@@ -251,6 +278,34 @@ class pages
             return $results;
         } catch (PDOException $e) {
             return "Database List pages query failed: " . $e->getMessage();
+        }
+    }
+
+
+    //List all pages or all Public pages created by user
+    public function listAllPublicPages($conn, $userID = null)
+    {
+        $sql = "SELECT * FROM pages WHERE visibility = 1";
+
+        if (!is_null($userID)) {
+            $sql .= " WHERE userID = :userID";
+        }
+
+
+        $stmt = $conn->prepare($sql);
+
+        if (!is_null($userID)) {
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
+        }
+
+        $stmt = $conn->prepare($sql);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        } catch (PDOException $e) {
+            return "Database List public pages query failed: " . $e->getMessage();
         }
     }
 

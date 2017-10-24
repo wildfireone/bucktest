@@ -61,7 +61,6 @@
     <title>Create | Pages | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
-    <link href="../css/site.css" rel="stylesheet"/>
     <script src='../tinymce/tinymce.min.js'></script>
     <script>
         tinymce.init({
@@ -203,8 +202,8 @@
 
     </div>
 </div>
-<script src="<?php echo $domain ?>/js/files.js" type="text/javascript" charset="utf-8"></script>
 <?php include '../inc/footer.inc.php';?>
+<script src="<?php echo $domain ?>/js/files.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

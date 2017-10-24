@@ -10,7 +10,6 @@ session_start();
 // Check for a parameter before we send the header
 require '../inc/connection.inc.php';
 require '../inc/security.inc.php';
-require '../obj/pages.obj.php';
 require '../obj/files.obj.php';
 
 if (!isset($_SESSION['username'])) {
@@ -53,8 +52,16 @@ if (isset($_POST['btnSubmit'])) {
         if ($pages->update($connection)) {
             $_SESSION['update'] = true;
 
-            header('Location:' . $domain . 'pages/view.php?id=' . $pages->getPageID());
-            die();
+
+            if (isset($_SESSION['editDescription'])) {
+                $pageID = $_SESSION['editDescription'];
+                unset($_SESSION['editDescription']);
+                header('Location:' . $domain . $pageID);
+            } else {
+                header('Location:' . $domain . 'pages/view.php?id=' . $pages->getPageID());
+                die();
+            }
+
         } else {
             $_SESSION['error'] = true;
         }
@@ -71,7 +78,6 @@ if (isset($_POST['btnAddFiles'])) {
 }
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +88,6 @@ if (isset($_POST['btnAddFiles'])) {
     <title>Edit | Page | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
-    <link href="../css/site.css" rel="stylesheet"/>
     <script src='../tinymce/tinymce.min.js'></script>
     <script>
         tinymce.init({
@@ -169,7 +174,8 @@ if (isset($_POST['btnAddFiles'])) {
 
             <br/>
             <br/>
-            <h3 class="centre">Add Files to page    <input name="btnAddFiles" value="Upload File" class="button" type="submit"></h3>
+            <h3 class="centre">Add Files to page <input name="btnAddFiles" value="Upload File" class="button"
+                                                        type="submit"></h3>
 
 
             <div id="FileTable">
@@ -200,7 +206,7 @@ if (isset($_POST['btnAddFiles'])) {
 
                         $fileAuthorLink = "../members/view.php?u=" . $files->getUserID();
                         $fileViewLink = "../" . "files/view.php?id=" . $files->getFileID();
-                        $fileDirectLink =  "../" . $files->getFilePath();
+                        $fileDirectLink = "../" . $files->getFilePath();
 
                         echo "<tr>";
 
@@ -232,7 +238,8 @@ if (isset($_POST['btnAddFiles'])) {
 
             </div>
     </div>
-    <script src="<?php echo $domain ?>/js/files.js" type="text/javascript" charset="utf-8"></script>
+
     <?php include '../inc/footer.inc.php'; ?>
+    <script src="<?php echo $domain ?>/js/files.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

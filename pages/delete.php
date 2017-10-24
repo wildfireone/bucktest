@@ -10,7 +10,7 @@
 
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
-    require '../obj/pages.obj.php';
+
 
     if (!isset($_SESSION['username'])) {
         header('Location:' . $domain . 'message.php?id=badaccess');
@@ -61,7 +61,6 @@
     <title>Delete | Pages | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
-    <link href="../css/site.css" rel="stylesheet"/>
 </head>
 
 <body>
