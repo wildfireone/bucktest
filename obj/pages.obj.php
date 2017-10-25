@@ -12,7 +12,7 @@ class pages
 
     //Properties
 
-    private $pageID, $userID, $pageTitle, $pageContent, $pageDescription, $createdDate, $modifiedDate, $visibility;
+    private $pageID, $userID, $pageTitle, $pageContent, $pageDescription, $createdDate, $modifiedDate, $visibility, $lastUpdateID;
 
     // ***** CONSTRUCTOR *****
     function __construct($pageID = -1)
@@ -68,6 +68,11 @@ class pages
         return $this->visibility;
     }
 
+    public function  getLastUpdateID()
+    {
+        return $this->lastUpdateID;
+    }
+
     //Setters
 
     public function setPageID($pageID)
@@ -110,6 +115,11 @@ class pages
         $this->visibility = htmlentities($visibility);
     }
 
+    public function setLastUpdateID($lastUpdateID)
+    {
+        $this->lastUpdateID = htmlentities($lastUpdateID);
+    }
+
 //    CRUD METHODS
 
     public function getAllDetails($conn)
@@ -130,6 +140,7 @@ class pages
                 $this->setCreatedDate($row['createdDate']);
                 $this->setModifiedDate($row['modifiedDate']);
                 $this->setVisibility($row['visibility']);
+                $this->setlastUpdateID($row['lastUpdateID']);
             }
             return true;
         } catch (PDOException $e) {
@@ -157,6 +168,7 @@ class pages
                 $this->setCreatedDate($row['createdDate']);
                 $this->setModifiedDate($row['modifiedDate']);
                 $this->setVisibility($row['visibility']);
+                $this->setLastUpdateID($row['lastUpdateID']);
             }
             return true;
         } catch (PDOException $e) {
@@ -197,7 +209,7 @@ class pages
     public function update($conn)
     {
         try {
-            $sql = "UPDATE pages SET pageTitle = :title, pageDescription = :description, pageContent = :content, visibility = :visibility, modifiedDate =  CURDATE() WHERE pageID = :pageID";
+            $sql = "UPDATE pages SET pageTitle = :title, pageDescription = :description, pageContent = :content, visibility = :visibility, modifiedDate =  CURDATE(), lastUpdateID = :lastUpdateID WHERE pageID = :pageID";
 
             $stmt = $conn->prepare($sql);
 
@@ -206,6 +218,7 @@ class pages
             $stmt->bindParam(':content', $this->getPageContent(), PDO::PARAM_STR);
             $stmt->bindParam(':description', $this->getPageDescription(), PDO::PARAM_INT);
             $stmt->bindValue(':visibility', $this->getVisibility(), PDO::PARAM_INT);
+            $stmt->bindParam(':lastUpdateID', $this->getLastUpdateID(), PDO::PARAM_STR);
 
             $stmt->execute();
             return true;
@@ -217,7 +230,7 @@ class pages
 
     public function create($conn)
     {
-        $sql = "INSERT INTO pages (userID, pageTitle, pageContent, pageDescription, createdDate, modifiedDate, visibility) VALUES (:userID, :pageTitle, :pageContent,:pageDescription, CURDATE(),CURDATE(),:visibility)";
+        $sql = "INSERT INTO pages (userID, pageTitle, pageContent, pageDescription, createdDate, modifiedDate, visibility, lastUpdateID) VALUES (:userID, :pageTitle, :pageContent,:pageDescription, CURDATE(),CURDATE(),:visibility, :lastUpdateID)";
         $stmt = $conn->prepare($sql);
 
         $stmt->bindParam(':userID', $this->getUserID(), PDO::PARAM_STR);
@@ -225,6 +238,7 @@ class pages
         $stmt->bindParam(':pageContent', $this->getPageContent(), PDO::PARAM_STR);
         $stmt->bindParam(':pageDescription', $this->getPageDescription(), PDO::PARAM_STR);
         $stmt->bindParam(':visibility', $this->getVisibility(), PDO::PARAM_STR);
+        $stmt->bindParam(':lastUpdateID', $this->getLastUpdateID(), PDO::PARAM_STR);
 
         try {
             $stmt->execute();

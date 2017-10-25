@@ -10,7 +10,6 @@
 
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
-    require '../obj/pages.obj.php';
     require '../obj/files.obj.php';
 
     if (!isset($_SESSION['username'])) {
@@ -36,6 +35,7 @@
             $pages->setPageContent($_POST['txtMainBody']);
             $pages->setVisibility(htmlentities($_POST['chkVisibility']));
             $pages->setUserID($members->getUsername());
+            $pages->setLastUpdateID($members->getUsername());
 
 
             if ($pages->create($connection)) {

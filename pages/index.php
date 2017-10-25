@@ -58,8 +58,9 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
             <tr>
                 <th>Page Title</th>
                 <th>Page Description</th>
-                <th>Author</th>
+                <th>Original Author</th>
                 <th>Created</th>
+                <th>Last Modified by</th>
                 <th>Modified</th>
                 <th>Visibility</th>
                 <th>View</th>
@@ -72,6 +73,7 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
 
             $pages = new pages();
             $member = new Members();
+            $updatedBy = new Members();
             $pageList = $pages->listAllPages($conn);
 
             foreach ($pageList as $pageItem) {
@@ -79,8 +81,11 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
                 $pages->setPageID($pageItem['pageID']);
                 $pages->getAllDetails($conn);
                 $member->setUsername($pages->getUserID());
+                $updatedBy->setUsername($pages->getLastUpdateID());
+
 
                 $pageAuthorLink = "../members/view.php?u=" . $pages->getUserID();
+                $pageUpdaterLink = "../members/view.php?u=" . $pages->getLastUpdateID();
                 $pageViewLink = "view.php?id=" . $pages->getPageID();
                 $pageEditLink = "edit.php?id=" . $pages->getPageID();
 
@@ -90,6 +95,7 @@ if (!pagesFullAccess($connection, $currentUser, $memberValidation)) {
                 echo '<td data-th="Description">' . $pages->getPageDescription() . '</td>';
                 echo '<td data-th="Author"><a href="' . $pageAuthorLink . '">' . $member->getFullNameByUsername($conn) . '</a></td>';
                 echo '<td data-th="Created">' . $pages->getCreatedDate() . '</td>';
+                echo '<td data-th="Modified By"><a href="'. $pageUpdaterLink .'">' . $updatedBy->getFullNameByUsername($conn) . '</a></td>';
                 echo '<td data-th="Modified">' . $pages->getModifiedDate() . '</td>';
                 echo '<td data-th="Visibility">' . $pages->displayVisibility() . '</td>';
                 echo '<td data-th="View"><a href="' . $pageViewLink . '">View</a></td>';

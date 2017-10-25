@@ -48,6 +48,8 @@ if (isset($_POST['btnSubmit'])) {
         $pages->setPageDescription($_POST['txtDescription']);
         $pages->setPageContent($_POST['txtMainBody']);
         $pages->setVisibility(htmlentities($_POST['chkVisibility']));
+        $pages->setLastUpdateID($member->getUsername());
+
 
         if ($pages->update($connection)) {
             $_SESSION['update'] = true;
@@ -106,7 +108,7 @@ if (isset($_POST['btnAddFiles'])) {
 
         <ul class="breadcrumbs">
             <li><a href="../index.php" role="link">Home</a></li>
-            <li><a href="/pages/view.php?id=<?php echo $pages->getPageID(); ?>" role="link">Page</a></li>
+            <li><a href="/pages/view.php?id=<?php echo $_GET["id"] ?>" role="link">Page</a></li>
             <li class="current">Edit a Page Item</li>
         </ul>
 

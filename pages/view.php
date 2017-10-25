@@ -79,6 +79,8 @@ if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {
 
                 $memberItem = new Members($pages->getUserID());
                 $memberItem->getAllDetails($conn);
+                $lastUpdatedBy = new Members($pages->getLastUpdateID());
+                $lastUpdatedBy->getAllDetails($conn);
 
 
                 echo $pages->getPageTitle();
@@ -100,7 +102,7 @@ if (is_null($_GET["id"]) || !is_numeric($_GET["id"])) {
 
                 echo '<p>' . $pages->getPageContent() . '</p>
                 <h4 class="h5 italic">By ' . $memberItem->getFullNameByUsername($conn) . ' on ' . $pages->getCreatedDate() . '</h4>
-                <h4 class="h5 italic">Last Updated: ' . $pages->getModifiedDate() . '</h4>
+                <h4 class="h5 italic">Last Updated by '.$lastUpdatedBy->getFullNameByUsername($conn).' on: '. $pages->getModifiedDate() . '</h4>
                 </article>
                 
                 ';
