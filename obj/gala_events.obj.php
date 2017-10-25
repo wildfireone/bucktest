@@ -263,6 +263,7 @@ class GalaEvents {
     public function listRanks()
     {
         $ranks = array(
+            '' => "No Rank",
             -1  => "Speeding Ticket",
             1  => "1",
             2  => "2",
