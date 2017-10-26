@@ -36,7 +36,7 @@
             if ($squad->update($connection)) {
                 $_SESSION['update'] = true;
                 
-                header('Location:' .$domain . '/squads/view.php?id=' . $squad->getID());
+                header('Location:' .$domain . 'squads/view.php?id=' . $squad->getID());
                 die();
             } else {
                 $_SESSION['error'] = true;
