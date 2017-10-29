@@ -46,7 +46,6 @@ if (file_exists('obj/pages.obj.php')) {
 }
 
 
-
 $connection = dbConnect();
 $memberValidation = New Members_Roles();
 $currentUser = "";
@@ -64,7 +63,7 @@ if (isset($_SESSION["username"])) {
     //If not on reset page then carry out checks
     if ($pos != true) {
         if ($currentUser->getReset() == 1) {
-            header('Location: '.$domain.'members/reset_pass.php');
+            header('Location: ' . $domain . 'members/reset_pass.php');
         }
     }
 
@@ -86,7 +85,7 @@ function showEditLink($domain, $view, $edit, $parm, $currentUser, $connection, $
 //Gala
 function galaFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || ($memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()))|| ($memberValidation->isMemberMeetSecretary($connection, $currentUser->getUsername()))) {
+    if ($memberValidation->galasFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -107,7 +106,7 @@ function galaViewAccess($connection, $currentUser, $memberValidation)
 //Members
 function memberFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || ($memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberCoach($connection, $currentUser->getUsername()))) {
+    if ($memberValidation->membersFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -128,8 +127,7 @@ function memberViewAccess($connection, $currentUser, $memberValidation)
 //Squads
 function squadFullAccess($connection, $currentUser, $memberValidation)
 {
-
-    if ($memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || ($memberValidation->isMemberCommittee($connection, $currentUser->getUsername())) || $memberValidation->isMemberCoach($connection, $currentUser->getUsername())) {
+    if ($memberValidation->squadsFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -140,7 +138,7 @@ function squadViewAccess($connection, $currentUser, $memberValidation)
 {
     if (squadFullAccess($connection, $currentUser, $memberValidation)) {
         return true;
-    } else if ($memberValidation->isMemberCoach($connection, $currentUser->getUsername())) {
+    } else if ($memberValidation->isMemberCommittee($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -151,7 +149,7 @@ function squadViewAccess($connection, $currentUser, $memberValidation)
 //Venues
 function venueFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || ($memberValidation->isMemberCommittee($connection, $currentUser->getUsername()))) {
+    if ($memberValidation->venuesFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -162,7 +160,7 @@ function venueViewAccess($connection, $currentUser, $memberValidation)
 {
     if (venueFullAccess($connection, $currentUser, $memberValidation)) {
         return true;
-    } else if ($memberValidation->isMemberCoach($connection, $currentUser->getUsername()) || !$memberValidation->isMemberSwimmer($connection, $currentUser->getUsername())) {
+    } else if ($memberValidation->isMemberCommittee($connection, $currentUser->getUsername()) || !$memberValidation->isMemberSwimmer($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -172,7 +170,7 @@ function venueViewAccess($connection, $currentUser, $memberValidation)
 //News
 function newsFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberPresident($connection, $currentUser->getUsername()) || $memberValidation->isMemberSecretary($connection, $currentUser->getUsername()) || $memberValidation->isMemberTreasurer($connection, $currentUser->getUsername()) || $memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberBetaLeagueCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+    if ($memberValidation->newsFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -183,7 +181,7 @@ function newsFullAccess($connection, $currentUser, $memberValidation)
 //Pages
 function pagesFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberPresident($connection, $currentUser->getUsername()) || $memberValidation->isMemberSecretary($connection, $currentUser->getUsername()) || $memberValidation->isMemberTreasurer($connection, $currentUser->getUsername()) || $memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberBetaLeagueCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+    if ($memberValidation->pagesFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -193,7 +191,7 @@ function pagesFullAccess($connection, $currentUser, $memberValidation)
 //Files
 function filesFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberPresident($connection, $currentUser->getUsername()) || $memberValidation->isMemberSecretary($connection, $currentUser->getUsername()) || $memberValidation->isMemberTreasurer($connection, $currentUser->getUsername()) || $memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberBetaLeagueCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+    if ($memberValidation->filesFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -202,23 +200,19 @@ function filesFullAccess($connection, $currentUser, $memberValidation)
 
 
 //Gallery
-//News
 function galleryFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberPresident($connection, $currentUser->getUsername()) || $memberValidation->isMemberSecretary($connection, $currentUser->getUsername()) || $memberValidation->isMemberTreasurer($connection, $currentUser->getUsername()) || $memberValidation->isMemberGalaCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberMembershipCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberBetaLeagueCoordinator($connection, $currentUser->getUsername()) || $memberValidation->isMemberHeadCoach($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+    if ($memberValidation->galleryFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
     }
 }
 
-
-
-
 //Shop
 function shopFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberSwimshop($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+    if ($memberValidation->shopFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;
@@ -229,7 +223,7 @@ function shopFullAccess($connection, $currentUser, $memberValidation)
 //TimeTable
 function timetableFullAccess($connection, $currentUser, $memberValidation)
 {
-    if ($memberValidation->isMemberCommittee($connection, $currentUser->getUsername()) || $memberValidation->isMemberWebCoordinator($connection, $currentUser->getUsername())) {
+    if ($memberValidation->timetableFullAccess($connection, $currentUser->getUsername())) {
         return true;
     } else {
         return false;

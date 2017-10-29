@@ -593,6 +593,217 @@ class Members_Roles {
         }
     }
 
+
+    //Security Checks (I.E making my life easier while making the site secure..)
+
+
+    public function newsFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (1,2,3,6,8,9,12,15,17,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function galasFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (4,9,15,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function membersFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (2,3,6,9,15,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function galleryFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (1,2,3,6,9,15,17,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+
+    public function shopFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (9,13,15) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function timetableFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (9,15,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function squadsFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (9,15,16,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+
+    public function venuesFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (9,15,16,19) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function pagesFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (9,15) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+    public function filesFullAccess($conn, $member) {
+        $sql = "SELECT member FROM members_roles WHERE roleID IN (9,15) AND member = :member";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':member', $member, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return "Query failed: " . $e->getMessage();
+        }
+    }
+
+
+
+
+
+
     public function isInputValid($member, $roleID, $conn) {
         if (isMemberValid($member, $conn) && isRoleValid($roleID, $conn)) {
             return true;
