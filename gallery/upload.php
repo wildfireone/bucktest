@@ -20,7 +20,7 @@ if (isset($_SESSION['username'])) {
     $album = new gallery_album();
 
 
-    if (galleryFullAccess($connection, $currentUser, $memberValidation)) {
+    if (!galleryFullAccess($connection, $currentUser, $memberValidation)) {
         //Standard members can uploads to their own albums only.
         $albumsList = $album->listAllAlbumSelect($conn, $_SESSION['username']);
 
