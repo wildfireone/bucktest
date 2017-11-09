@@ -287,7 +287,7 @@ $im = array();
                             </tr>
                             <tr class="titletext">
                                 <th>Name</th>
-                                <th>DOB</th>
+                                <th>Type</th>
                                 <th>25</th>
                                 <th>Date</th>
                                 <th>50</th>

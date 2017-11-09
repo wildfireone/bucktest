@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script defer src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
-
 <!--<!--Jquery-->
 <!--<script src="https://code.jquery.com/jquery-1.9.0.min.js"></script>-->
 <!--<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>-->
@@ -65,6 +64,10 @@
 
 <script  defer type="text/javascript" src="<?php echo $domain ?>js/foundation.min.js"></script>
 <script  defer type="text/javascript" src="<?php echo $domain ?>js/functions.js"></script>
+
+<script type="javascript">
+    $(document).foundation();
+</script>
 
 <?php
 //Relative paths for local js files

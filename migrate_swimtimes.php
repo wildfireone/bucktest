@@ -25,7 +25,6 @@ foreach ($oldTimes as $times) {
 
     $time = $hour . $times['time'];
 
-
     //Convert mysql date format to UK format
     $date = new DateTime($time);
     $date->setTimezone(new DateTimeZone('Europe/London'));
