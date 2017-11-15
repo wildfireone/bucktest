@@ -19,8 +19,8 @@
             header('Location:' . $domain . '404.php');
             exit;
         }
-        if (!memberFullAccess($connection, $currentUser, $memberValidation)) {
-            //Not full access and editing someone else's profile - see 403 page
+        if (!memberViewAccess($connection, $currentUser, $memberValidation)) {
+            //Not full access and editing someone else's pbs - see 403 page
             if ($_SESSION['username'] !== $_GET["u"]) {
                 header('Location:' . $domain . 'message.php?id=badaccess');
                 exit;
