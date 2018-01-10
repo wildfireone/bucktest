@@ -9950,3 +9950,7 @@ nav {
     max-height: 320px;
     overflow-y: scroll;
 }
+
+.emailHider {
+    display: none;
+}

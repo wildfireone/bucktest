@@ -2,6 +2,20 @@
     session_start();
     require '../inc/connection.inc.php';
     require '../inc/security.inc.php';
+
+
+//
+function myobfiscate($emailaddress)
+{
+    $email = $emailaddress;
+    $obfuscatedEmail = null;
+    $length = strlen($email);
+    for ($i = 0; $i < $length; $i++) {
+        $obfuscatedEmail .= "&#" . ord($email[$i]) . ";";
+    }
+    return $obfuscatedEmail;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +26,14 @@
     <title>Committee | Bucksburn Amateur Swimming Club</title>
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#revealEmails").click(function () {
+                $(".emailHider").toggle();
+            });
+        });
+    </script>
 </head>
 
 <body>   
@@ -28,10 +50,15 @@
         </ul>
     
         <h2>Committee</h2>
-            
-        <p>The committee for the current session:</p>
-            
-        <?php
+
+            <p>The committee for the current session: <br/>
+            <div class="small-6 small-centered text-center columns">
+                <input id="revealEmails" class="button text-center" type="button" value="Reveal Emails"/>
+            </div>
+            </p>
+
+
+            <?php
             require_once '../obj/members_roles.obj.php';
             require '../obj/roles.obj.php';
             require_once '../obj/members.obj.php';
@@ -58,12 +85,11 @@
                 }
                 echo '<span class="h4">' . substr($list, 0, (count($list) - 3)) . '</span>';
                 if (!empty($role->getEmail())) {
-                    echo '<a href="mailto:' . $role->getEmail() . '">' . $role->getEmail() . '</a>';
+                    echo '<div class="emailHider"><a href="mailto:' . myobfiscate($role->getEmail()) . '"/>' . myobfiscate($role->getEmail()) . '</a></div>';
                 }                
                 echo '</div>';
             }
         ?>
-
         </div>
     </div>
     <?php include '../inc/footer.inc.php';?>

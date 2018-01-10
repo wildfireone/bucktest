@@ -109,7 +109,7 @@
                   <a href="#" role="link">About</a>
                   <ul class="dropdown">';
                         //Loop through pages system
-                        if($pagesLinks !== false) {
+        if ($pageLinks !== false) {
                             foreach ($pageLinks as $pageItem) {
 
                                 $pages->setPageID($pageItem['pageID']);
@@ -186,7 +186,7 @@
                   <a href="#" role="link">About</a>
                   <ul class="dropdown">';
                     //Loop through pages system
-                    if($pagesLinks !== false) {
+        if ($pageLinks !== false) {
                         foreach ($pageLinks as $pageItem) {
                             $pages->setPageID($pageItem['pageID']);
                             $pages->getAllDetails($connection);
